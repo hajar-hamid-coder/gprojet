@@ -118,11 +118,11 @@
 **Réponse utilisateur** : _en attente_
 
 ### H-017 · P0-T04
-> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 11:55
+> **Statut** : REPONDUE · **Bloquante** : non · **Date** : 2026-10-16 11:55
 **Question** : FluentAssertions 8.x (licence commerciale Xceed) est-il acceptable pour un projet d'État ?
 **Hypothèse retenue par défaut** : Version 8.11.0 retenue pour l'instant ; si la licence pose problème, épingler 7.x (Apache 2.0) dans Directory.Packages.props
 **Impact si l'hypothèse est fausse** : Aucun avant l'écriture des premiers tests (P0-T05+ ou P1)
-**Réponse utilisateur** : _en attente_
+**Réponse utilisateur** (2026-10-16 12:51) : Non : épingler FluentAssertions 7.x (Apache 2.0), pas de licence commerciale
 
 ### H-018 · P0-T06
 > **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 11:58
