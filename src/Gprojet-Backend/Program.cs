@@ -1,5 +1,36 @@
+using Gprojet.Backend.Infrastructure;
+using Gprojet.Backend.Repositories;
+using Gprojet.Backend.Web;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Scalar.AspNetCore;
+using Serilog;
+using Serilog.Formatting.Compact;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseSerilog((ctx, cfg) => cfg
+    .ReadFrom.Configuration(ctx.Configuration)
+    .WriteTo.Console(new RenderedCompactJsonFormatter()));
+
+builder.Services
+    .AddGpInfrastructure()
+    .AddGpRepositories(builder.Configuration)
+    .AddGpWeb();
+
 var app = builder.Build();
+
+app.UseExceptionHandler();
+app.UseSerilogRequestLogging();
+
+app.MapControllers();
+app.MapOpenApi();
+if (app.Environment.IsDevelopment())
+{
+    app.MapScalarApiReference(o => o.DisableDefaultFonts()); // aucune police chargée depuis Internet
+}
+
+app.MapHealthChecks("/health", new HealthCheckOptions { Predicate = _ => false });
+app.MapHealthChecks("/health/ready", new HealthCheckOptions { Predicate = c => c.Tags.Contains("ready") });
 
 app.Run();
 

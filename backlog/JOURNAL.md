@@ -128,3 +128,8 @@
 - **2026-10-16 14:55** — NOTE P1-T08 — vérificateur OK (essai 1) : Integration 12/12, total 116/116
 - **2026-10-16 14:55** — NOTE P1-T08 — commit 7649d13
 - **2026-10-16 14:55** — P1-T08 EN_COURS → A_VALIDER — preuve : dotnet test --filter Category=Integration → 12/12 (échec au milieu → rien écrit; concurrence → ConflitException); dotnet test → 116/116; vérificateur OK; commit 7649d13
+- **2026-10-16 14:55** — P1-T09 NON_FAIT → EN_COURS
+- **2026-10-16 14:55** — NOTE P1-T09 — délégué à executeur-sonnet (essai 1)
+- **2026-10-16 15:00** — Hypothèse H-026 créée pour P1-T09 (bloquante : non).
+- **2026-10-16 15:00** — NOTE P1-T09 — exécuteur OK (essai 1) : 124/124, dotnet run gprojet /health/ready 200 ; lancement vérificateur
+- **2026-10-16 15:00** — NOTE P1-T09 — vérificateur OK (essai 1) : 124/124, dotnet run /health/ready 200 sur gprojet, aucune fuite

@@ -179,3 +179,10 @@
 **Hypothèse retenue par défaut** : Un seul repository réel (Compétence) pour démontrer le motif ; les autres arrivent avec leurs modules (P4, P5…). Enregistrement DI dans la tâche de composition (P1-T09/T10)
 **Impact si l'hypothèse est fausse** : Effort minime pour changer d'agrégat ; aucun enregistrement DI tant que Program.cs n'est pas composé
 **Réponse utilisateur** : _en attente_
+
+### H-026 · P1-T09
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 15:00
+**Question** : Quel utilisateur courant avant Keycloak (P18), et quel code HTTP pour RegleMetierException ?
+**Hypothèse retenue par défaut** : ICurrentUser provisoire = agent SYSTEME (Id Guid.Empty, sans rôle), shortcut à remplacer en P18 ; RegleMetierException → 422, validation FluentValidation → 400
+**Impact si l'hypothèse est fausse** : cree_par/agent_id valent Guid.Empty jusqu'en P18 (colonnes sans FK) ; changer le code 422 est une ligne dans GestionnaireExceptions
+**Réponse utilisateur** : _en attente_
