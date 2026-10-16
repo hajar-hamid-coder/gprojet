@@ -19,12 +19,12 @@
 
 <!-- RESUME:DEBUT -->
 
-_Mis à jour le 2026-10-16 13:16 par scripts/backlog.py — ne pas modifier à la main._
+_Mis à jour le 2026-10-16 14:32 par scripts/backlog.py — ne pas modifier à la main._
 
 | Phase | Titre | Statut | Modèle | Avancement |
 |---|---|---|---|---|
 | P0 | Initialisation et outillage | ✅ VALIDEE | sonnet | 6/6 |
-| P1 | Socle backend .NET 10 | 🔄 EN_COURS | opus | 4/11 |
+| P1 | Socle backend .NET 10 | 🔄 EN_COURS | opus | 5/11 |
 | P2 | Socle frontend Blazor WebAssembly et BFF | ⬜ NON_DEMARREE | sonnet | 0/9 |
 | P3 | Conteneurisation et intégration continue GitHub Actions | ⬜ NON_DEMARREE | sonnet | 0/5 |
 | P4 | Module Organisation et périmètre hiérarchique | ⬜ NON_DEMARREE | sonnet | 0/8 |
@@ -121,7 +121,7 @@ _Mis à jour le 2026-10-16 13:16 par scripts/backlog.py — ne pas modifier à l
 **Test de validation** : `dotnet build` OK ; test de réflexion : nombre de types entités = 60 et chaque énumération a les mêmes valeurs que la contrainte SQL correspondante (test paramétré lisant `01-schema.sql`).
 
 ### P1-T05 · DbContext et configurations EF Core
-> **Statut** : EN_COURS · **Modèle** : opus · **Ordre** : 5 · **Dépend de** : P1-T04
+> **Statut** : A_VALIDER · **Modèle** : opus · **Ordre** : 5 · **Dépend de** : P1-T04
 
 **Explication** : `GpDbContext` (Npgsql, extension `ltree`), une `IEntityTypeConfiguration<T>` par entité : schéma, noms `snake_case`, types (`numeric(p,s)`, `ltree`, `jsonb`, `text[]`, `inet`), `uuidv7()` par défaut, contraintes `CHECK`, index uniques **partiels** (`HasFilter`), index GiST, colonne générée `criticite`, `xmin` (concurrence), filtre global `!EstSupprime`, conversions enum → texte.
 **Test de validation** : `dotnet build` OK ; `dotnet ef dbcontext info` réussit ; test unitaire : le modèle EF déclare 60 tables réparties dans les 6 schémas.

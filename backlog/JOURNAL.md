@@ -104,3 +104,5 @@
 - **2026-10-16 13:27** — NOTE P1-T05 — INTERRUPTION (limite d'usage) : vérificateur arrêté avant verdict ; code de l'exécuteur non commité et complet (104/104) ; à la reprise : relancer le vérificateur (essai 1) puis commit
 - **2026-10-16 14:31** — NOTE P1-T05 — reprise : relance du vérificateur (essai 1)
 - **2026-10-16 14:32** — NOTE P1-T05 — vérificateur OK (essai 1) : dbcontext info OK, Persistance 5/5, total 104/104
+- **2026-10-16 14:32** — NOTE P1-T05 — commit 9efdfb0
+- **2026-10-16 14:32** — P1-T05 EN_COURS → A_VALIDER — preuve : dotnet ef dbcontext info → OK (Npgsql); --filter Category=Persistance → 5/5 (60 tables, 6 schémas, colonnes/index = SQL); dotnet test → 104/104; vérificateur OK; commit 9efdfb0
