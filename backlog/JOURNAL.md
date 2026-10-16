@@ -32,3 +32,5 @@
 - **2026-10-16 11:51** — Hypothèse H-015 créée pour P0-T02 (bloquante : non).
 - **2026-10-16 11:51** — NOTE P0-T02 — exécuteur OK (essai 1); lancement vérificateur
 - **2026-10-16 11:51** — NOTE P0-T02 — vérificateur OK (essai 1) : tableau exit 0; PG_BIN vide exit 1
+- **2026-10-16 11:51** — NOTE P0-T02 — commit 9400994
+- **2026-10-16 11:51** — P0-T02 EN_COURS → A_VALIDER — preuve : verifier-env.py → exit 0; avec PG_BIN vide → exit 1; vérificateur OK; commit 9400994

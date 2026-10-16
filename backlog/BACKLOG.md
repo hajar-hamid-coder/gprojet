@@ -19,11 +19,11 @@
 
 <!-- RESUME:DEBUT -->
 
-_Mis à jour le 2026-10-16 11:50 par scripts/backlog.py — ne pas modifier à la main._
+_Mis à jour le 2026-10-16 11:51 par scripts/backlog.py — ne pas modifier à la main._
 
 | Phase | Titre | Statut | Modèle | Avancement |
 |---|---|---|---|---|
-| P0 | Initialisation et outillage | 🔄 EN_COURS | sonnet | 1/6 |
+| P0 | Initialisation et outillage | 🔄 EN_COURS | sonnet | 2/6 |
 | P1 | Socle backend .NET 10 | ⬜ NON_DEMARREE | opus | 0/11 |
 | P2 | Socle frontend Blazor WebAssembly et BFF | ⬜ NON_DEMARREE | sonnet | 0/9 |
 | P3 | Conteneurisation et intégration continue GitLab | ⬜ NON_DEMARREE | sonnet | 0/5 |
@@ -60,7 +60,7 @@ _Mis à jour le 2026-10-16 11:50 par scripts/backlog.py — ne pas modifier à l
 **Test de validation** : `git log --oneline` montre au moins 2 commits ; `git status --porcelain` est vide ; `git check-ignore .pgtest/x bin/x .claude/settings.local.json` renvoie les trois chemins ; `git ls-files | grep -c settings.local` renvoie 0.
 
 ### P0-T02 · Script de vérification de l'environnement
-> **Statut** : EN_COURS · **Modèle** : haiku · **Ordre** : 2 · **Dépend de** : P0-T01
+> **Statut** : A_VALIDER · **Modèle** : haiku · **Ordre** : 2 · **Dépend de** : P0-T01
 
 **Explication** : `scripts/verifier-env.py` affiche un tableau OK / MANQUANT / OPTIONNEL pour : .NET SDK 10, Python ≥ 3.12 avec le module openpyxl (export Excel du backlog), binaires PostgreSQL 18 (`PG_BIN`), Git, Node.js (optionnel : ponytail, motion), Docker (requis à partir de P3), uv et graphify (optionnels). Code de sortie 1 si un outil requis manque.
 **Test de validation** : `python scripts/verifier-env.py` affiche le tableau et sort en 0 sur ce poste (dotnet, python, PostgreSQL, git présents) ; en masquant `PG_BIN` vers un dossier vide, il sort en 1.
