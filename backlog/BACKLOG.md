@@ -109,7 +109,7 @@ _Mis à jour le 2026-10-16 13:02 par scripts/backlog.py — ne pas modifier à l
 **Test de validation** : `dotnet test tests/Gprojet-Backend.Tests --filter Category=Architecture` → tous verts, ≥ 10 règles ; le garde-fou prouve qu'une violation fait échouer la règle (assert inversé).
 
 ### P1-T03 · Common : primitives transverses
-> **Statut** : NON_FAIT · **Modèle** : sonnet · **Ordre** : 3 · **Dépend de** : P1-T01
+> **Statut** : EN_COURS · **Modèle** : sonnet · **Ordre** : 3 · **Dépend de** : P1-T01
 
 **Explication** : `Result<T>` / `Result`, exceptions métier (`RegleMetierException`, `AccesRefuseException`, `IntrouvableException`, `ConflitException`), `PageRequete` / `PageResultat<T>` (tri, filtre, taille max 200), `ICurrentUser` (Id agent, matricule, entité, rôles), `IHorloge` (testable), `IGenerateurCode` (codes lisibles).
 **Test de validation** : `dotnet test tests/Gprojet-Backend.Tests --filter Category=Common` → tests de `Result`, pagination (bornes, taille max) et horloge factice verts.

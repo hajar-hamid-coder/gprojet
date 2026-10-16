@@ -81,3 +81,9 @@
 - **2026-10-16 13:02** — NOTE P1-T02 — essai 2 : règle 12 Repositories ↛ Contracts/Mapping ajoutée ; rejoué par l'orchestrateur : 25 verts Architecture, 26 au total
 - **2026-10-16 13:02** — NOTE P1-T02 — commit caa6213
 - **2026-10-16 13:02** — P1-T02 EN_COURS → A_VALIDER — preuve : dotnet test --filter Category=Architecture → 25/25 (12 règles + 12 garde-fous + couverture); contre-épreuve Web→Entities détectée; vérificateur OK; commit caa6213
+- **2026-10-16 13:02** — P1-T03 NON_FAIT → EN_COURS
+- **2026-10-16 13:02** — NOTE P1-T03 — délégué à executeur-sonnet (essai 1)
+- **2026-10-16 13:05** — Hypothèse H-020 créée pour P1-T03 (bloquante : non).
+- **2026-10-16 13:05** — NOTE P1-T03 — revue orchestrateur : Aujourdhui en UTC (décalage d'un jour à Casablanca) → renvoyé à executeur-sonnet (essai 2)
+- **2026-10-16 13:07** — NOTE P1-T03 — essai 2 OK : 42 tests ; risque : données Windows Africa/Casablanca fausses après 2025 (prod Linux/tzdata OK), shortcut commenté ; lancement vérificateur
+- **2026-10-16 13:08** — NOTE P1-T03 — vérificateur OK (essai 2) : Common 16/16, total 42/42, build 0 warn

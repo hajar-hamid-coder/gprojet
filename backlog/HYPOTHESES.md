@@ -137,3 +137,10 @@
 **Hypothèse retenue par défaut** : Contrôleur = hérite de ControllerBase ou nom en *Controller ; Contracts autorise tout System.* (les API absentes du navigateur ne sont pas détectées, la compilation du front en P2 servira de seconde garde)
 **Impact si l'hypothèse est fausse** : Des endpoints minimal API échapperaient à la règle ; une API System non disponible en WASM serait détectée seulement à la compilation du front
 **Réponse utilisateur** : _en attente_
+
+### H-020 · P1-T03
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 13:05
+**Question** : Dans quel fuseau calcule-t-on la date du jour (saisie des temps, échéances) ?
+**Hypothèse retenue par défaut** : Fuseau Africa/Casablanca (HCP) ; IHorloge.Aujourdhui est calculé dans ce fuseau, Maintenant reste en UTC
+**Impact si l'hypothèse est fausse** : Si un autre fuseau est attendu, changer la valeur passée à HorlogeSysteme ; en UTC pur, les saisies entre minuit et 1 h seraient datées de la veille
+**Réponse utilisateur** : _en attente_
