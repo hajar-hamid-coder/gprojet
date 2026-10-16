@@ -1,0 +1,23 @@
+# --- Secrets et réglages locaux (ne jamais versionner) ---
+.claude/settings.local.json
+.claude/etat-stop.json
+*.local.json
+.env
+.env.*
+!.env.example
+
+# --- Outils locaux ---
+.pgtest/
+graphify-out/cache/
+__pycache__/
+
+# --- .NET ---
+bin/
+obj/
+*.user
+*.suo
+.vs/
+.idea/
+TestResults/
+*.trx
+coverage*/

@@ -1,0 +1,104 @@
+# Feuille des hypothèses
+
+> Une hypothèse est créée quand une tâche manque de précision. **Bloquante** : la tâche passe `BLOQUE` jusqu'à la réponse. **Non bloquante** : Claude avance avec l'hypothèse par défaut et la signale au bilan de phase.
+> Création : `python scripts/backlog.py hypothese-ajouter …` (Claude). Réponse : `/repondre-hypothese H-00x <réponse>` (utilisateur).
+> Statuts : `OUVERTE` → `REPONDUE`.
+
+
+### H-001 · P3-T01
+> **Statut** : REPONDUE · **Bloquante** : oui · **Date** : 2026-10-16 10:54
+**Question** : Docker n'est pas installé sur le poste. Faut-il installer Docker Desktop (ou Rancher Desktop / Podman) avant la phase P3 ?
+**Hypothèse retenue par défaut** : Docker Desktop sera installé par l'utilisateur avant P3 ; P3-T03, P3-T04 et P3-T05 peuvent avancer sans Docker.
+**Impact si l'hypothèse est fausse** : Sans moteur de conteneurs, les images, docker compose et les tests Testcontainers ne peuvent pas être validés.
+**Réponse utilisateur** (2026-10-16 11:23) : Docker 29 est installé
+
+### H-002 · P3-T04
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 10:54
+**Question** : Quelle instance GitLab (URL, version, runners Docker disponibles) exécutera le pipeline ?
+**Hypothèse retenue par défaut** : GitLab self-managed ≥ 17 avec runners Docker et Container Registry activé ; validation du YAML par script local, CI Lint GitLab dès que l'URL est connue.
+**Impact si l'hypothèse est fausse** : Mots-clés ou templates de sécurité indisponibles selon l'édition (SAST/DAST complets = Ultimate).
+**Réponse utilisateur** : _en attente_
+
+### H-003 · P0-T06
+> **Statut** : REPONDUE · **Bloquante** : non · **Date** : 2026-10-16 10:54
+**Question** : Node.js n'est pas installé : faut-il l'installer pour Ponytail (hooks d'activation) et l'installation du skill motion-design ?
+**Hypothèse retenue par défaut** : Installer Node.js LTS via scripts/installer-outils.ps1 ; sans Node, les skills Ponytail restent utilisables manuellement et motion-design est copié par git clone.
+**Impact si l'hypothèse est fausse** : Ponytail ne s'active pas automatiquement à chaque session.
+**Réponse utilisateur** (2026-10-16 11:23) : Node.js v26 est installé
+
+### H-004 · P1-T09
+> **Statut** : REPONDUE · **Bloquante** : non · **Date** : 2026-10-16 10:54
+**Question** : Pour exécuter l'API en développement (hors tests), quelle base PostgreSQL utiliser et avec quel compte ?
+**Hypothèse retenue par défaut** : Tests sur l'instance jetable pg-test ; exécution locale sur le service PostgreSQL 18 du poste avec une chaîne de connexion définie par l'utilisateur dans dotnet user-secrets (Claude ne connaît aucun mot de passe).
+**Impact si l'hypothèse est fausse** : Si une autre base est imposée, seule la configuration change.
+**Réponse utilisateur** (2026-10-16 11:31) : Base de développement fournie : gprojet (vide) sur localhost:5432, compte postgres. Chaîne de connexion dans .claude/settings.local.json (variable ConnectionStrings__Gp, non versionnée). Les tests restent sur l'instance jetable pg-test, jamais sur gprojet.
+
+### H-005 · P6-T11
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 10:54
+**Question** : Quelle bibliothèque de Gantt utiliser (licence compatible marché public) ?
+**Hypothèse retenue par défaut** : Frappe Gantt (MIT) via JS Interop ; vue PERT avec Cytoscape.js (MIT).
+**Impact si l'hypothèse est fausse** : Fonctions avancées (ressources, baseline visuelle) à développer soi-même ; alternative commerciale DHTMLX / Syncfusion.
+**Réponse utilisateur** : _en attente_
+
+### H-006 · P8-T07
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 10:54
+**Question** : Bibliothèques d'export Excel et PDF autorisées ?
+**Hypothèse retenue par défaut** : ClosedXML (MIT) pour Excel, PDFsharp / MigraDoc (MIT) pour PDF ; QuestPDF écarté (licence communautaire conditionnelle).
+**Impact si l'hypothèse est fausse** : Mise en page PDF plus verbeuse à coder.
+**Réponse utilisateur** : _en attente_
+
+### H-007 · P8-T07
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 10:54
+**Question** : Charte officielle (logo, en-tête, mentions) à appliquer sur les exports et les livrables ?
+**Hypothèse retenue par défaut** : Logo et en-tête génériques paramétrables par entité, remplacés par les fichiers officiels fournis plus tard.
+**Impact si l'hypothèse est fausse** : Exports à régénérer une fois la charte fournie.
+**Réponse utilisateur** : _en attente_
+
+### H-008 · P9-T02
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 10:54
+**Question** : Les pièces jointes doivent-elles passer par un antivirus ?
+**Hypothèse retenue par défaut** : Point d'extension IAnalyseurFichier ; implémentation ClamAV (conteneur) optionnelle, désactivée en développement.
+**Impact si l'hypothèse est fausse** : Sans antivirus, risque de dépôt de fichiers malveillants en production.
+**Réponse utilisateur** : _en attente_
+
+### H-009 · P10-T07
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 10:54
+**Question** : Quelle bibliothèque pour l'éditeur visuel MCD / classes ?
+**Hypothèse retenue par défaut** : JointJS core (MPL-2.0) via JS Interop.
+**Impact si l'hypothèse est fausse** : Si refusée, alternative Drawflow (MIT) avec plus de développement.
+**Réponse utilisateur** : _en attente_
+
+### H-010 · P10-T08
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 10:54
+**Question** : bpmn-js impose de conserver le filigrane bpmn.io : est-ce acceptable ?
+**Hypothèse retenue par défaut** : Oui, filigrane conservé conformément à la licence.
+**Impact si l'hypothèse est fausse** : Sinon, BPMN limité à un rendu texte / Mermaid.
+**Réponse utilisateur** : _en attente_
+
+### H-011 · P12-T01
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 10:54
+**Question** : URL GitLab et jeton technique (portée api) pour l'intégration réelle ?
+**Hypothèse retenue par défaut** : Développement et tests sur serveur GitLab simulé ; l'URL et le jeton seront fournis via la configuration sécurisée avant la recette.
+**Impact si l'hypothèse est fausse** : Intégration non testée de bout en bout tant que l'instance n'est pas fournie.
+**Réponse utilisateur** : _en attente_
+
+### H-012 · P15-T03
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 10:54
+**Question** : Une instance SonarQube est-elle disponible ?
+**Hypothèse retenue par défaut** : Intégration optionnelle, désactivée si aucune URL n'est configurée.
+**Impact si l'hypothèse est fausse** : Indicateurs de dette technique absents.
+**Réponse utilisateur** : _en attente_
+
+### H-013 · P18-T01
+> **Statut** : OUVERTE · **Bloquante** : oui · **Date** : 2026-10-16 10:54
+**Question** : Paramètres de l'annuaire AD / LDAP : URL, base DN, compte de service, groupes à mapper vers les rôles, attribut portant le matricule ?
+**Hypothèse retenue par défaut** : Aucune : ces valeurs ne peuvent pas être devinées.
+**Impact si l'hypothèse est fausse** : Fédération Keycloak impossible sans elles.
+**Réponse utilisateur** : _en attente_
+
+### H-014 · P2-T02
+> **Statut** : REPONDUE · **Bloquante** : non · **Date** : 2026-10-16 11:31
+**Question** : La charte HCP utilise des couleurs de texte sous le seuil RGAA/WCAG (text-tertiary 2,5:1, success 2,5:1, warning 2,2:1, danger 3,8:1, blue 3,7:1, purple 4,2:1). Accepte-t-on des variantes foncées réservées au texte, ajoutées dans app.gp.css sans toucher à app.css ?
+**Hypothèse retenue par défaut** : Oui : --success-text #047857, --warning-text #B45309, --danger-text #B91C1C, --info-text #1D4ED8, --purple-text #6D28D9 (toutes ≥ 4,5:1 sur le fond du badge) ; couleurs d'origine conservées pour pastilles, barres, bordures et icônes ; text-tertiary réservé au décoratif.
+**Impact si l'hypothèse est fausse** : Si refusé : badges et petits textes de statut non conformes RGAA, la phase P17 (0 violation axe) ne pourra pas être validée.
+**Réponse utilisateur** (2026-10-16 11:34) : Oui, variantes de texte accessibles validées
