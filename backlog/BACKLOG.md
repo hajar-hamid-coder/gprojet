@@ -19,13 +19,13 @@
 
 <!-- RESUME:DEBUT -->
 
-_Mis à jour le 2026-10-16 15:56 par scripts/backlog.py — ne pas modifier à la main._
+_Mis à jour le 2026-10-16 15:58 par scripts/backlog.py — ne pas modifier à la main._
 
 | Phase | Titre | Statut | Modèle | Avancement |
 |---|---|---|---|---|
 | P0 | Initialisation et outillage | ✅ VALIDEE | sonnet | 6/6 |
 | P1 | Socle backend .NET 10 | ✅ VALIDEE | opus | 11/11 |
-| P2 | Socle frontend Blazor WebAssembly et BFF | 🔄 EN_COURS | sonnet | 4/9 |
+| P2 | Socle frontend Blazor WebAssembly et BFF | 🔄 EN_COURS | sonnet | 5/9 |
 | P3 | Conteneurisation et intégration continue GitHub Actions | ⬜ NON_DEMARREE | sonnet | 0/5 |
 | P4 | Module Organisation et périmètre hiérarchique | ⬜ NON_DEMARREE | sonnet | 0/8 |
 | P5 | Projets et affectation en cascade | ⬜ NON_DEMARREE | opus | 0/10 |
@@ -194,7 +194,7 @@ _Mis à jour le 2026-10-16 15:56 par scripts/backlog.py — ne pas modifier à l
 **Test de validation** : `app.gp.css` contient un bloc `@media (prefers-reduced-motion: reduce)` qui neutralise `transition` et `animation` ; aucune durée autre que 0.1s, 0.15s, 0.25s, 0.6s dans les CSS du projet (grep) ; aucune bibliothèque JS d'animation ajoutée (`git diff --stat` sur `wwwroot/lib` vide).
 
 ### P2-T05 · Couche Api : clients HTTP typés
-> **Statut** : EN_COURS · **Modèle** : sonnet · **Ordre** : 5 · **Dépend de** : P2-T01
+> **Statut** : A_VALIDER · **Modèle** : sonnet · **Ordre** : 5 · **Dépend de** : P2-T01
 
 **Explication** : `ApiClientBase` (sérialisation System.Text.Json, conversion `ProblemDetails` → `ApiException` typée avec erreurs de validation, annulation), enregistrement des clients via `IHttpClientFactory` en adresses relatives (même origine que le backend), premier client `SanteApiClient`.
 **Test de validation** : tests unitaires avec `HttpMessageHandler` simulé : 200 → DTO ; 400 `problem+json` → `ApiException` contenant les erreurs par champ ; 404 → `ApiException.Statut == 404`.

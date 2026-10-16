@@ -185,3 +185,5 @@
 - **2026-10-16 15:56** — NOTE P2-T05 — délégué à executeur-sonnet (essai 1)
 - **2026-10-16 15:58** — NOTE P2-T05 — exécuteur OK (essai 1) : Api 6/6, front 21/21, backend 143/143 ; lancement vérificateur
 - **2026-10-16 15:58** — NOTE P2-T05 — vérificateur OK (essai 1) : Api 6/6, front 21/21, backend 143/143
+- **2026-10-16 15:58** — NOTE P2-T05 — commit 19e106c
+- **2026-10-16 15:58** — P2-T05 EN_COURS → A_VALIDER — preuve : Category=Api → 6/6 (200 → DTO, 400 problem+json → erreurs par champ, 404 → Statut 404); front 21/21; vérificateur OK; commit 19e106c
