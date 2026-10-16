@@ -19,13 +19,13 @@
 
 <!-- RESUME:DEBUT -->
 
-_Mis à jour le 2026-10-16 15:43 par scripts/backlog.py — ne pas modifier à la main._
+_Mis à jour le 2026-10-16 15:48 par scripts/backlog.py — ne pas modifier à la main._
 
 | Phase | Titre | Statut | Modèle | Avancement |
 |---|---|---|---|---|
 | P0 | Initialisation et outillage | ✅ VALIDEE | sonnet | 6/6 |
 | P1 | Socle backend .NET 10 | ✅ VALIDEE | opus | 11/11 |
-| P2 | Socle frontend Blazor WebAssembly et BFF | 🔄 EN_COURS | sonnet | 1/9 |
+| P2 | Socle frontend Blazor WebAssembly et BFF | 🔄 EN_COURS | sonnet | 2/9 |
 | P3 | Conteneurisation et intégration continue GitHub Actions | ⬜ NON_DEMARREE | sonnet | 0/5 |
 | P4 | Module Organisation et périmètre hiérarchique | ⬜ NON_DEMARREE | sonnet | 0/8 |
 | P5 | Projets et affectation en cascade | ⬜ NON_DEMARREE | opus | 0/10 |
@@ -176,7 +176,7 @@ _Mis à jour le 2026-10-16 15:43 par scripts/backlog.py — ne pas modifier à l
 **Test de validation** : `dotnet build Gprojet.slnx` OK et `dotnet sln list` affiche exactement 4 projets ; test d'intégration backend : `GET /` → 200 HTML contenant `blazor.webassembly`, `GET /api/health` → 200 ; un DTO de `Gprojet-Backend/Contracts` est utilisé dans le front (compilation) ; règle d'architecture : le front ne référence aucun autre code du backend.
 
 ### P2-T02 · Charte HCP : intégration de app.css et des ressources
-> **Statut** : EN_COURS · **Modèle** : sonnet · **Ordre** : 2 · **Dépend de** : P2-T01
+> **Statut** : A_VALIDER · **Modèle** : sonnet · **Ordre** : 2 · **Dépend de** : P2-T01
 
 **Explication** : appliquer `design/charte-hcp/README.md`. Copier `design/charte-hcp/app.css` dans `wwwroot/css/app.css` **sans autre modification** que le remplacement de l'`@import` Google Fonts par un `@font-face` local (Geist, licence OFL, fichiers dans `wwwroot/fonts/`). Créer `wwwroot/css/app.gp.css` (chargé après) : variantes de texte accessibles (`--success-text`, `--warning-text`, `--danger-text`, `--info-text`, `--purple-text`), badges des statuts GestionProjet (`.status-badge.a-faire`, `.a-valider`, `.bloque`, `.valide`…), classes manquantes, le tout à partir des variables de la charte. Auto-héberger Font Awesome Free 6 et Chart.js dans `wwwroot/lib/` ; logo HCP dans `wwwroot/images/`. `docs/DESIGN.md` : renvoi vers la charte et inventaire des classes utilisées / ajoutées.
 **Test de validation** : un script compare `design/charte-hcp/app.css` et `wwwroot/css/app.css` : seule la ligne `@import` diffère ; `grep -rE "https?://" src/Gprojet-Front/wwwroot/index.html src/Gprojet-Front/wwwroot/css` ne renvoie rien (aucune ressource externe) ; aucune couleur hexadécimale dans `Pages/`, `Components/`, `Layouts/` ni dans `app.gp.css` hors des 5 variables de texte documentées ; contraste de chaque variable de texte ≥ 4,5:1 (calcul dans un test).
