@@ -63,3 +63,4 @@
 - **2026-10-16 12:00** — Phase P0 terminée par Claude : en attente de validation utilisateur (`/valider-phase P0`).
 - **2026-10-16 12:00** — P0-T06 EN_COURS → A_VALIDER — preuve : OUTILLAGE.md liste 4 outils avec statut; backlog.py contexte → exit 0; vérificateur OK; commit 40d7469
 - **2026-10-16 12:21** — Phase P0 VALIDÉE par l'utilisateur.
+- **2026-10-16 12:48** — Hypothèse H-002 répondue : Choix utilisateur (2026-10-16) : le dépôt du projet est sur GitHub (hajar-hamid-coder/gprojet, public) ; l'intégration continue se fait avec GitHub Actions et l'image est publiée sur ghcr.io. GitLab reste une intégration fonctionnelle de la plateforme (P12-P13).

@@ -225,10 +225,10 @@ _Mis à jour le 2026-10-16 12:21 par scripts/backlog.py — ne pas modifier à l
 
 ---
 
-## Phase P3 · Conteneurisation et intégration continue GitLab
+## Phase P3 · Conteneurisation et intégration continue GitHub Actions
 > **Statut phase** : NON_DEMARREE · **Modèle conseillé** : sonnet
 
-**Objectif** : images Docker, environnement local complet par docker compose, pipeline GitLab CI. **Livrable** : `docker compose up` fonctionnel et `.gitlab-ci.yml`. ⚠️ Nécessite Docker (hypothèse H-001).
+**Objectif** : images Docker, environnement local complet par docker compose, intégration continue **GitHub Actions** sur le dépôt `hajar-hamid-coder/gprojet`. **Livrable** : `docker compose up` fonctionnel et `.github/workflows/ci.yml`. ⚠️ Nécessite Docker (hypothèse H-001).
 
 ### P3-T01 · Dockerfile de l'application
 > **Statut** : NON_FAIT · **Modèle** : sonnet · **Ordre** : 1 · **Dépend de** : —
@@ -248,16 +248,16 @@ _Mis à jour le 2026-10-16 12:21 par scripts/backlog.py — ne pas modifier à l
 **Explication** : rendre les tests d'intégration indépendants de `pg-test.py` via la variable `GP_TEST_CONNECTION` (si définie : base fournie par la CI ; sinon : instance locale jetable). Fixture xUnit commune.
 **Test de validation** : `dotnet test` local (instance jetable) vert ; avec `GP_TEST_CONNECTION` pointant sur l'instance démarrée manuellement, les mêmes tests passent.
 
-### P3-T04 · Pipeline .gitlab-ci.yml
+### P3-T04 · Workflow GitHub Actions
 > **Statut** : NON_FAIT · **Modèle** : sonnet · **Ordre** : 4 · **Dépend de** : P3-T01, P3-T03
 
-**Explication** : étapes `build`, `test` (service `postgres:18`, rapports JUnit et couverture Cobertura), `qualite` (`dotnet format --verify-no-changes`), `securite` (templates GitLab SAST, Dependency-Scanning, Secret-Detection, Container-Scanning), `paquet` (build et push des images vers le GitLab Container Registry sur `main` et les tags), `deploiement` (manuel, préparé pour P13). Cache NuGet.
-**Test de validation** : `python scripts/verifier-ci.py` (à écrire, parse YAML) confirme les 6 étapes, les rapports JUnit, l'absence de secret en clair ; validation par l'API CI Lint de GitLab si H-002 est répondue, sinon signalée dans la preuve.
+**Explication** : `.github/workflows/ci.yml` déclenché sur push et pull request : jobs `build`, `test` (service `postgres:18`, `GP_TEST_CONNECTION`, rapport de tests et couverture publiés comme artefacts), `qualite` (`dotnet format --verify-no-changes`), `securite` (CodeQL C#, `dependency-review` sur les pull requests, scan d'image Trivy), `paquet` (build et push de l'image vers **GitHub Container Registry** `ghcr.io` sur `main` et les tags, avec `GITHUB_TOKEN`), `deploiement` (`workflow_dispatch` + environnement protégé, préparé pour P13). Cache NuGet, versions d'actions épinglées. Reprendre aussi les modèles `.gitlab/` existants en `.github/pull_request_template.md` et `.github/ISSUE_TEMPLATE/`, et mettre `CONTRIBUTING.md` à jour (pull requests GitHub).
+**Test de validation** : `python scripts/verifier-ci.py` (à écrire, parse YAML) confirme les 6 jobs, leurs dépendances, le service PostgreSQL et l'absence de secret en clair ; le modèle de pull request existe. L'exécution réelle sur GitHub se constate après le push de l'utilisateur (signalé dans le bilan de phase).
 
 ### P3-T05 · Documentation de déploiement local
 > **Statut** : NON_FAIT · **Modèle** : haiku · **Ordre** : 5 · **Dépend de** : P3-T02, P3-T04
 
-**Explication** : `docs/DEPLOIEMENT.md` : prérequis, variables, démarrage compose, migrations, dépannage, description du pipeline et des variables CI à créer dans GitLab (masquées / protégées).
+**Explication** : `docs/DEPLOIEMENT.md` : prérequis, variables, démarrage compose, migrations, dépannage, description du workflow GitHub Actions, des secrets à créer (Settings → Secrets and variables → Actions) et de la publication d'image sur ghcr.io.
 **Test de validation** : le document contient les sections Prérequis, Démarrage, Variables, Pipeline, Dépannage ; chaque commande citée existe dans le dépôt.
 
 ---

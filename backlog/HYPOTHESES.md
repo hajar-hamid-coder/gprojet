@@ -13,11 +13,11 @@
 **Réponse utilisateur** (2026-10-16 11:23) : Docker 29 est installé
 
 ### H-002 · P3-T04
-> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 10:54
+> **Statut** : REPONDUE · **Bloquante** : non · **Date** : 2026-10-16 10:54
 **Question** : Quelle instance GitLab (URL, version, runners Docker disponibles) exécutera le pipeline ?
 **Hypothèse retenue par défaut** : GitLab self-managed ≥ 17 avec runners Docker et Container Registry activé ; validation du YAML par script local, CI Lint GitLab dès que l'URL est connue.
 **Impact si l'hypothèse est fausse** : Mots-clés ou templates de sécurité indisponibles selon l'édition (SAST/DAST complets = Ultimate).
-**Réponse utilisateur** : _en attente_
+**Réponse utilisateur** (2026-10-16 12:48) : Choix utilisateur (2026-10-16) : le dépôt du projet est sur GitHub (hajar-hamid-coder/gprojet, public) ; l'intégration continue se fait avec GitHub Actions et l'image est publiée sur ghcr.io. GitLab reste une intégration fonctionnelle de la plateforme (P12-P13).
 
 ### H-003 · P0-T06
 > **Statut** : REPONDUE · **Bloquante** : non · **Date** : 2026-10-16 10:54

@@ -53,7 +53,7 @@ S'il manque une précision : `python scripts/backlog.py hypothese-ajouter --tach
 
 **Deux projets applicatifs, pas un de plus** : `src/Gprojet-Backend` (ASP.NET Core : API + BFF, sert aussi le front) et `src/Gprojet-Front` (Blazor WebAssembly) ; tests dans `tests/Gprojet-Backend.Tests` et `tests/Gprojet-Front.Tests`.
 
-.NET 10 · Blazor WebAssembly + BFF intégré au backend · ASP.NET Core Web API (contrôleurs) · EF Core 10 + Npgsql · PostgreSQL 18 · Keycloak (intégré en dernier) · Docker · GitLab.
+.NET 10 · Blazor WebAssembly + BFF intégré au backend · ASP.NET Core Web API (contrôleurs) · EF Core 10 + Npgsql · PostgreSQL 18 · Keycloak (intégré en dernier) · Docker. Dépôt du projet : **GitHub** (`origin` = `hajar-hamid-coder/gprojet`, **public** : rien de sensible ne doit y entrer), CI **GitHub Actions**. GitLab reste une *fonctionnalité* de la plateforme (intégration avec les projets de l'État, P12-P13).
 
 Couches = **dossiers / espaces de noms** de `Gprojet-Backend` : `Web → Orchestration → Services → Repositories → Entities`, plus `Mapping`, `Contracts` (DTO partagés avec le front par fichiers liés), `Infrastructure`, `Common`. Le compilateur ne protège plus ces frontières : les tests NetArchTest (`tests/Gprojet-Backend.Tests/Architecture`) sont la garde, ne jamais les affaiblir.
 - **Les DTO ne descendent jamais sous l'Orchestration ; les entités ne remontent jamais au-dessus.**
@@ -71,7 +71,7 @@ Couches = **dossiers / espaces de noms** de `Gprojet-Backend` : `Web → Orchest
 - Base : `snake_case`, un schéma PostgreSQL par module, PK `uuid` (`uuidv7()`), colonnes d'audit, suppression logique, concurrence `xmin`. Le schéma EF doit reproduire `database/01-schema.sql`.
 - C# : `PascalCase`, `nullable enable`, `TreatWarningsAsErrors` sur les nouveaux projets, `async` suffixé `Async`, un type par fichier. Langue du domaine : français (`Projet`, `Phase`, `Tache`, `Ticket`).
 - Tests : xUnit + FluentAssertions ; bUnit pour les composants ; NetArchTest pour les dépendances de couches ; PostgreSQL de test via `python scripts/pg-test.py demarrer|arreter` (instance jetable, port 55432, sans mot de passe).
-- Secrets : jamais dans le dépôt ni dans un fichier suivi. Base de dev : variable `ConnectionStrings__Gp` (déjà fournie à tes commandes) ; ne jamais afficher, journaliser, committer ni recopier cette chaîne. Pipeline : variables GitLab CI masquées.
+- Secrets : jamais dans le dépôt ni dans un fichier suivi. Base de dev : variable `ConnectionStrings__Gp` (déjà fournie à tes commandes) ; ne jamais afficher, journaliser, committer ni recopier cette chaîne. Pipeline : secrets GitHub Actions.
 - Base `gprojet` = développement (migrations, `dotnet run`) ; **tests = instance jetable `pg-test` uniquement**, jamais `gprojet`.
 - Git : branche `phase/Pn-<slug>` par phase ; **un commit par tâche** : `Pn-Tnn: <titre>` ; pas de push (l'utilisateur pousse après validation).
 
