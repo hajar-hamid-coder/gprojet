@@ -19,13 +19,13 @@
 
 <!-- RESUME:DEBUT -->
 
-_Mis à jour le 2026-10-16 16:23 par scripts/backlog.py — ne pas modifier à la main._
+_Mis à jour le 2026-10-16 16:27 par scripts/backlog.py — ne pas modifier à la main._
 
 | Phase | Titre | Statut | Modèle | Avancement |
 |---|---|---|---|---|
 | P0 | Initialisation et outillage | ✅ VALIDEE | sonnet | 6/6 |
 | P1 | Socle backend .NET 10 | ✅ VALIDEE | opus | 11/11 |
-| P2 | Socle frontend Blazor WebAssembly et BFF | 🔄 EN_COURS | sonnet | 8/9 |
+| P2 | Socle frontend Blazor WebAssembly et BFF | 🟡 A_VALIDER | sonnet | 9/9 |
 | P3 | Conteneurisation et intégration continue GitHub Actions | ⬜ NON_DEMARREE | sonnet | 0/5 |
 | P4 | Module Organisation et périmètre hiérarchique | ⬜ NON_DEMARREE | sonnet | 0/8 |
 | P5 | Projets et affectation en cascade | ⬜ NON_DEMARREE | opus | 0/10 |
@@ -165,7 +165,7 @@ _Mis à jour le 2026-10-16 16:23 par scripts/backlog.py — ne pas modifier à l
 ---
 
 ## Phase P2 · Socle frontend Blazor WebAssembly et BFF
-> **Statut phase** : EN_COURS · **Modèle conseillé** : sonnet
+> **Statut phase** : A_VALIDER · **Modèle conseillé** : sonnet
 
 **Objectif** : projet unique `Gprojet-Front` servi par `Gprojet-Backend` (BFF intégré), charte et layout définitifs, couches front en place. **Livrable** : coquille navigable authentifiée (auth de dev).
 
@@ -218,7 +218,7 @@ _Mis à jour le 2026-10-16 16:23 par scripts/backlog.py — ne pas modifier à l
 **Test de validation** : tests bUnit : en culture `ar-MA` le layout est rendu avec `dir="rtl"` ; un libellé du menu change selon la culture ; aucun texte en dur dans `Layouts/` (contrôle : test qui échoue si une chaîne littérale française apparaît dans un `.razor` du layout).
 
 ### P2-T09 · Pages système
-> **Statut** : EN_COURS · **Modèle** : haiku · **Ordre** : 9 · **Dépend de** : P2-T08
+> **Statut** : A_VALIDER · **Modèle** : haiku · **Ordre** : 9 · **Dépend de** : P2-T08
 
 **Explication** : pages Accueil (placeholder du tableau de bord), 404, Accès refusé, Erreur inattendue (avec identifiant de corrélation), Chargement initial.
 **Test de validation** : tests bUnit : chaque page se rend sans exception et contient son titre traduit.
