@@ -19,11 +19,11 @@
 
 <!-- RESUME:DEBUT -->
 
-_Mis à jour le 2026-10-16 11:51 par scripts/backlog.py — ne pas modifier à la main._
+_Mis à jour le 2026-10-16 11:53 par scripts/backlog.py — ne pas modifier à la main._
 
 | Phase | Titre | Statut | Modèle | Avancement |
 |---|---|---|---|---|
-| P0 | Initialisation et outillage | 🔄 EN_COURS | sonnet | 2/6 |
+| P0 | Initialisation et outillage | 🔄 EN_COURS | sonnet | 3/6 |
 | P1 | Socle backend .NET 10 | ⬜ NON_DEMARREE | opus | 0/11 |
 | P2 | Socle frontend Blazor WebAssembly et BFF | ⬜ NON_DEMARREE | sonnet | 0/9 |
 | P3 | Conteneurisation et intégration continue GitLab | ⬜ NON_DEMARREE | sonnet | 0/5 |
@@ -66,7 +66,7 @@ _Mis à jour le 2026-10-16 11:51 par scripts/backlog.py — ne pas modifier à l
 **Test de validation** : `python scripts/verifier-env.py` affiche le tableau et sort en 0 sur ce poste (dotnet, python, PostgreSQL, git présents) ; en masquant `PG_BIN` vers un dossier vide, il sort en 1.
 
 ### P0-T03 · Valider l'instance PostgreSQL de test et le schéma de référence
-> **Statut** : EN_COURS · **Modèle** : sonnet · **Ordre** : 3 · **Dépend de** : P0-T01
+> **Statut** : A_VALIDER · **Modèle** : sonnet · **Ordre** : 3 · **Dépend de** : P0-T01
 
 **Explication** : utiliser `scripts/pg-test.py` pour démarrer l'instance jetable, appliquer `database/01` et `02`, exécuter `database/03-tests-integrite.sql`, puis arrêter. Ajouter `scripts/tester-schema.py` qui automatise cela et vérifie que les 13 blocs « attendu ERREUR » échouent et que les autres réussissent (analyse de la sortie psql).
 **Test de validation** : `python scripts/tester-schema.py` sort en 0 et affiche « 18/18 vérifications conformes » ; `.pgtest/` n'existe plus après exécution.

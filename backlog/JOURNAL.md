@@ -39,3 +39,5 @@
 - **2026-10-16 11:52** — Hypothèse H-016 créée pour P0-T03 (bloquante : non).
 - **2026-10-16 11:52** — NOTE P0-T03 — exécuteur OK (essai 1); lancement vérificateur
 - **2026-10-16 11:53** — NOTE P0-T03 — vérificateur OK (essai 1) : 18/18, exit 0, .pgtest supprimé
+- **2026-10-16 11:53** — NOTE P0-T03 — commit 99428d2
+- **2026-10-16 11:53** — P0-T03 EN_COURS → A_VALIDER — preuve : tester-schema.py → 18/18 vérifications conformes, exit 0, .pgtest absent; vérificateur OK; commit 99428d2
