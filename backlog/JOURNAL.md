@@ -111,3 +111,5 @@
 - **2026-10-16 14:43** — NOTE P1-T06 — exécuteur OK (essai 1) : comparer-schema 0 écart, auto-test 3/3, gprojet 60 tables/6 schémas, 104/104 ; lancement vérificateur
 - **2026-10-16 14:45** — Hypothèse H-023 créée pour P1-T06 (bloquante : non).
 - **2026-10-16 14:45** — NOTE P1-T06 — vérificateur OK (essai 1) : 0 écart, auto-test 3/3, gprojet 60 tables + InitialCreate, 104/104
+- **2026-10-16 14:45** — NOTE P1-T06 — commit 1a296ed
+- **2026-10-16 14:45** — P1-T06 EN_COURS → A_VALIDER — preuve : comparer-schema.py → 0 écart (935 colonnes, 767 contraintes, 191 index); --auto-test → 3/3; ef database update gprojet → 60 tables/6 schémas; vérificateur OK; commit 1a296ed

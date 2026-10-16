@@ -19,12 +19,12 @@
 
 <!-- RESUME:DEBUT -->
 
-_Mis à jour le 2026-10-16 14:32 par scripts/backlog.py — ne pas modifier à la main._
+_Mis à jour le 2026-10-16 14:45 par scripts/backlog.py — ne pas modifier à la main._
 
 | Phase | Titre | Statut | Modèle | Avancement |
 |---|---|---|---|---|
 | P0 | Initialisation et outillage | ✅ VALIDEE | sonnet | 6/6 |
-| P1 | Socle backend .NET 10 | 🔄 EN_COURS | opus | 5/11 |
+| P1 | Socle backend .NET 10 | 🔄 EN_COURS | opus | 6/11 |
 | P2 | Socle frontend Blazor WebAssembly et BFF | ⬜ NON_DEMARREE | sonnet | 0/9 |
 | P3 | Conteneurisation et intégration continue GitHub Actions | ⬜ NON_DEMARREE | sonnet | 0/5 |
 | P4 | Module Organisation et périmètre hiérarchique | ⬜ NON_DEMARREE | sonnet | 0/8 |
@@ -127,7 +127,7 @@ _Mis à jour le 2026-10-16 14:32 par scripts/backlog.py — ne pas modifier à l
 **Test de validation** : `dotnet build` OK ; `dotnet ef dbcontext info` réussit ; test unitaire : le modèle EF déclare 60 tables réparties dans les 6 schémas.
 
 ### P1-T06 · Migration initiale identique au schéma de référence
-> **Statut** : EN_COURS · **Modèle** : opus · **Ordre** : 6 · **Dépend de** : P1-T05
+> **Statut** : A_VALIDER · **Modèle** : opus · **Ordre** : 6 · **Dépend de** : P1-T05
 
 **Explication** : migration `InitialCreate` (+ trigger d'ajout seul sur `commun.historique` et données de `02-donnees-reference.sql` via `migrationBuilder.Sql`). Écrire `scripts/comparer-schema.py` : crée deux bases sur l'instance de test (l'une par `01-schema.sql`, l'autre par `dotnet ef database update`), puis compare colonnes (type, nullabilité, défaut), contraintes, index (définition) et triggers via `pg_catalog`. Appliquer ensuite la migration à la **base de développement `gprojet`** (vide au départ ; connexion fournie par la variable `ConnectionStrings__Gp`, définie dans `.claude/settings.local.json` — ne jamais l'afficher ni la recopier).
 **Test de validation** : `python scripts/comparer-schema.py` → « 0 écart » ; toute différence est listée et fait échouer le script ; `dotnet ef database update` sur `gprojet` réussit et `gprojet` contient 60 tables dans les 6 schémas.
