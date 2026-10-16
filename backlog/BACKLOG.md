@@ -157,7 +157,7 @@ _Mis à jour le 2026-10-16 15:14 par scripts/backlog.py — ne pas modifier à l
 **Test de validation** : tests d'intégration : sans en-tête → 401 ; matricule inconnu → 401 ; matricule valide → 200 et `ICurrentUser` renseigné ; en environnement Production le schéma « Dev » n'est pas enregistré.
 
 ### P1-T11 · Données de démonstration
-> **Statut** : NON_FAIT · **Modèle** : haiku · **Ordre** : 11 · **Dépend de** : P1-T06
+> **Statut** : EN_COURS · **Modèle** : haiku · **Ordre** : 11 · **Dépend de** : P1-T06
 
 **Explication** : `database/04-donnees-demo.sql` : 1 direction, 3 divisions, 6 services, 25 agents fictifs (responsables nommés, fonctions, compétences), 2 délégations, quelques absences, jours fériés de l'année. Uniquement des noms fictifs. Option `--demo` dans `pg-test.py demarrer`.
 **Test de validation** : `python scripts/pg-test.py demarrer --demo` puis requêtes de comptage : 10 entités, 25 agents, 10 responsables ; chaque service a un parent division (requête `ltree`).

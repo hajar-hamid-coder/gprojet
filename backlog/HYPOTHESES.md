@@ -193,3 +193,10 @@
 **Hypothèse retenue par défaut** : Deux rôles déduits : RESPONSABLE_ENTITE (responsable d'une entité active) et DELEGATAIRE (délégation non supprimée couvrant aujourd'hui) ; révocation = suppression logique ; les rôles Directeur/Chef de division/Chef de service seront déduits du niveau de l'entité dans le module Organisation (P4). Hors requête et en Production avant P18 : utilisateur SYSTEME et 401 sur les contrôleurs
 **Impact si l'hypothèse est fausse** : Enrichir DevAuthHandler si d'autres rôles sont requis ; prévoir un agent système en base si cree_par doit référencer un agent réel
 **Réponse utilisateur** : _en attente_
+
+### H-028 · P1-T11
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 15:18
+**Question** : Quels jours fériés 2026 retenir pour la démo, notamment les fêtes religieuses mobiles ?
+**Hypothèse retenue par défaut** : Calendrier civil marocain pour les jours fixes ; fêtes mobiles 2026 à des dates indicatives (marquées « indicatif »), à confirmer par l'annonce officielle
+**Impact si l'hypothèse est fausse** : Seules les données de démonstration seraient à corriger ; aucun calcul métier n'est encore branché dessus
+**Réponse utilisateur** : _en attente_

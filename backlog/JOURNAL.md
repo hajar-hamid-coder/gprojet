@@ -143,3 +143,8 @@
 - **2026-10-16 15:14** — NOTE P1-T10 — essai 2 : 3 tests de suppression logique ajoutés ; rejoué par l'orchestrateur : AuthDev 11/11, total 135/135 ; seul écart du vérificateur levé
 - **2026-10-16 15:14** — NOTE P1-T10 — commit b14995e
 - **2026-10-16 15:14** — P1-T10 EN_COURS → A_VALIDER — preuve : AuthDevTests → 11/11 (sans en-tête 401, inconnu 401, valide 200 + ICurrentUser, Production schéma Dev absent); dotnet test → 135/135; vérificateur : seul écart (test suppression logique) corrigé; commit b14995e
+- **2026-10-16 15:14** — P1-T11 NON_FAIT → EN_COURS
+- **2026-10-16 15:14** — NOTE P1-T11 — délégué à executeur-haiku (essai 1)
+- **2026-10-16 15:18** — Hypothèse H-028 créée pour P1-T11 (bloquante : non).
+- **2026-10-16 15:18** — NOTE P1-T11 — exécuteur OK (essai 1) : 10 entités, 25 agents, 10 responsables, 6/6 services sous une division ; tester-schema 18/18, comparer-schema 0 écart ; lancement vérificateur
+- **2026-10-16 15:19** — NOTE P1-T11 — vérificateur OK (essai 1) : 10/25/10, 6/6 services sous division, non-régression OK
