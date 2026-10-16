@@ -52,3 +52,5 @@
 - **2026-10-16 11:56** — NOTE P0-T05 — délégué à executeur-haiku (essai 1)
 - **2026-10-16 11:57** — NOTE P0-T05 — exécuteur OK (essai 1); lancement vérificateur
 - **2026-10-16 11:58** — NOTE P0-T05 — vérificateur OK (essai 1) : 4 fichiers, 6 sections, cohérent avec CLAUDE.md
+- **2026-10-16 11:58** — NOTE P0-T05 — commit bc0bbd6
+- **2026-10-16 11:58** — P0-T05 EN_COURS → A_VALIDER — preuve : 4 fichiers présents; grep -c '^## ' CONTRIBUTING.md → 6; vérificateur OK; commit bc0bbd6

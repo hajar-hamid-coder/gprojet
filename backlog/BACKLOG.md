@@ -19,11 +19,11 @@
 
 <!-- RESUME:DEBUT -->
 
-_Mis à jour le 2026-10-16 11:56 par scripts/backlog.py — ne pas modifier à la main._
+_Mis à jour le 2026-10-16 11:58 par scripts/backlog.py — ne pas modifier à la main._
 
 | Phase | Titre | Statut | Modèle | Avancement |
 |---|---|---|---|---|
-| P0 | Initialisation et outillage | 🔄 EN_COURS | sonnet | 4/6 |
+| P0 | Initialisation et outillage | 🔄 EN_COURS | sonnet | 5/6 |
 | P1 | Socle backend .NET 10 | ⬜ NON_DEMARREE | opus | 0/11 |
 | P2 | Socle frontend Blazor WebAssembly et BFF | ⬜ NON_DEMARREE | sonnet | 0/9 |
 | P3 | Conteneurisation et intégration continue GitLab | ⬜ NON_DEMARREE | sonnet | 0/5 |
@@ -78,7 +78,7 @@ _Mis à jour le 2026-10-16 11:56 par scripts/backlog.py — ne pas modifier à l
 **Test de validation** : `dotnet --version` (dans le dossier) renvoie une version 10.0.4xx ; `dotnet new console -o .tmpcheck && dotnet build .tmpcheck` réussit avec les props appliquées (vérifier `TreatWarningsAsErrors` dans `obj/*.nuget.g.props` ou via `dotnet msbuild -getProperty:TreatWarningsAsErrors`) ; supprimer `.tmpcheck`.
 
 ### P0-T05 · Modèles GitLab et guide de contribution
-> **Statut** : EN_COURS · **Modèle** : haiku · **Ordre** : 5 · **Dépend de** : P0-T01
+> **Statut** : A_VALIDER · **Modèle** : haiku · **Ordre** : 5 · **Dépend de** : P0-T01
 
 **Explication** : `.gitlab/merge_request_templates/Phase.md` (résumé de phase, tâches, preuves, hypothèses, checklist de revue), `.gitlab/issue_templates/Anomalie.md` et `Demande.md`, `CONTRIBUTING.md` (branches `phase/Pn-…`, commits `Pn-Tnn: …`, revue, règles des couches, comment lancer les tests).
 **Test de validation** : les 4 fichiers existent ; `CONTRIBUTING.md` contient les sections « Branches », « Commits », « Architecture », « Tests » (`grep -c "^## "` ≥ 4).
