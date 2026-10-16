@@ -116,3 +116,10 @@
 **Hypothèse retenue par défaut** : Il contient 12 ERREUR + 6 OK (total 18 conforme) ; la répartition 13+5 est une erreur de décompte, seul le total compte
 **Impact si l'hypothèse est fausse** : Si faux, un bloc attendu ERREUR manquerait dans le fichier 03
 **Réponse utilisateur** : _en attente_
+
+### H-017 · P0-T04
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 11:55
+**Question** : FluentAssertions 8.x (licence commerciale Xceed) est-il acceptable pour un projet d'État ?
+**Hypothèse retenue par défaut** : Version 8.11.0 retenue pour l'instant ; si la licence pose problème, épingler 7.x (Apache 2.0) dans Directory.Packages.props
+**Impact si l'hypothèse est fausse** : Aucun avant l'écriture des premiers tests (P0-T05+ ou P1)
+**Réponse utilisateur** : _en attente_

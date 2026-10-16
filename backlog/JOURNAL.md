@@ -41,3 +41,8 @@
 - **2026-10-16 11:53** — NOTE P0-T03 — vérificateur OK (essai 1) : 18/18, exit 0, .pgtest supprimé
 - **2026-10-16 11:53** — NOTE P0-T03 — commit 99428d2
 - **2026-10-16 11:53** — P0-T03 EN_COURS → A_VALIDER — preuve : tester-schema.py → 18/18 vérifications conformes, exit 0, .pgtest absent; vérificateur OK; commit 99428d2
+- **2026-10-16 11:53** — P0-T04 NON_FAIT → EN_COURS
+- **2026-10-16 11:53** — NOTE P0-T04 — délégué à executeur-haiku (essai 1)
+- **2026-10-16 11:55** — Hypothèse H-017 créée pour P0-T04 (bloquante : non).
+- **2026-10-16 11:55** — NOTE P0-T04 — exécuteur OK (essai 1); lancement vérificateur
+- **2026-10-16 11:56** — NOTE P0-T04 — vérificateur OK (essai 1) : dotnet 10.0.401, build 0 warn, TreatWarningsAsErrors=true
