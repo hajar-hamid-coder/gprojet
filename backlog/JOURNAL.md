@@ -73,3 +73,9 @@
 - **2026-10-16 12:57** — NOTE P1-T01 — vérificateur OK (essai 1) : build 0/0, 2 projets, test 1/1, FA 7.2.2, .github présent
 - **2026-10-16 12:57** — NOTE P1-T01 — commit 404738a
 - **2026-10-16 12:57** — P1-T01 EN_COURS → A_VALIDER — preuve : dotnet build → 0 avertissement; sln list → 2 projets; dotnet test → 1/1; FA 7.2.2; .github migré; vérificateur OK; commit 404738a
+- **2026-10-16 12:57** — P1-T02 NON_FAIT → EN_COURS
+- **2026-10-16 12:57** — NOTE P1-T02 — délégué à executeur-opus (essai 1)
+- **2026-10-16 13:01** — Hypothèse H-019 créée pour P1-T02 (bloquante : non).
+- **2026-10-16 13:01** — NOTE P1-T02 — exécuteur OK (essai 1) : 11 règles + 11 garde-fous + 1 couverture = 23 verts ; lancement vérificateur
+- **2026-10-16 13:02** — NOTE P1-T02 — vérificateur OK (essai 1) ; ponytail-review : manque Repositories ↛ Contracts/Mapping → renvoyé à executeur-opus (essai 2)
+- **2026-10-16 13:02** — NOTE P1-T02 — essai 2 : règle 12 Repositories ↛ Contracts/Mapping ajoutée ; rejoué par l'orchestrateur : 25 verts Architecture, 26 au total

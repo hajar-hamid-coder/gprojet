@@ -130,3 +130,10 @@
 **Hypothèse retenue par défaut** : Ne pas installer maintenant : graphify n'est utile qu'à partir de la première phase qui produit du code (P1). Installation prévue via scripts/installer-outils.ps1 (étapes uv puis uv tool install graphifyy, puis graphify install --project) avant P1 ; en attendant, la recherche se fait par Grep/Explore.
 **Impact si l'hypothèse est fausse** : Sans graphify, les requêtes 'graphify query' de CLAUDE.md ne fonctionnent pas : le repérage du code se fait par recherche classique (plus lent, plus de tokens). Aucun blocage de P0.
 **Réponse utilisateur** : _en attente_
+
+### H-019 · P1-T02
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 13:01
+**Question** : Comment reconnaître un contrôleur, et la liste blanche System.* de Contracts suffit-elle ?
+**Hypothèse retenue par défaut** : Contrôleur = hérite de ControllerBase ou nom en *Controller ; Contracts autorise tout System.* (les API absentes du navigateur ne sont pas détectées, la compilation du front en P2 servira de seconde garde)
+**Impact si l'hypothèse est fausse** : Des endpoints minimal API échapperaient à la règle ; une API System non disponible en WASM serait détectée seulement à la compilation du front
+**Réponse utilisateur** : _en attente_

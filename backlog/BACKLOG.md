@@ -103,7 +103,7 @@ _Mis à jour le 2026-10-16 12:57 par scripts/backlog.py — ne pas modifier à l
 **Test de validation** : `dotnet build Gprojet.slnx` réussit sans avertissement ; `dotnet sln Gprojet.slnx list` affiche exactement 2 projets (`Gprojet-Backend`, `Gprojet-Backend.Tests`) ; `dotnet test` passe (test de fumée). `Directory.Packages.props` référence FluentAssertions 7.x ; `.gitlab/` n'existe plus et `.github/pull_request_template.md` existe.
 
 ### P1-T02 · Tests d'architecture par espace de noms
-> **Statut** : NON_FAIT · **Modèle** : opus · **Ordre** : 2 · **Dépend de** : P1-T01
+> **Statut** : EN_COURS · **Modèle** : opus · **Ordre** : 2 · **Dépend de** : P1-T01
 
 **Explication** : les couches étant des dossiers d'un même projet, **ces tests remplacent le compilateur** comme garde. NetArchTest dans `tests/Gprojet-Backend.Tests/Architecture/`, une règle par interdiction entre espaces de noms `Gprojet.Backend.*` : Web ↛ Services / Repositories / Entities ; Orchestration ↛ implémentations de Repositories ; Services ↛ Contracts, Mapping, EF Core ; Entities ↛ toute autre couche sauf Common ; Contracts ↛ tout sauf BCL et FluentValidation (compilé dans le navigateur) ; types `*Dto` uniquement dans Contracts ; contrôleurs uniquement dans Web. Test « garde-fou » : des types de violation volontaire, définis dans le projet de test sous des espaces de noms simulés, sont bien détectés.
 **Test de validation** : `dotnet test tests/Gprojet-Backend.Tests --filter Category=Architecture` → tous verts, ≥ 10 règles ; le garde-fou prouve qu'une violation fait échouer la règle (assert inversé).
