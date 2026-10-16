@@ -46,3 +46,5 @@
 - **2026-10-16 11:55** — Hypothèse H-017 créée pour P0-T04 (bloquante : non).
 - **2026-10-16 11:55** — NOTE P0-T04 — exécuteur OK (essai 1); lancement vérificateur
 - **2026-10-16 11:56** — NOTE P0-T04 — vérificateur OK (essai 1) : dotnet 10.0.401, build 0 warn, TreatWarningsAsErrors=true
+- **2026-10-16 11:56** — NOTE P0-T04 — commit fa6386a
+- **2026-10-16 11:56** — P0-T04 EN_COURS → A_VALIDER — preuve : dotnet --version → 10.0.401; build .tmpcheck 0 avertissement/0 erreur; TreatWarningsAsErrors=true; vérificateur OK; commit fa6386a

@@ -19,11 +19,11 @@
 
 <!-- RESUME:DEBUT -->
 
-_Mis à jour le 2026-10-16 11:53 par scripts/backlog.py — ne pas modifier à la main._
+_Mis à jour le 2026-10-16 11:56 par scripts/backlog.py — ne pas modifier à la main._
 
 | Phase | Titre | Statut | Modèle | Avancement |
 |---|---|---|---|---|
-| P0 | Initialisation et outillage | 🔄 EN_COURS | sonnet | 3/6 |
+| P0 | Initialisation et outillage | 🔄 EN_COURS | sonnet | 4/6 |
 | P1 | Socle backend .NET 10 | ⬜ NON_DEMARREE | opus | 0/11 |
 | P2 | Socle frontend Blazor WebAssembly et BFF | ⬜ NON_DEMARREE | sonnet | 0/9 |
 | P3 | Conteneurisation et intégration continue GitLab | ⬜ NON_DEMARREE | sonnet | 0/5 |
@@ -72,7 +72,7 @@ _Mis à jour le 2026-10-16 11:53 par scripts/backlog.py — ne pas modifier à l
 **Test de validation** : `python scripts/tester-schema.py` sort en 0 et affiche « 18/18 vérifications conformes » ; `.pgtest/` n'existe plus après exécution.
 
 ### P0-T04 · Conventions de build .NET centralisées
-> **Statut** : EN_COURS · **Modèle** : haiku · **Ordre** : 4 · **Dépend de** : P0-T01
+> **Statut** : A_VALIDER · **Modèle** : haiku · **Ordre** : 4 · **Dépend de** : P0-T01
 
 **Explication** : `global.json` (SDK 10.0.4xx, `rollForward: latestFeature`), `Directory.Build.props` (`net10.0`, `Nullable enable`, `ImplicitUsings enable`, `TreatWarningsAsErrors true`, `AnalysisLevel latest-recommended`, `InvariantGlobalization false`), `Directory.Packages.props` (gestion centralisée des versions : EF Core 10, Npgsql 10, Mapperly, FluentValidation, Serilog, xUnit, FluentAssertions, bUnit, NetArchTest, Microsoft.AspNetCore.Components.WebAssembly et .Server), `.editorconfig` (style C# : file-scoped namespaces, `var` si évident, accolades, nommage `_champ`).
 **Test de validation** : `dotnet --version` (dans le dossier) renvoie une version 10.0.4xx ; `dotnet new console -o .tmpcheck && dotnet build .tmpcheck` réussit avec les props appliquées (vérifier `TreatWarningsAsErrors` dans `obj/*.nuget.g.props` ou via `dotnet msbuild -getProperty:TreatWarningsAsErrors`) ; supprimer `.tmpcheck`.
