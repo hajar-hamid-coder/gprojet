@@ -19,11 +19,11 @@
 
 <!-- RESUME:DEBUT -->
 
-_Mis à jour le 2026-10-16 12:00 par scripts/backlog.py — ne pas modifier à la main._
+_Mis à jour le 2026-10-16 12:21 par scripts/backlog.py — ne pas modifier à la main._
 
 | Phase | Titre | Statut | Modèle | Avancement |
 |---|---|---|---|---|
-| P0 | Initialisation et outillage | 🟡 A_VALIDER | sonnet | 6/6 |
+| P0 | Initialisation et outillage | ✅ VALIDEE | sonnet | 6/6 |
 | P1 | Socle backend .NET 10 | ⬜ NON_DEMARREE | opus | 0/11 |
 | P2 | Socle frontend Blazor WebAssembly et BFF | ⬜ NON_DEMARREE | sonnet | 0/9 |
 | P3 | Conteneurisation et intégration continue GitLab | ⬜ NON_DEMARREE | sonnet | 0/5 |
@@ -49,42 +49,42 @@ _Mis à jour le 2026-10-16 12:00 par scripts/backlog.py — ne pas modifier à l
 ---
 
 ## Phase P0 · Initialisation et outillage
-> **Statut phase** : A_VALIDER · **Modèle conseillé** : sonnet
+> **Statut phase** : VALIDEE · **Modèle conseillé** : sonnet
 
 **Objectif** : dépôt Git propre, conventions, environnement vérifié, base de test opérationnelle. **Livrable** : un dépôt prêt à recevoir la solution .NET.
 
 ### P0-T01 · Initialiser le dépôt Git et la branche de phase
-> **Statut** : A_VALIDER · **Modèle** : haiku · **Ordre** : 1 · **Dépend de** : —
+> **Statut** : VALIDE · **Modèle** : haiku · **Ordre** : 1 · **Dépend de** : —
 
 **Explication** : `git init -b main` à la racine du projet, premier commit contenant l'existant (`CLAUDE.md`, `.claude/`, `backlog/`, `scripts/`, `database/`), puis branche `phase/P0-initialisation`. Le `.gitignore` existe déjà (secrets locaux dont `.claude/settings.local.json`, `.pgtest/`, .NET) : le vérifier **avant** le premier `git add`, le compléter si besoin. Créer `.gitattributes` (`* text=auto eol=lf`, `*.sql` et `*.md` en LF, `*.ps1` en CRLF).
 **Test de validation** : `git log --oneline` montre au moins 2 commits ; `git status --porcelain` est vide ; `git check-ignore .pgtest/x bin/x .claude/settings.local.json` renvoie les trois chemins ; `git ls-files | grep -c settings.local` renvoie 0.
 
 ### P0-T02 · Script de vérification de l'environnement
-> **Statut** : A_VALIDER · **Modèle** : haiku · **Ordre** : 2 · **Dépend de** : P0-T01
+> **Statut** : VALIDE · **Modèle** : haiku · **Ordre** : 2 · **Dépend de** : P0-T01
 
 **Explication** : `scripts/verifier-env.py` affiche un tableau OK / MANQUANT / OPTIONNEL pour : .NET SDK 10, Python ≥ 3.12 avec le module openpyxl (export Excel du backlog), binaires PostgreSQL 18 (`PG_BIN`), Git, Node.js (optionnel : ponytail, motion), Docker (requis à partir de P3), uv et graphify (optionnels). Code de sortie 1 si un outil requis manque.
 **Test de validation** : `python scripts/verifier-env.py` affiche le tableau et sort en 0 sur ce poste (dotnet, python, PostgreSQL, git présents) ; en masquant `PG_BIN` vers un dossier vide, il sort en 1.
 
 ### P0-T03 · Valider l'instance PostgreSQL de test et le schéma de référence
-> **Statut** : A_VALIDER · **Modèle** : sonnet · **Ordre** : 3 · **Dépend de** : P0-T01
+> **Statut** : VALIDE · **Modèle** : sonnet · **Ordre** : 3 · **Dépend de** : P0-T01
 
 **Explication** : utiliser `scripts/pg-test.py` pour démarrer l'instance jetable, appliquer `database/01` et `02`, exécuter `database/03-tests-integrite.sql`, puis arrêter. Ajouter `scripts/tester-schema.py` qui automatise cela et vérifie que les 13 blocs « attendu ERREUR » échouent et que les autres réussissent (analyse de la sortie psql).
 **Test de validation** : `python scripts/tester-schema.py` sort en 0 et affiche « 18/18 vérifications conformes » ; `.pgtest/` n'existe plus après exécution.
 
 ### P0-T04 · Conventions de build .NET centralisées
-> **Statut** : A_VALIDER · **Modèle** : haiku · **Ordre** : 4 · **Dépend de** : P0-T01
+> **Statut** : VALIDE · **Modèle** : haiku · **Ordre** : 4 · **Dépend de** : P0-T01
 
 **Explication** : `global.json` (SDK 10.0.4xx, `rollForward: latestFeature`), `Directory.Build.props` (`net10.0`, `Nullable enable`, `ImplicitUsings enable`, `TreatWarningsAsErrors true`, `AnalysisLevel latest-recommended`, `InvariantGlobalization false`), `Directory.Packages.props` (gestion centralisée des versions : EF Core 10, Npgsql 10, Mapperly, FluentValidation, Serilog, xUnit, FluentAssertions, bUnit, NetArchTest, Microsoft.AspNetCore.Components.WebAssembly et .Server), `.editorconfig` (style C# : file-scoped namespaces, `var` si évident, accolades, nommage `_champ`).
 **Test de validation** : `dotnet --version` (dans le dossier) renvoie une version 10.0.4xx ; `dotnet new console -o .tmpcheck && dotnet build .tmpcheck` réussit avec les props appliquées (vérifier `TreatWarningsAsErrors` dans `obj/*.nuget.g.props` ou via `dotnet msbuild -getProperty:TreatWarningsAsErrors`) ; supprimer `.tmpcheck`.
 
 ### P0-T05 · Modèles GitLab et guide de contribution
-> **Statut** : A_VALIDER · **Modèle** : haiku · **Ordre** : 5 · **Dépend de** : P0-T01
+> **Statut** : VALIDE · **Modèle** : haiku · **Ordre** : 5 · **Dépend de** : P0-T01
 
 **Explication** : `.gitlab/merge_request_templates/Phase.md` (résumé de phase, tâches, preuves, hypothèses, checklist de revue), `.gitlab/issue_templates/Anomalie.md` et `Demande.md`, `CONTRIBUTING.md` (branches `phase/Pn-…`, commits `Pn-Tnn: …`, revue, règles des couches, comment lancer les tests).
 **Test de validation** : les 4 fichiers existent ; `CONTRIBUTING.md` contient les sections « Branches », « Commits », « Architecture », « Tests » (`grep -c "^## "` ≥ 4).
 
 ### P0-T06 · Rapport d'outillage Claude Code
-> **Statut** : A_VALIDER · **Modèle** : haiku · **Ordre** : 6 · **Dépend de** : P0-T02
+> **Statut** : VALIDE · **Modèle** : haiku · **Ordre** : 6 · **Dépend de** : P0-T02
 
 **Explication** : `docs/OUTILLAGE.md` : état réel des plugins / skills (graphify, ponytail, ui-ux-pro-max, motion-design) détecté sur le poste (`~/.claude/skills`, `.claude/skills`, `~/.claude/plugins`), des hooks et des sous-agents du projet, avec la commande d'installation de chaque élément manquant (voir `scripts/installer-outils.ps1`). Si un outil manque, créer une hypothèse **non bloquante**.
 **Test de validation** : `docs/OUTILLAGE.md` liste les 4 outils avec un statut chacun ; `python scripts/backlog.py contexte` s'exécute sans erreur.
