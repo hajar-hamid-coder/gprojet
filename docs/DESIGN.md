@@ -27,6 +27,20 @@ Layout : `.page`, `.sidebar`, `.sidebar-brand`, `.nav-section-label`, `.nav-item
 - Layout (P2-T03) : `.page.sidebar-collapsed .sidebar` (repli en bureau, largeur 0, transition 0.25s) ; `.page.mobile-open .sidebar` (tiroir fixe sous 768 px, transition 0.25s, seul `mobile-open` pilote le menu en mobile) ; `.skip-link` (lien « Aller au contenu », visible au focus) ; `.nav-item .nav-icon` ajusté pour les icônes Font Awesome. Variables de la charte uniquement ; transitions neutralisées sous `prefers-reduced-motion`. Raccourci Ctrl+K et lien d'évitement : `wwwroot/js/layout.js` (sans bibliothèque).
 - Accessibilité : `.sr-only`, `:focus-visible` (anneau `--accent-soft` de la charte), neutralisation des animations sous `prefers-reduced-motion: reduce`.
 
+## Mouvement (P2-T04)
+
+Durées autorisées, uniquement celles de la charte : `0.1s` et `0.15s ease` (survols), `0.25s ease` (`fadeIn` / `.animate-in`, repli du menu), `0.6s` (barres de progression). Aucune autre durée ni courbe, aucune bibliothèque d'animation.
+
+| Où | Mouvement |
+|---|---|
+| Contenu de page | `.animate-in` sur le conteneur de `@Body` dans `MainLayout`, clé = route (sans requête ni ancre) : rejoué à chaque navigation seulement |
+| Repli / tiroir du menu | `transition` 0.25s (`.sidebar`) |
+| Dialogues | règle prête `dialog[open], [role="dialog"]` en `fadeIn 0.25s` ; le composant reste à créer |
+| Listes | règle : poser `.animate-in` sur le conteneur de la liste (jamais ligne par ligne, pas de cascade) ; à appliquer à la création des composants de liste |
+| Survols, boutons | `0.15s ease` hérité de la charte |
+
+Neutralisation : un seul bloc `@media (prefers-reduced-motion: reduce)` dans `app.gp.css` met `animation: none` et `transition: none` partout. Test : `dotnet test --filter Category=Mouvement`.
+
 ## Bibliothèques auto-hébergées (aucune ressource Internet)
 
 | Bibliothèque | Version | Emplacement | Licence | Source |

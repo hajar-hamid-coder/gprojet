@@ -188,7 +188,7 @@ _Mis à jour le 2026-10-16 15:53 par scripts/backlog.py — ne pas modifier à l
 **Test de validation** : tests bUnit : le rendu contient `.page .sidebar`, `.main-area .topbar` et `.content-area` ; un agent ne voit pas l'entrée « Portefeuille direction », un directeur la voit ; l'action de repli ajoute `sidebar-collapsed`.
 
 ### P2-T04 · Mouvement selon la charte (motion-design)
-> **Statut** : NON_FAIT · **Modèle** : sonnet · **Ordre** : 4 · **Dépend de** : P2-T02
+> **Statut** : EN_COURS · **Modèle** : sonnet · **Ordre** : 4 · **Dépend de** : P2-T02
 
 **Explication** : réutiliser **uniquement** les mouvements de la charte (`0.15s ease` pour les survols, `fadeIn 0.25s` / `.animate-in` pour les apparitions, `0.6s` pour les barres de progression) ; **motion-design** sert à décider où les appliquer (apparition des pages et des listes, dialogues, repli du menu), pas à créer d'autres durées. Neutralisation complète sous `prefers-reduced-motion: reduce` dans `app.gp.css`. Documenter dans `docs/DESIGN.md`.
 **Test de validation** : `app.gp.css` contient un bloc `@media (prefers-reduced-motion: reduce)` qui neutralise `transition` et `animation` ; aucune durée autre que 0.1s, 0.15s, 0.25s, 0.6s dans les CSS du projet (grep) ; aucune bibliothèque JS d'animation ajoutée (`git diff --stat` sur `wwwroot/lib` vide).

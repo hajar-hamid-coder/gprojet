@@ -2,6 +2,7 @@
 @using Gprojet.Front.Components
 @using Microsoft.AspNetCore.Components.Authorization
 @inherits LayoutComponentBase
+@inject NavigationManager Navigation
 
 <a class="skip-link" href="#contenu">Aller au contenu</a>
 <div class="page @(_replie ? "sidebar-collapsed" : null) @(_mobileOuvert ? "mobile-open" : null)">
@@ -53,12 +54,15 @@
             </button>
         </header>
         <main class="content-area" id="contenu" tabindex="-1">
-            @Body
+            <div class="animate-in" @key="CleRoute">@Body</div>
         </main>
     </div>
 </div>
 
 @code {
+    // Une cle par route (sans requete ni ancre) : l'apparition ne rejoue qu'a la navigation.
+    private string CleRoute => Navigation.ToBaseRelativePath(Navigation.Uri).Split('?', '#')[0];
+
     private bool _replie;
     private bool _mobileOuvert;
 
