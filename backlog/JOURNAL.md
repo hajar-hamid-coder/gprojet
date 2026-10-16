@@ -96,3 +96,11 @@
 - **2026-10-16 13:16** — NOTE P1-T04 — vérificateur OK (essai 1) : Entites 57/57, total 99/99, contre-épreuve enum détectée
 - **2026-10-16 13:16** — NOTE P1-T04 — commit a7a4375
 - **2026-10-16 13:16** — P1-T04 EN_COURS → A_VALIDER — preuve : dotnet test --filter Category=Entites → 57/57 (60 entités, 54 CHECK IN); dotnet test → 99/99; vérificateur OK; commit a7a4375
+- **2026-10-16 13:16** — P1-T05 NON_FAIT → EN_COURS
+- **2026-10-16 13:16** — NOTE P1-T05 — délégué à executeur-opus (essai 1)
+- **2026-10-16 13:27** — Hypothèse H-022 créée pour P1-T05 (bloquante : non).
+- **2026-10-16 13:27** — NOTE P1-T06 — À FAIRE (issu de P1-T05, H) : en SQL brut dans la migration initiale, recréer ux_agent_email sur lower(email) (avec son filtre) et commun.fn_historique_lecture_seule + trigger tg_historique_lecture_seule
+- **2026-10-16 13:27** — NOTE P1-T05 — exécuteur OK (essai 1) : dbcontext info OK, Persistance 5/5, total 104/104 ; lancement vérificateur
+- **2026-10-16 13:27** — NOTE P1-T05 — INTERRUPTION (limite d'usage) : vérificateur arrêté avant verdict ; code de l'exécuteur non commité et complet (104/104) ; à la reprise : relancer le vérificateur (essai 1) puis commit
+- **2026-10-16 14:31** — NOTE P1-T05 — reprise : relance du vérificateur (essai 1)
+- **2026-10-16 14:32** — NOTE P1-T05 — vérificateur OK (essai 1) : dbcontext info OK, Persistance 5/5, total 104/104

@@ -151,3 +151,10 @@
 **Hypothèse retenue par défaut** : Non : card_min reste short, correspondance_type.type_logique reste string ; seuls les CHECK IN à valeurs texte deviennent des enums (49 enums, 54 contraintes contrôlées)
 **Impact si l'hypothèse est fausse** : Si faux : créer CardinaliteMin et/ou ajouter le CHECK au SQL puis typer en TypeLogique
 **Réponse utilisateur** : _en attente_
+
+### H-022 · P1-T05
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 13:27
+**Question** : Comment reproduire l'index sur expression ux_agent_email (lower(email)) et le trigger de lecture seule de commun.historique, non modélisables par EF ?
+**Hypothèse retenue par défaut** : Le modèle EF déclare ux_agent_email sur email (shortcut commenté) ; la migration initiale P1-T06 recrée l'index sur lower(email) et le trigger tg_historique_lecture_seule en SQL brut
+**Impact si l'hypothèse est fausse** : Si oublié en P1-T06 : unicité de l'email sensible à la casse et journal d'historique modifiable
+**Réponse utilisateur** : _en attente_

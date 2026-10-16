@@ -29,6 +29,18 @@ public static partial class SchemaSql
         where valeurs.Length > 0 // les CHECK IN numériques (patte.card_min IN (0,1)) restent des entiers
         select (t.Schema, t.Table, m.Groups[1].Value, valeurs);
 
+    /// <summary>Index : (table, nom, unique, filtre WHERE ou null).</summary>
+    public static IEnumerable<(string Table, string Nom, bool Unique, string? Filtre)> Index() =>
+        CreateIndex().Matches(Contenu.Value).Select(m =>
+            (m.Groups[3].Value, m.Groups[2].Value, m.Groups[1].Success, m.Groups[4].Success ? m.Groups[4].Value : null));
+
+    /// <summary>Noms des colonnes d'un corps de CREATE TABLE (hors contraintes de table et commentaires).</summary>
+    public static IEnumerable<string> Colonnes(string corps) =>
+        corps.Split('\n')
+            .Select(l => l.Trim())
+            .Where(l => l.Length > 0 && !l.StartsWith("--", StringComparison.Ordinal) && char.IsLower(l[0]))
+            .Select(l => l.Split(' ')[0]);
+
     /// <summary>table_snake → TablePascal (règle de nommage des entités et des propriétés).</summary>
     public static string Pascal(string snake) =>
         string.Concat(snake.Split('_').Select(p => char.ToUpperInvariant(p[0]) + p[1..]));
@@ -48,6 +60,9 @@ public static partial class SchemaSql
 
     [GeneratedRegex(@"CREATE TABLE (\w+)\.(\w+) \((.*?)\n\);", RegexOptions.Singleline)]
     private static partial Regex CreateTable();
+
+    [GeneratedRegex(@"CREATE (UNIQUE )?INDEX (\w+)\s+ON \w+\.(\w+).*?\)(?:\s+WHERE (.*?))?;")]
+    private static partial Regex CreateIndex();
 
     [GeneratedRegex(@"CHECK \((\w+)\s+IN \(([^)]*)\)\)")]
     private static partial Regex CheckIn();
