@@ -235,3 +235,10 @@
 **Hypothèse retenue par défaut** : PerimetreState expose Definir(...) ; il sera alimenté par le module Organisation (P4), sans endpoint fantôme maintenant. Notifications : 6 s pour tous les types, réglable
 **Impact si l'hypothèse est fausse** : Un endpoint ou un claim supplémentaire en P4 ; réglage simple du délai
 **Réponse utilisateur** : _en attente_
+
+### H-034 · P2-T08
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 16:22
+**Question** : Culture par défaut, police arabe et relecture des traductions ?
+**Hypothèse retenue par défaut** : fr-MA par défaut (repli), en et ar-MA ; arabe affiché avec la pile système (Geist sans glyphes arabes, aucune police téléchargée) ; traductions en/ar rédigées sans relecture native
+**Impact si l'hypothèse est fausse** : Changer Langues.Defaut ; ajouter une police arabe auto-hébergée si le rendu système déplaît ; faire relire en et ar avant la mise en production
+**Réponse utilisateur** : _en attente_

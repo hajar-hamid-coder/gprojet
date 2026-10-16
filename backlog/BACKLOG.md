@@ -212,7 +212,7 @@ _Mis à jour le 2026-10-16 16:11 par scripts/backlog.py — ne pas modifier à l
 **Test de validation** : tests bUnit : un composant abonné à `PerimetreState` se rafraîchit au changement ; une `ApiException` 403 affiche le message « Accès refusé » via le snackbar.
 
 ### P2-T08 · Internationalisation fr / en / ar (RTL)
-> **Statut** : NON_FAIT · **Modèle** : sonnet · **Ordre** : 8 · **Dépend de** : P2-T03
+> **Statut** : EN_COURS · **Modèle** : sonnet · **Ordre** : 8 · **Dépend de** : P2-T03
 
 **Explication** : `Resources/*.resx` (fr par défaut, en, ar), sélecteur de langue persistant (cookie BFF), `dir="rtl"` sur `<html>` et règles RTL dans `app.gp.css` (menu latéral à droite) pour l'arabe, formats de date et de nombre selon la culture.
 **Test de validation** : tests bUnit : en culture `ar-MA` le layout est rendu avec `dir="rtl"` ; un libellé du menu change selon la culture ; aucun texte en dur dans `Layouts/` (contrôle : test qui échoue si une chaîne littérale française apparaît dans un `.razor` du layout).

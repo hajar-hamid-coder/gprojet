@@ -23,6 +23,27 @@ public static class BffEndpoints
             return Results.NoContent();
         }).RequireAuthorization();
 
+        // Langue d'affichage : cookie lisible par le front (non HttpOnly, aucune donnée sensible), liste blanche stricte.
+        app.MapPost("/bff/langue", (LangueDto dto, HttpContext ctx) =>
+        {
+            var culture = Langues.Cultures.FirstOrDefault(c => c == dto.Culture);
+            if (culture is null)
+            {
+                return Results.ValidationProblem(new Dictionary<string, string[]> { ["culture"] = [$"Culture non prise en charge ({string.Join(", ", Langues.Cultures)})."] });
+            }
+
+            ctx.Response.Cookies.Append(Langues.NomCookie, culture, new CookieOptions
+            {
+                HttpOnly = false,
+                Secure = ctx.Request.IsHttps,
+                SameSite = SameSiteMode.Lax,
+                MaxAge = TimeSpan.FromDays(365),
+                Path = "/",
+                IsEssential = true
+            });
+            return Results.NoContent();
+        }).AllowAnonymous();
+
         if (loginDev)
         {
             // Sert de sonde au front : 204 si le login de développement existe (sinon 404).

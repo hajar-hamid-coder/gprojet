@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="xml:space" default="preserve" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="Marque" xml:space="preserve"><value>GestionProjet</value></data>
+  <data name="Evitement" xml:space="preserve"><value>انتقل إلى المحتوى</value></data>
+  <data name="NavPrincipale" xml:space="preserve"><value>التنقل الرئيسي</value></data>
+  <data name="NavAccueil" xml:space="preserve"><value>الرئيسية</value></data>
+  <data name="SectionTravail" xml:space="preserve"><value>العمل</value></data>
+  <data name="NavTaches" xml:space="preserve"><value>مهامي</value></data>
+  <data name="NavProjets" xml:space="preserve"><value>المشاريع</value></data>
+  <data name="NavTemps" xml:space="preserve"><value>الوقت</value></data>
+  <data name="SectionPilotage" xml:space="preserve"><value>القيادة</value></data>
+  <data name="NavReporting" xml:space="preserve"><value>التقارير</value></data>
+  <data name="NavPortefeuille" xml:space="preserve"><value>محفظة المديرية</value></data>
+  <data name="SectionOrganisation" xml:space="preserve"><value>التنظيم</value></data>
+  <data name="NavAdministration" xml:space="preserve"><value>الإدارة</value></data>
+  <data name="SeDeconnecter" xml:space="preserve"><value>تسجيل الخروج</value></data>
+  <data name="SeConnecter" xml:space="preserve"><value>تسجيل الدخول</value></data>
+  <data name="BasculerMenu" xml:space="preserve"><value>طيّ القائمة أو توسيعها</value></data>
+  <data name="FilAriane" xml:space="preserve"><value>مسار التنقل</value></data>
+  <data name="Rechercher" xml:space="preserve"><value>بحث…</value></data>
+  <data name="RechercherAria" xml:space="preserve"><value>بحث</value></data>
+  <data name="Notifications" xml:space="preserve"><value>الإشعارات</value></data>
+  <data name="Langue" xml:space="preserve"><value>اللغة</value></data>
+  <data name="LangueFr" xml:space="preserve"><value>Français</value></data>
+  <data name="LangueEn" xml:space="preserve"><value>English</value></data>
+  <data name="LangueAr" xml:space="preserve"><value>العربية</value></data>
+  <data name="FermerNotification" xml:space="preserve"><value>إغلاق الإشعار</value></data>
+  <data name="ChargementEnCours" xml:space="preserve"><value>جارٍ التحميل</value></data>
+  <data name="Chargement" xml:space="preserve"><value>جارٍ التحميل…</value></data>
+  <data name="ErrDonnees" xml:space="preserve"><value>البيانات المدخلة غير صالحة.</value></data>
+  <data name="Err401" xml:space="preserve"><value>انتهت الجلسة، يرجى تسجيل الدخول من جديد.</value></data>
+  <data name="Err403" xml:space="preserve"><value>الوصول مرفوض.</value></data>
+  <data name="Err404" xml:space="preserve"><value>العنصر غير موجود.</value></data>
+  <data name="Err409" xml:space="preserve"><value>تم تعديل البيانات من قبل مستخدم آخر.</value></data>
+  <data name="Err422" xml:space="preserve"><value>العملية غير ممكنة.</value></data>
+  <data name="ErrGenerique" xml:space="preserve"><value>حدث خطأ، يرجى المحاولة لاحقاً.</value></data>
+  <data name="PageIntrouvable" xml:space="preserve"><value>الصفحة غير موجودة</value></data>
+  <data name="PageIntrouvableTexte" xml:space="preserve"><value>هذه الصفحة غير موجودة.</value></data>
+  <data name="ConnexionTitre" xml:space="preserve"><value>الدخول</value></data>
+  <data name="ConnexionDev" xml:space="preserve"><value>دخول التطوير</value></data>
+  <data name="ConnexionIndisponible" xml:space="preserve"><value>دخول التطوير غير متاح على هذا الخادم.</value></data>
+  <data name="ConnexionAide" xml:space="preserve"><value>أدخل رقم تسجيل تجريبياً (مثل A0001).</value></data>
+  <data name="MatriculeInconnu" xml:space="preserve"><value>رقم التسجيل غير معروف أو الموظف غير نشط.</value></data>
+  <data name="Matricule" xml:space="preserve"><value>رقم التسجيل</value></data>
+  <data name="Connexion" xml:space="preserve"><value>دخول</value></data>
+</root>

@@ -157,4 +157,46 @@ public sealed class BffTests(PgTestFixture pg) : IAsyncLifetime
         (await c.GetAsync("/bff/login")).StatusCode.Should().Be(HttpStatusCode.NotFound);
         (await c.GetAsync("/bff/user")).StatusCode.Should().Be(HttpStatusCode.Unauthorized);
     }
+
+    [Theory]
+    [InlineData("fr-MA")]
+    [InlineData("en")]
+    [InlineData("ar-MA")]
+    public async Task Langue_valide_pose_le_cookie_lisible_par_le_front(string culture)
+    {
+        var (c, f) = Creer("Development");
+        using var _ = f;
+
+        var r = await c.PostAsJsonAsync("/bff/langue", new LangueDto(culture));
+
+        r.StatusCode.Should().Be(HttpStatusCode.NoContent);
+        var cookie = r.Headers.GetValues("Set-Cookie").Single(h => h.StartsWith(Langues.NomCookie + "=", StringComparison.Ordinal));
+        cookie.Should().StartWith($"{Langues.NomCookie}={culture};");
+        cookie.ToLowerInvariant().Should().NotContain("httponly").And.Contain("samesite=lax").And.Contain("max-age=");
+    }
+
+    [Theory]
+    [InlineData("de-DE")]
+    [InlineData("")]
+    [InlineData("fr-MA; Path=/evil")]
+    public async Task Langue_hors_liste_blanche_400_sans_cookie(string culture)
+    {
+        var (c, f) = Creer("Development");
+        using var _ = f;
+
+        var r = await c.PostAsJsonAsync("/bff/langue", new LangueDto(culture));
+
+        r.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+        r.Headers.Contains("Set-Cookie").Should().BeFalse();
+    }
+
+    [Fact]
+    public async Task Langue_avec_session_exige_l_en_tete_anti_csrf()
+    {
+        var (c, f) = Creer("Development");
+        using var _ = f;
+        await Login(c, Mat);
+
+        (await c.PostAsJsonAsync("/bff/langue", new LangueDto("en"))).StatusCode.Should().Be(HttpStatusCode.Forbidden);
+    }
 }

@@ -1,6 +1,7 @@
 @using Gprojet.Front.Services
 @implements IDisposable
 @inject NotificationUiService Notifications
+@inject IStringLocalizer<Textes> T
 
 <div class="snackbar-zone">
     @foreach (var n in Notifications.Messages)
@@ -8,7 +9,7 @@
         <div class="snackbar @(n.Type == TypeNotification.Erreur ? "message-erreur" : n.Type == TypeNotification.Succes ? "message-succes" : "snackbar-info") animate-in"
              role="@(n.Type == TypeNotification.Erreur ? "alert" : "status")" @key="n.Id">
             <span>@n.Message</span>
-            <button type="button" class="topbar-btn" aria-label="Fermer la notification" @onclick="() => Notifications.Fermer(n.Id)">
+            <button type="button" class="topbar-btn" aria-label="@T["FermerNotification"]" @onclick="() => Notifications.Fermer(n.Id)">
                 <i class="fa-solid fa-xmark" aria-hidden="true"></i>
             </button>
         </div>

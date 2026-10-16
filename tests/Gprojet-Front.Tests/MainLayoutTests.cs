@@ -19,6 +19,12 @@ public sealed class MainLayoutTests : BunitContext
         public override Task<AuthenticationState> GetAuthenticationStateAsync() => Task.FromResult(new AuthenticationState(utilisateur));
     }
 
+    public MainLayoutTests()
+    {
+        Services.AddLocalization();
+        System.Globalization.CultureInfo.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo("fr-MA");
+    }
+
     private IRenderedComponent<MainLayout> Rendre(params string[] roles)
     {
         var identite = roles.Length == 0

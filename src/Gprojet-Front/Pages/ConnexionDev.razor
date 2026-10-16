@@ -2,44 +2,45 @@
 @layout Layouts.LayoutVide
 @using Gprojet.Front.Api
 @inject BffApiClient Bff
+@inject IStringLocalizer<Textes> T
 
-<PageTitle>Connexion</PageTitle>
+<PageTitle>@T["ConnexionTitre"]</PageTitle>
 <div class="login-page">
     <div class="login-card">
         <div class="login-brand">
             <img src="images/logo_hcp.png" alt="" height="36" />
             <div>
-                <div class="login-brand-name">GestionProjet</div>
-                <div class="login-brand-org">Connexion de développement</div>
+                <div class="login-brand-name">@T["Marque"]</div>
+                <div class="login-brand-org">@T["ConnexionDev"]</div>
             </div>
         </div>
         @if (_disponible is null)
         {
-            <p role="status">Chargement…</p>
+            <p role="status">@T["Chargement"]</p>
         }
         else if (_disponible == false)
         {
-            <p role="alert">La connexion de développement n'est pas disponible sur ce serveur.</p>
+            <p role="alert">@T["ConnexionIndisponible"]</p>
         }
         else
         {
             <div class="login-header">
-                <h1>Se connecter</h1>
-                <p>Saisissez un matricule de démonstration (par exemple A0001).</p>
+                <h1>@T["SeConnecter"]</h1>
+                <p>@T["ConnexionAide"]</p>
             </div>
             @if (Erreur is not null)
             {
                 <div class="login-error" role="alert">
-                    <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i> Matricule inconnu ou agent inactif.
+                    <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i> @T["MatriculeInconnu"]
                 </div>
             }
             @* Formulaire classique : le cookie est posé par la réponse de navigation, puis le serveur redirige vers l'accueil. *@
             <form class="login-form" method="post" action="bff/login">
                 <div class="form-group">
-                    <label for="matricule">Matricule</label>
+                    <label for="matricule">@T["Matricule"]</label>
                     <input id="matricule" name="matricule" class="form-input" autocomplete="username" required autofocus />
                 </div>
-                <button type="submit" class="login-btn">Connexion</button>
+                <button type="submit" class="login-btn">@T["Connexion"]</button>
             </form>
         }
     </div>

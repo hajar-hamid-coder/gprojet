@@ -1,9 +1,10 @@
+@inject IStringLocalizer<Textes> T
 <Router AppAssembly="typeof(App).Assembly">
     <Found Context="routeData">
         <RouteView RouteData="routeData" DefaultLayout="typeof(Layouts.MainLayout)" />
     </Found>
     <NotFound>
-        <PageTitle>Page introuvable</PageTitle>
-        <p role="alert">Cette page n'existe pas.</p>
+        <PageTitle>@T["PageIntrouvable"]</PageTitle>
+        <p role="alert">@T["PageIntrouvableTexte"]</p>
     </NotFound>
 </Router>

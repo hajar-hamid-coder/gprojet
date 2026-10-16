@@ -201,3 +201,8 @@
 - **2026-10-16 16:11** — NOTE P2-T07 — vérificateur OK (essai 1) : Etat 8/8, front 32/32, backend 150/150
 - **2026-10-16 16:11** — NOTE P2-T07 — commit 143cb2f
 - **2026-10-16 16:11** — P2-T07 EN_COURS → A_VALIDER — preuve : Category=Etat → 8/8 (rerendu PerimetreState, ApiException 403 → « Accès refusé » dans le snackbar); front 32/32; vérificateur OK; commit 143cb2f
+- **2026-10-16 16:11** — P2-T08 NON_FAIT → EN_COURS
+- **2026-10-16 16:11** — NOTE P2-T08 — délégué à executeur-sonnet (essai 1)
+- **2026-10-16 16:22** — Hypothèse H-034 créée pour P2-T08 (bloquante : non).
+- **2026-10-16 16:22** — NOTE P2-T08 — exécuteur OK (essai 1) : front 43/43 (I18n), backend 157/157 ; lancement vérificateur
+- **2026-10-16 16:22** — NOTE P2-T08 — vérificateur OK (essai 1) : I18n 11/11, front 43/43, backend 157/157

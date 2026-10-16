@@ -13,6 +13,15 @@ namespace Gprojet.Front.Tests;
 [Trait("Category", "Etat")]
 public sealed class EtatTests : BunitContext
 {
+    public EtatTests()
+    {
+        Services.AddLocalization();
+        System.Globalization.CultureInfo.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo("fr-MA");
+    }
+
+    private GestionnaireErreursUi Gestionnaire(NotificationUiService n) =>
+        new(n, new Microsoft.Extensions.Logging.Abstractions.NullLogger<GestionnaireErreursUi>(), Services.GetRequiredService<Microsoft.Extensions.Localization.IStringLocalizer<Gprojet.Front.Resources.Textes>>());
+
     // Composant abonné à PerimetreState, comme le fera une page.
     private sealed class AfficheurPerimetre : ComponentBase, IDisposable
     {
@@ -50,7 +59,7 @@ public sealed class EtatTests : BunitContext
     {
         var notifications = new NotificationUiService();
         Services.AddSingleton(notifications);
-        var gestionnaire = new GestionnaireErreursUi(notifications, new Microsoft.Extensions.Logging.Abstractions.NullLogger<GestionnaireErreursUi>());
+        var gestionnaire = Gestionnaire(notifications);
         var cut = Render<Snackbar>();
 
         gestionnaire.Gerer(new ApiException(403, "Forbidden", "detail interne"));
@@ -105,5 +114,5 @@ public sealed class EtatTests : BunitContext
     [InlineData(409, "autre utilisateur")]
     [InlineData(500, "erreur est survenue")]
     public void Les_statuts_sont_traduits_en_francais(int statut, string attendu) =>
-        GestionnaireErreursUi.Message(new ApiException(statut)).Should().Contain(attendu);
+        Gestionnaire(new NotificationUiService()).Message(new ApiException(statut)).Should().Contain(attendu);
 }

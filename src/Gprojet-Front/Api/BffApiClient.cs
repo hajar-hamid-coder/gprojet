@@ -18,6 +18,8 @@ public sealed class BffApiClient(HttpClient http) : ApiClientBase(http)
         }
     }
 
+    public Task ChangerLangueAsync(string culture, CancellationToken ct = default) => PostAsync<object>("bff/langue", new LangueDto(culture), ct);
+
     public Task DeconnecterAsync(CancellationToken ct = default) => PostAsync<object>("bff/logout", null, ct);
 
     /// <summary>Le backend n'expose le login de développement qu'en Development / Test (404 sinon).</summary>
