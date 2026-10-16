@@ -27,3 +27,8 @@
 - **2026-10-16 11:50** — NOTE P0-T01 — vérificateur OK (essai 1) : 4 commandes du test rejouées, .gitattributes conforme, aucun secret suivi
 - **2026-10-16 11:50** — NOTE P0-T01 — commit e0433e8
 - **2026-10-16 11:50** — P0-T01 EN_COURS → A_VALIDER — preuve : git log --oneline → 2 commits; check-ignore → 3 chemins; ls-files|grep -c settings.local → 0; vérificateur OK; commit e0433e8
+- **2026-10-16 11:50** — P0-T02 NON_FAIT → EN_COURS
+- **2026-10-16 11:50** — NOTE P0-T02 — délégué à executeur-haiku (essai 1)
+- **2026-10-16 11:51** — Hypothèse H-015 créée pour P0-T02 (bloquante : non).
+- **2026-10-16 11:51** — NOTE P0-T02 — exécuteur OK (essai 1); lancement vérificateur
+- **2026-10-16 11:51** — NOTE P0-T02 — vérificateur OK (essai 1) : tableau exit 0; PG_BIN vide exit 1

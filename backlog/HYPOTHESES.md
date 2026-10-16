@@ -102,3 +102,10 @@
 **Hypothèse retenue par défaut** : Oui : --success-text #047857, --warning-text #B45309, --danger-text #B91C1C, --info-text #1D4ED8, --purple-text #6D28D9 (toutes ≥ 4,5:1 sur le fond du badge) ; couleurs d'origine conservées pour pastilles, barres, bordures et icônes ; text-tertiary réservé au décoratif.
 **Impact si l'hypothèse est fausse** : Si refusé : badges et petits textes de statut non conformes RGAA, la phase P17 (0 violation axe) ne pourra pas être validée.
 **Réponse utilisateur** (2026-10-16 11:34) : Oui, variantes de texte accessibles validées
+
+### H-015 · P0-T02
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 11:51
+**Question** : Que faire si PG_BIN pointe vers un dossier sans binaires PostgreSQL ?
+**Hypothèse retenue par défaut** : PG_BIN est exclusif dans verifier-env.py (pas de repli), sinon le cas test PG_BIN vide ne peut jamais sortir en 1 ici
+**Impact si l'hypothèse est fausse** : pg-test.py retombe sur les chemins par défaut : comportement différent entre les deux scripts
+**Réponse utilisateur** : _en attente_
