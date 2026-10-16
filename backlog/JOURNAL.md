@@ -126,3 +126,5 @@
 - **2026-10-16 14:54** — Hypothèse H-025 créée pour P1-T08 (bloquante : non).
 - **2026-10-16 14:54** — NOTE P1-T08 — exécuteur OK (essai 1) : Integration 12/12, total 116/116 ; lancement vérificateur
 - **2026-10-16 14:55** — NOTE P1-T08 — vérificateur OK (essai 1) : Integration 12/12, total 116/116
+- **2026-10-16 14:55** — NOTE P1-T08 — commit 7649d13
+- **2026-10-16 14:55** — P1-T08 EN_COURS → A_VALIDER — preuve : dotnet test --filter Category=Integration → 12/12 (échec au milieu → rien écrit; concurrence → ConflitException); dotnet test → 116/116; vérificateur OK; commit 7649d13
