@@ -173,3 +173,5 @@
 - **2026-10-16 15:52** — Hypothèse H-031 créée pour P2-T03 (bloquante : non).
 - **2026-10-16 15:52** — NOTE P2-T03 — exécuteur OK (essai 1) : Layout 5/5, front 12/12, backend 143/143 ; limite aria-expanded en mobile (shortcut) ; lancement vérificateur
 - **2026-10-16 15:53** — NOTE P2-T03 — vérificateur OK (essai 1) : Layout 5/5, front 12/12, backend 143/143
+- **2026-10-16 15:53** — NOTE P2-T03 — commit b14d3a7
+- **2026-10-16 15:53** — P2-T03 EN_COURS → A_VALIDER — preuve : Category=Layout → 5/5 (structure, agent sans « Portefeuille direction », directeur la voit, repli → sidebar-collapsed); front 12/12, backend 143/143; vérificateur OK; commit b14d3a7

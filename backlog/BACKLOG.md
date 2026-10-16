@@ -19,13 +19,13 @@
 
 <!-- RESUME:DEBUT -->
 
-_Mis à jour le 2026-10-16 15:48 par scripts/backlog.py — ne pas modifier à la main._
+_Mis à jour le 2026-10-16 15:53 par scripts/backlog.py — ne pas modifier à la main._
 
 | Phase | Titre | Statut | Modèle | Avancement |
 |---|---|---|---|---|
 | P0 | Initialisation et outillage | ✅ VALIDEE | sonnet | 6/6 |
 | P1 | Socle backend .NET 10 | ✅ VALIDEE | opus | 11/11 |
-| P2 | Socle frontend Blazor WebAssembly et BFF | 🔄 EN_COURS | sonnet | 2/9 |
+| P2 | Socle frontend Blazor WebAssembly et BFF | 🔄 EN_COURS | sonnet | 3/9 |
 | P3 | Conteneurisation et intégration continue GitHub Actions | ⬜ NON_DEMARREE | sonnet | 0/5 |
 | P4 | Module Organisation et périmètre hiérarchique | ⬜ NON_DEMARREE | sonnet | 0/8 |
 | P5 | Projets et affectation en cascade | ⬜ NON_DEMARREE | opus | 0/10 |
@@ -182,7 +182,7 @@ _Mis à jour le 2026-10-16 15:48 par scripts/backlog.py — ne pas modifier à l
 **Test de validation** : un script compare `design/charte-hcp/app.css` et `wwwroot/css/app.css` : seule la ligne `@import` diffère ; `grep -rE "https?://" src/Gprojet-Front/wwwroot/index.html src/Gprojet-Front/wwwroot/css` ne renvoie rien (aucune ressource externe) ; aucune couleur hexadécimale dans `Pages/`, `Components/`, `Layouts/` ni dans `app.gp.css` hors des 5 variables de texte documentées ; contraste de chaque variable de texte ≥ 4,5:1 (calcul dans un test).
 
 ### P2-T03 · Layout principal et navigation par rôle
-> **Statut** : EN_COURS · **Modèle** : sonnet · **Ordre** : 3 · **Dépend de** : P2-T02
+> **Statut** : A_VALIDER · **Modèle** : sonnet · **Ordre** : 3 · **Dépend de** : P2-T02
 
 **Explication** : `MainLayout` identique à celui de la GED HCP : `.page` > `aside.sidebar` (`.sidebar-brand` avec logo HCP, sections `.nav-section-label`, `.nav-item` avec icône et `.nav-badge`, pied `.user-row`) + `.main-area` > `.topbar` (bouton de repli, `.breadcrumb-nav`, `.search-box` avec raccourci Ctrl+K, notifications) + `.content-area`. Menu construit selon les rôles / politiques (`AuthorizeView`) ; repli du menu et mode mobile (classes `sidebar-collapsed`, `mobile-open` dans `app.gp.css`).
 **Test de validation** : tests bUnit : le rendu contient `.page .sidebar`, `.main-area .topbar` et `.content-area` ; un agent ne voit pas l'entrée « Portefeuille direction », un directeur la voit ; l'action de repli ajoute `sidebar-collapsed`.
