@@ -71,3 +71,5 @@
 - **2026-10-16 12:54** — NOTE P1-T01 — délégué à executeur-sonnet (essai 1), avec la demande utilisateur FluentAssertions 7.x + migration .github
 - **2026-10-16 12:56** — NOTE P1-T01 — exécuteur OK (essai 1) : build 0 warn, 2 projets, 1 test OK, FA 7.2.2, .github migré; lancement vérificateur
 - **2026-10-16 12:57** — NOTE P1-T01 — vérificateur OK (essai 1) : build 0/0, 2 projets, test 1/1, FA 7.2.2, .github présent
+- **2026-10-16 12:57** — NOTE P1-T01 — commit 404738a
+- **2026-10-16 12:57** — P1-T01 EN_COURS → A_VALIDER — preuve : dotnet build → 0 avertissement; sln list → 2 projets; dotnet test → 1/1; FA 7.2.2; .github migré; vérificateur OK; commit 404738a
