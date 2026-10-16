@@ -1,0 +1,19 @@
+@using Gprojet.Front.Services
+@implements IDisposable
+@inject ChargementService Chargement
+
+@if (Chargement.EnCours)
+{
+    <div class="chargement-global" role="status">
+        <span class="spinner" aria-hidden="true"></span>
+        <span class="sr-only">Chargement en cours</span>
+    </div>
+}
+
+@code {
+    protected override void OnInitialized() => Chargement.Changed += Rafraichir;
+
+    private void Rafraichir() => _ = InvokeAsync(StateHasChanged);
+
+    public void Dispose() => Chargement.Changed -= Rafraichir;
+}

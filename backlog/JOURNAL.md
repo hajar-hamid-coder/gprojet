@@ -194,3 +194,8 @@
 - **2026-10-16 16:07** — NOTE P2-T06 — vérificateur OK (essai 1, revue sécurité) : backend 150/150, front 24/24
 - **2026-10-16 16:07** — NOTE P2-T06 — commit 0087971
 - **2026-10-16 16:07** — P2-T06 EN_COURS → A_VALIDER — preuve : BffTests 7/7 (/bff/user sans cookie 401; login dev → cookie HttpOnly/Secure/Strict puis 200; POST /api sans X-CSRF → 403; Production sans login); bUnit AuthorizeView 3/3; backend 150/150, front 24/24; vérificateur OK; commit 0087971
+- **2026-10-16 16:07** — P2-T07 NON_FAIT → EN_COURS
+- **2026-10-16 16:07** — NOTE P2-T07 — délégué à executeur-sonnet (essai 1)
+- **2026-10-16 16:10** — Hypothèse H-033 créée pour P2-T07 (bloquante : non).
+- **2026-10-16 16:10** — NOTE P2-T07 — exécuteur OK (essai 1) : Etat 8/8, front 32/32, backend 150/150 ; lancement vérificateur
+- **2026-10-16 16:11** — NOTE P2-T07 — vérificateur OK (essai 1) : Etat 8/8, front 32/32, backend 150/150

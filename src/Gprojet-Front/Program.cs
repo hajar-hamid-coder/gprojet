@@ -1,6 +1,8 @@
 using Gprojet.Front;
 using Gprojet.Front.Api;
 using Gprojet.Front.Auth;
+using Gprojet.Front.Services;
+using Gprojet.Front.State;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -16,5 +18,11 @@ builder.Services.AddHttpClient<BffApiClient>(c => c.BaseAddress = new Uri(builde
 builder.Services.AddAuthorizationCore(Politiques.Enregistrer);
 builder.Services.AddCascadingAuthenticationState();
 builder.Services.AddScoped<AuthenticationStateProvider, BffAuthenticationStateProvider>();
+
+builder.Services.AddScoped<UtilisateurCourantState>();
+builder.Services.AddScoped<PerimetreState>();
+builder.Services.AddScoped<NotificationUiService>();
+builder.Services.AddScoped<ChargementService>();
+builder.Services.AddScoped<GestionnaireErreursUi>();
 
 await builder.Build().RunAsync();

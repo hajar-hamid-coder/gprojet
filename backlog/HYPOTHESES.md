@@ -228,3 +228,10 @@
 **Hypothèse retenue par défaut** : Rôles lus au login et valables 8 h glissantes (shortcut jusqu'à Keycloak P18) ; pas de redirection automatique vers /connexion dans le socle, les gardes de pages viendront avec les pages métier ; anti-CSRF par en-tête X-CSRF: 1 obligatoire dès qu'un cookie de session est présent
 **Impact si l'hypothèse est fausse** : Un changement de rôle ne s'applique qu'à la reconnexion ; ajouter des gardes de pages au besoin
 **Réponse utilisateur** : _en attente_
+
+### H-033 · P2-T07
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 16:10
+**Question** : D'où viendront le niveau et le chemin du périmètre côté front, et quel délai de disparition des notifications ?
+**Hypothèse retenue par défaut** : PerimetreState expose Definir(...) ; il sera alimenté par le module Organisation (P4), sans endpoint fantôme maintenant. Notifications : 6 s pour tous les types, réglable
+**Impact si l'hypothèse est fausse** : Un endpoint ou un claim supplémentaire en P4 ; réglage simple du délai
+**Réponse utilisateur** : _en attente_

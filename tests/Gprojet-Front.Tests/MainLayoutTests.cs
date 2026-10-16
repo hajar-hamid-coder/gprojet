@@ -27,6 +27,8 @@ public sealed class MainLayoutTests : BunitContext
         Services.RemoveAll<IAuthorizationService>(); // remplace le service factice de bUnit : on teste les vraies politiques
         Services.AddAuthorizationCore(Politiques.Enregistrer);
         Services.AddSingleton(new Gprojet.Front.Api.BffApiClient(new HttpClient { BaseAddress = new Uri("http://localhost/") }));
+        Services.AddSingleton<Gprojet.Front.Services.NotificationUiService>();
+        Services.AddSingleton<Gprojet.Front.Services.ChargementService>();
         Services.AddCascadingAuthenticationState();
         Services.AddSingleton<AuthenticationStateProvider>(new Fournisseur(new ClaimsPrincipal(identite)));
         return Render<MainLayout>(p => p.Add(l => l.Body, "<p>contenu</p>"));

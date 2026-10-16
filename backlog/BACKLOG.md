@@ -206,7 +206,7 @@ _Mis à jour le 2026-10-16 16:07 par scripts/backlog.py — ne pas modifier à l
 **Test de validation** : tests d'intégration BFF : `/bff/user` sans cookie → 401 ; après login dev → 200 avec matricule ; POST `/api/...` sans en-tête anti-CSRF → 400/403 ; test bUnit de `AuthorizeView` avec le provider.
 
 ### P2-T07 · État partagé et services front de base
-> **Statut** : NON_FAIT · **Modèle** : sonnet · **Ordre** : 7 · **Dépend de** : P2-T06
+> **Statut** : EN_COURS · **Modèle** : sonnet · **Ordre** : 7 · **Dépend de** : P2-T06
 
 **Explication** : `State/UtilisateurCourantState`, `State/PerimetreState` (entité, niveau, chemin), `Services/NotificationUiService` (snackbar), `Services/ChargementService` (indicateur global), gestion centralisée des `ApiException` (message utilisateur, journal console).
 **Test de validation** : tests bUnit : un composant abonné à `PerimetreState` se rafraîchit au changement ; une `ApiException` 403 affiche le message « Accès refusé » via le snackbar.

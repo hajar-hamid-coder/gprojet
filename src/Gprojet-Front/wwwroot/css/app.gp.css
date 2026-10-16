@@ -37,6 +37,22 @@
 .message-erreur { color: var(--danger-text); background: rgba(239,68,68,0.08); }
 .message-succes { color: var(--success-text); background: rgba(16,185,129,0.08); }
 
+/* ── SNACKBAR ET INDICATEUR DE CHARGEMENT (P2-T07) ── */
+.snackbar-zone {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 380px;
+}
+.snackbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; background-color: var(--bg); }
+.snackbar-info { color: var(--info-text); border: 1px solid var(--border-strong); border-radius: var(--radius); font-size: 12.5px; padding: 8px 12px; }
+.chargement-global { position: fixed; top: 12px; right: 16px; z-index: 200; }
+.chargement-global .spinner { border-color: var(--border-strong); border-top-color: var(--accent); }
+
 /* ── ACCESSIBILITE ── */
 .sr-only {
     position: absolute;
