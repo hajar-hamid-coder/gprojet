@@ -19,12 +19,12 @@
 
 <!-- RESUME:DEBUT -->
 
-_Mis à jour le 2026-10-16 13:08 par scripts/backlog.py — ne pas modifier à la main._
+_Mis à jour le 2026-10-16 13:16 par scripts/backlog.py — ne pas modifier à la main._
 
 | Phase | Titre | Statut | Modèle | Avancement |
 |---|---|---|---|---|
 | P0 | Initialisation et outillage | ✅ VALIDEE | sonnet | 6/6 |
-| P1 | Socle backend .NET 10 | 🔄 EN_COURS | opus | 3/11 |
+| P1 | Socle backend .NET 10 | 🔄 EN_COURS | opus | 4/11 |
 | P2 | Socle frontend Blazor WebAssembly et BFF | ⬜ NON_DEMARREE | sonnet | 0/9 |
 | P3 | Conteneurisation et intégration continue GitHub Actions | ⬜ NON_DEMARREE | sonnet | 0/5 |
 | P4 | Module Organisation et périmètre hiérarchique | ⬜ NON_DEMARREE | sonnet | 0/8 |
@@ -115,7 +115,7 @@ _Mis à jour le 2026-10-16 13:08 par scripts/backlog.py — ne pas modifier à l
 **Test de validation** : `dotnet test tests/Gprojet-Backend.Tests --filter Category=Common` → tests de `Result`, pagination (bornes, taille max) et horloge factice verts.
 
 ### P1-T04 · Entités du domaine (6 schémas)
-> **Statut** : EN_COURS · **Modèle** : opus · **Ordre** : 4 · **Dépend de** : P1-T03
+> **Statut** : A_VALIDER · **Modèle** : opus · **Ordre** : 4 · **Dépend de** : P1-T03
 
 **Explication** : `EntiteAuditable` (Id Guid v7, audit, suppression logique) et une classe par table de `database/01-schema.sql`, rangées par module (`Organisation`, `Projets`, `Planification`, `Temps`, `Commun`, `Modelisation`), avec propriétés de navigation, collections, et énumérations C# pour chaque `CHECK … IN`. `Historique` n'hérite pas d'`EntiteAuditable` (bigint, ajout seul).
 **Test de validation** : `dotnet build` OK ; test de réflexion : nombre de types entités = 60 et chaque énumération a les mêmes valeurs que la contrainte SQL correspondante (test paramétré lisant `01-schema.sql`).

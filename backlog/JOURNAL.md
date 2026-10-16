@@ -94,3 +94,5 @@
 - **2026-10-16 13:15** — Hypothèse H-021 créée pour P1-T04 (bloquante : non).
 - **2026-10-16 13:15** — NOTE P1-T04 — exécuteur OK (essai 1) : 60 entités, 49 enums, Entites 57/57, total 99/99 ; lancement vérificateur
 - **2026-10-16 13:16** — NOTE P1-T04 — vérificateur OK (essai 1) : Entites 57/57, total 99/99, contre-épreuve enum détectée
+- **2026-10-16 13:16** — NOTE P1-T04 — commit a7a4375
+- **2026-10-16 13:16** — P1-T04 EN_COURS → A_VALIDER — preuve : dotnet test --filter Category=Entites → 57/57 (60 entités, 54 CHECK IN); dotnet test → 99/99; vérificateur OK; commit a7a4375
