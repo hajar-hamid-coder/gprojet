@@ -152,3 +152,10 @@
 - **2026-10-16 15:19** — Phase P1 terminée par Claude : en attente de validation utilisateur (`/valider-phase P1`).
 - **2026-10-16 15:19** — P1-T11 EN_COURS → A_VALIDER — preuve : pg-test.py demarrer --demo → 10 entités, 25 agents, 10 responsables, 6/6 services sous division (ltree); vérificateur OK; commit 282f387
 - **2026-10-16 15:35** — Phase P1 VALIDÉE par l'utilisateur.
+- **2026-10-16 15:37** — Phase P2 lancée par l'utilisateur.
+- **2026-10-16 15:37** — P2-T01 NON_FAIT → EN_COURS
+- **2026-10-16 15:37** — NOTE P2-T01 — délégué à executeur-sonnet (essai 1)
+- **2026-10-16 15:41** — NOTE P2-T01 — exécuteur OK (essai 1) : 4 projets, front 4/4, backend 143/143 ; revue : NoWarn CS0436 global masque de vrais doublons → essai 2 (ReferenceOutputAssembly=false)
+- **2026-10-16 15:42** — Hypothèse H-029 créée pour P2-T01 (bloquante : non).
+- **2026-10-16 15:42** — NOTE P2-T01 — essai 2 OK : ReferenceOutputAssembly=false, NoWarn retiré, front 4/4, backend 143/143 ; lancement vérificateur
+- **2026-10-16 15:43** — NOTE P2-T01 — vérificateur OK (essai 2) : 4 projets, front 4/4, backend 143/143

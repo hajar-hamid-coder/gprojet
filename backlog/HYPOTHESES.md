@@ -200,3 +200,10 @@
 **Hypothèse retenue par défaut** : Calendrier civil marocain pour les jours fixes ; fêtes mobiles 2026 à des dates indicatives (marquées « indicatif »), à confirmer par l'annonce officielle
 **Impact si l'hypothèse est fausse** : Seules les données de démonstration seraient à corriger ; aucun calcul métier n'est encore branché dessus
 **Réponse utilisateur** : _en attente_
+
+### H-029 · P2-T01
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 15:42
+**Question** : Quel premier DTO partagé, et où exposer la santé pour le front ?
+**Hypothèse retenue par défaut** : SanteDto (record Statut) renvoyé par GET /api/health (minimal API anonyme), consommé par SanteApiClient ; /health et /health/ready restent pour l'exploitation
+**Impact si l'hypothèse est fausse** : Renommage ou déplacement minime si un autre DTO de référence est préféré
+**Réponse utilisateur** : _en attente_

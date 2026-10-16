@@ -1,3 +1,4 @@
+using Gprojet.Backend.Contracts.Commun;
 using Gprojet.Backend.Infrastructure;
 using Gprojet.Backend.Repositories;
 using Gprojet.Backend.Web;
@@ -20,6 +21,9 @@ builder.Services
 var app = builder.Build();
 
 app.UseExceptionHandler();
+app.UseStatusCodePages(); // 404/401 sans corps -> ProblemDetails
+app.UseBlazorFrameworkFiles();
+app.UseStaticFiles();
 app.UseSerilogRequestLogging();
 
 app.UseAuthentication();
@@ -35,6 +39,12 @@ if (app.Environment.IsDevelopment())
 
 app.MapHealthChecks("/health", new HealthCheckOptions { Predicate = _ => false });
 app.MapHealthChecks("/health/ready", new HealthCheckOptions { Predicate = c => c.Tags.Contains("ready") });
+
+app.MapGet("/api/health", () => new SanteDto("ok")).AllowAnonymous();
+
+// Le front prend tout sauf l'API et les points techniques : une route inconnue de ceux-ci reste un 404 JSON.
+app.MapFallbackToFile("/", "index.html"); // la racine : un catch-all ne reconnaît pas le chemin vide
+app.MapFallbackToFile("{**chemin:regex(^(?!api(/|$)|health|openapi|scalar).*$)}", "index.html");
 
 app.Run();
 

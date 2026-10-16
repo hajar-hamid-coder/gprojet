@@ -17,6 +17,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Gprojet-Front\Gprojet-Front.csproj" ReferenceOutputAssembly="false" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" />
+  </ItemGroup>
+
+  <ItemGroup>
     <!-- Données de référence des migrations : embarquées dans l'assembly (aucune lecture de fichier à l'exécution). -->
     <EmbeddedResource Include="Repositories\Migrations\Sql\*.sql" LogicalName="Migrations.Sql.%(Filename)%(Extension)" />
   </ItemGroup>

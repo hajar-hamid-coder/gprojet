@@ -109,3 +109,73 @@ public sealed class SocleApiTests(PgTestFixture pg)
         corps.Should().Contain("InvalidOperationException");
     }
 }
+
+[Collection(PgTestGroupe.Nom)]
+[Trait("Category", "Integration")]
+public sealed class HebergementFrontTests(PgTestFixture pg)
+{
+    private HttpClient Client(out WebApplicationFactory<Program> f)
+    {
+        f = new WebApplicationFactory<Program>().WithWebHostBuilder(b =>
+        {
+            b.UseEnvironment("Development");
+            b.UseSetting("ConnectionStrings:Gp", pg.Chaine);
+        });
+        return f.CreateClient();
+    }
+
+    [Theory]
+    [InlineData("/")]
+    [InlineData("/projets/inconnu")] // route du front : le fallback rend index.html
+    public async Task Le_front_est_servi_sans_authentification(string chemin)
+    {
+        var http = Client(out var f);
+        using var _ = f;
+
+        var reponse = await http.GetAsync(chemin);
+
+        reponse.StatusCode.Should().Be(HttpStatusCode.OK);
+        reponse.Content.Headers.ContentType!.MediaType.Should().Be("text/html");
+        (await reponse.Content.ReadAsStringAsync()).Should().Contain("blazor.webassembly");
+    }
+
+    [Fact]
+    public async Task Api_health_repond_200_en_json()
+    {
+        var http = Client(out var f);
+        using var _ = f;
+
+        var reponse = await http.GetAsync("/api/health");
+
+        reponse.StatusCode.Should().Be(HttpStatusCode.OK);
+        (await reponse.Content.ReadAsStringAsync()).Should().Contain("\"statut\":\"ok\"");
+    }
+
+    [Theory]
+    [InlineData("/api/inconnu")]
+    [InlineData("/api")]
+    [InlineData("/health/inconnu")]
+    [InlineData("/openapi/inconnu.json")]
+    public async Task Une_route_technique_inconnue_donne_404_et_non_index_html(string chemin)
+    {
+        var http = Client(out var f);
+        using var _ = f;
+
+        var reponse = await http.GetAsync(chemin);
+
+        reponse.StatusCode.Should().Be(HttpStatusCode.NotFound);
+        (await reponse.Content.ReadAsStringAsync()).Should().NotContain("blazor.webassembly");
+    }
+
+    [Fact]
+    public async Task Une_route_api_inconnue_donne_un_problem_json()
+    {
+        var http = Client(out var f);
+        using var _ = f;
+
+        var reponse = await http.GetAsync("/api/inconnu");
+
+        reponse.Content.Headers.ContentType!.MediaType.Should().Be("application/problem+json");
+    }
+
+}
