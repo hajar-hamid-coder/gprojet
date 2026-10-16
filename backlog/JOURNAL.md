@@ -181,3 +181,7 @@
 - **2026-10-16 15:56** — NOTE P2-T04 — vérificateur OK (essai 1) : Mouvement 3/3, front 15/15, backend 143/143, lib inchangé
 - **2026-10-16 15:56** — NOTE P2-T04 — commit 13d6072
 - **2026-10-16 15:56** — P2-T04 EN_COURS → A_VALIDER — preuve : bloc reduced-motion présent; grep durées CSS → seulement 0.1/0.15/0.25/0.6s; git diff --stat wwwroot/lib → vide; Category=Mouvement 3/3; front 15/15; vérificateur OK; commit 13d6072
+- **2026-10-16 15:56** — P2-T05 NON_FAIT → EN_COURS
+- **2026-10-16 15:56** — NOTE P2-T05 — délégué à executeur-sonnet (essai 1)
+- **2026-10-16 15:58** — NOTE P2-T05 — exécuteur OK (essai 1) : Api 6/6, front 21/21, backend 143/143 ; lancement vérificateur
+- **2026-10-16 15:58** — NOTE P2-T05 — vérificateur OK (essai 1) : Api 6/6, front 21/21, backend 143/143

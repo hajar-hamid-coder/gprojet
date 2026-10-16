@@ -194,7 +194,7 @@ _Mis à jour le 2026-10-16 15:56 par scripts/backlog.py — ne pas modifier à l
 **Test de validation** : `app.gp.css` contient un bloc `@media (prefers-reduced-motion: reduce)` qui neutralise `transition` et `animation` ; aucune durée autre que 0.1s, 0.15s, 0.25s, 0.6s dans les CSS du projet (grep) ; aucune bibliothèque JS d'animation ajoutée (`git diff --stat` sur `wwwroot/lib` vide).
 
 ### P2-T05 · Couche Api : clients HTTP typés
-> **Statut** : NON_FAIT · **Modèle** : sonnet · **Ordre** : 5 · **Dépend de** : P2-T01
+> **Statut** : EN_COURS · **Modèle** : sonnet · **Ordre** : 5 · **Dépend de** : P2-T01
 
 **Explication** : `ApiClientBase` (sérialisation System.Text.Json, conversion `ProblemDetails` → `ApiException` typée avec erreurs de validation, annulation), enregistrement des clients via `IHttpClientFactory` en adresses relatives (même origine que le backend), premier client `SanteApiClient`.
 **Test de validation** : tests unitaires avec `HttpMessageHandler` simulé : 200 → DTO ; 400 `problem+json` → `ApiException` contenant les erreurs par champ ; 404 → `ApiException.Statut == 404`.
