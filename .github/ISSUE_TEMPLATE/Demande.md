@@ -20,5 +20,3 @@
 ## Notes
 
 <!-- Contraintes, dépendances vers d'autres tâches ou phases, questions ouvertes. -->
-
-/label ~demande

@@ -27,5 +27,3 @@
 - [ ] Fuite de données ou périmètre contourné (bloquant)
 - [ ] Fonction principale indisponible
 - [ ] Gêne ponctuelle
-
-/label ~anomalie

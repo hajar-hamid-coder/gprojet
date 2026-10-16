@@ -35,5 +35,3 @@
 - [ ] `dotnet build` sans avertissement nouveau
 - [ ] Aucun secret, chaîne de connexion ou donnée réelle dans le diff
 - [ ] Charte HCP respectée pour toute page ou composant front
-
-/cc @<relecteur>

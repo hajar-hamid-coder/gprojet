@@ -66,3 +66,8 @@
 - **2026-10-16 12:48** — Hypothèse H-002 répondue : Choix utilisateur (2026-10-16) : le dépôt du projet est sur GitHub (hajar-hamid-coder/gprojet, public) ; l'intégration continue se fait avec GitHub Actions et l'image est publiée sur ghcr.io. GitLab reste une intégration fonctionnelle de la plateforme (P12-P13).
 - **2026-10-16 12:51** — Hypothèse H-017 répondue : Non : épingler FluentAssertions 7.x (Apache 2.0), pas de licence commerciale
 - **2026-10-16 12:52** — NOTE P1-T01 — DEMANDE UTILISATEUR (à faire dans P1, en tâche d'ouverture) : (1) Directory.Packages.props : épingler FluentAssertions en 7.x (Apache 2.0, dernière 7.x stable vérifiée sur nuget) au lieu de 8.11.0 (H-017) ; (2) migrer .gitlab/ vers .github/ (pull_request_template.md, ISSUE_TEMPLATE/Anomalie.md et Demande.md) et adapter CONTRIBUTING.md à GitHub (dépôt public hajar-hamid-coder/gprojet, GitHub Actions) ; rien de sensible dans le dépôt. Mentionner dans le commit de la tâche.
+- **2026-10-16 12:54** — Phase P1 lancée par l'utilisateur.
+- **2026-10-16 12:54** — P1-T01 NON_FAIT → EN_COURS
+- **2026-10-16 12:54** — NOTE P1-T01 — délégué à executeur-sonnet (essai 1), avec la demande utilisateur FluentAssertions 7.x + migration .github
+- **2026-10-16 12:56** — NOTE P1-T01 — exécuteur OK (essai 1) : build 0 warn, 2 projets, 1 test OK, FA 7.2.2, .github migré; lancement vérificateur
+- **2026-10-16 12:57** — NOTE P1-T01 — vérificateur OK (essai 1) : build 0/0, 2 projets, test 1/1, FA 7.2.2, .github présent

@@ -19,14 +19,14 @@
 
 <!-- RESUME:DEBUT -->
 
-_Mis à jour le 2026-10-16 12:21 par scripts/backlog.py — ne pas modifier à la main._
+_Mis à jour le 2026-10-16 12:54 par scripts/backlog.py — ne pas modifier à la main._
 
 | Phase | Titre | Statut | Modèle | Avancement |
 |---|---|---|---|---|
 | P0 | Initialisation et outillage | ✅ VALIDEE | sonnet | 6/6 |
-| P1 | Socle backend .NET 10 | ⬜ NON_DEMARREE | opus | 0/11 |
+| P1 | Socle backend .NET 10 | 🔄 EN_COURS | opus | 0/11 |
 | P2 | Socle frontend Blazor WebAssembly et BFF | ⬜ NON_DEMARREE | sonnet | 0/9 |
-| P3 | Conteneurisation et intégration continue GitLab | ⬜ NON_DEMARREE | sonnet | 0/5 |
+| P3 | Conteneurisation et intégration continue GitHub Actions | ⬜ NON_DEMARREE | sonnet | 0/5 |
 | P4 | Module Organisation et périmètre hiérarchique | ⬜ NON_DEMARREE | sonnet | 0/8 |
 | P5 | Projets et affectation en cascade | ⬜ NON_DEMARREE | opus | 0/10 |
 | P6 | Planification et ordonnancement | ⬜ NON_DEMARREE | opus | 0/12 |
@@ -92,12 +92,12 @@ _Mis à jour le 2026-10-16 12:21 par scripts/backlog.py — ne pas modifier à l
 ---
 
 ## Phase P1 · Socle backend .NET 10
-> **Statut phase** : NON_DEMARREE · **Modèle conseillé** : opus
+> **Statut phase** : EN_COURS · **Modèle conseillé** : opus
 
 **Objectif** : solution en couches compilable, persistance PostgreSQL identique au schéma de référence, API démarrable. **Livrable** : `Gprojet.slnx` avec le projet unique `Gprojet-Backend` + API `/health` + tests d'architecture verts.
 
 ### P1-T01 · Créer la solution et le projet Gprojet-Backend
-> **Statut** : NON_FAIT · **Modèle** : sonnet · **Ordre** : 1 · **Dépend de** : —
+> **Statut** : EN_COURS · **Modèle** : sonnet · **Ordre** : 1 · **Dépend de** : —
 
 **Explication** : `Gprojet.slnx` ; **un seul projet backend** `src/Gprojet-Backend/Gprojet-Backend.csproj` (`Microsoft.NET.Sdk.Web`, `RootNamespace Gprojet.Backend`) avec les dossiers-couches `Web/`, `Orchestration/`, `Services/`, `Mapping/`, `Repositories/`, `Entities/`, `Contracts/`, `Infrastructure/`, `Common/` (espaces de noms alignés sur les dossiers) ; projet de tests `tests/Gprojet-Backend.Tests` (xUnit) avec `Unitaires/`, `Integration/`, `Architecture/`. Aucun autre projet (le front arrive en P2-T01). **Demandes utilisateur à intégrer dans cette tâche** : `Directory.Packages.props` → FluentAssertions en dernière **7.x** stable (licence Apache 2.0, H-017) au lieu de 8.x ; migrer `.gitlab/` vers `.github/` (`pull_request_template.md`, `ISSUE_TEMPLATE/Anomalie.md` et `Demande.md`) et adapter `CONTRIBUTING.md` (pull requests GitHub).
 **Test de validation** : `dotnet build Gprojet.slnx` réussit sans avertissement ; `dotnet sln Gprojet.slnx list` affiche exactement 2 projets (`Gprojet-Backend`, `Gprojet-Backend.Tests`) ; `dotnet test` passe (test de fumée). `Directory.Packages.props` référence FluentAssertions 7.x ; `.gitlab/` n'existe plus et `.github/pull_request_template.md` existe.

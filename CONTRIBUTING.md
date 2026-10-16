@@ -10,14 +10,14 @@ Les règles complètes (périmètre, conventions, interdits) sont dans [CLAUDE.m
 
 ## Commits
 
-- Un commit par tâche, au format `Pn-Tnn: <titre>` (ex. `P0-T05: Modèles GitLab et guide de contribution`).
+- Un commit par tâche, au format `Pn-Tnn: <titre>` (ex. `P0-T05: Modèles GitHub et guide de contribution`).
 - Le commit ne contient que les fichiers de la tâche. Les fichiers de pilotage `backlog/*.md` sont mis à jour par l'orchestrateur avec `python scripts/backlog.py`, jamais à la main.
 - Pas de `--no-verify` ni de contournement de signature.
 
 ## Revue
 
-- Chaque merge request utilise le modèle `.gitlab/merge_request_templates/Phase.md` : résumé, tâches, preuves, hypothèses, checklist.
-- Les anomalies et demandes utilisent `.gitlab/issue_templates/Anomalie.md` et `Demande.md`.
+- Chaque pull request GitHub utilise le modèle `.github/pull_request_template.md` : résumé, tâches, preuves, hypothèses, checklist.
+- Les anomalies et demandes utilisent `.github/ISSUE_TEMPLATE/Anomalie.md` et `Demande.md`.
 - Toute tâche codée par un sous-agent sonnet ou opus passe par une relecture (`ponytail-review`) avant commit.
 - Une tâche n'est marquée `A_VALIDER` qu'après exécution de son test de validation.
 
@@ -48,3 +48,7 @@ dotnet build                           # sans avertissement nouveau
 
 - Aucun secret, mot de passe ou chaîne de connexion dans le dépôt ni dans un fichier suivi.
 - La connexion de développement passe par la variable d'environnement locale, non versionnée.
+
+## Intégration continue
+
+Le dépôt est hébergé sur GitHub (public) et la CI tourne avec GitHub Actions. GitLab reste une fonctionnalité de la plateforme (phases P12 et P13), pas l'outil de dépôt.
