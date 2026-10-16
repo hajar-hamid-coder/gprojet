@@ -119,3 +119,5 @@
 - **2026-10-16 14:49** — NOTE P1-T07 — exécuteur OK (essai 1) : Integration 7/7, total 111/111 ; demande d'un test d'unicité des noms de table (essai 2 mineur)
 - **2026-10-16 14:50** — NOTE P1-T07 — essai 2 OK (unicité des noms de table) ; lancement vérificateur
 - **2026-10-16 14:51** — NOTE P1-T07 — vérificateur OK (essai 2) : Integration 7/7, total 111/111
+- **2026-10-16 14:51** — NOTE P1-T07 — commit 1998be5
+- **2026-10-16 14:51** — P1-T07 EN_COURS → A_VALIDER — preuve : dotnet test --filter Category=Integration → 7/7 (altération SQL détectée, concurrence 3×10); dotnet test → 111/111; vérificateur OK; commit 1998be5
