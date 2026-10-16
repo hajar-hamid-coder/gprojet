@@ -187,3 +187,8 @@
 - **2026-10-16 15:58** — NOTE P2-T05 — vérificateur OK (essai 1) : Api 6/6, front 21/21, backend 143/143
 - **2026-10-16 15:58** — NOTE P2-T05 — commit 19e106c
 - **2026-10-16 15:58** — P2-T05 EN_COURS → A_VALIDER — preuve : Category=Api → 6/6 (200 → DTO, 400 problem+json → erreurs par champ, 404 → Statut 404); front 21/21; vérificateur OK; commit 19e106c
+- **2026-10-16 15:58** — P2-T06 NON_FAIT → EN_COURS
+- **2026-10-16 15:58** — NOTE P2-T06 — délégué à executeur-sonnet (essai 1)
+- **2026-10-16 16:05** — Hypothèse H-032 créée pour P2-T06 (bloquante : non).
+- **2026-10-16 16:05** — NOTE P2-T06 — exécuteur OK (essai 1) : backend 150/150, front 24/24 ; lancement vérificateur (sécurité)
+- **2026-10-16 16:07** — NOTE P2-T06 — vérificateur OK (essai 1, revue sécurité) : backend 150/150, front 24/24

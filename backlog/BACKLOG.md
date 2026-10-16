@@ -200,7 +200,7 @@ _Mis à jour le 2026-10-16 15:58 par scripts/backlog.py — ne pas modifier à l
 **Test de validation** : tests unitaires avec `HttpMessageHandler` simulé : 200 → DTO ; 400 `problem+json` → `ApiException` contenant les erreurs par champ ; 404 → `ApiException.Statut == 404`.
 
 ### P2-T06 · Authentification côté front (BFF, mode dev)
-> **Statut** : NON_FAIT · **Modèle** : sonnet · **Ordre** : 6 · **Dépend de** : P2-T05
+> **Statut** : EN_COURS · **Modèle** : sonnet · **Ordre** : 6 · **Dépend de** : P2-T05
 
 **Explication** : endpoints BFF dans `Gprojet-Backend/Web/Auth/` : `/bff/login` (dev : choix d'un matricule de démo), `/bff/logout`, `/bff/user` ; cookie `HttpOnly`, `Secure`, `SameSite=Strict` ; jeton anti-CSRF exigé sur les appels mutants ; `BffAuthenticationStateProvider` côté WASM ; page de connexion de développement.
 **Test de validation** : tests d'intégration BFF : `/bff/user` sans cookie → 401 ; après login dev → 200 avec matricule ; POST `/api/...` sans en-tête anti-CSRF → 400/403 ; test bUnit de `AuthorizeView` avec le provider.

@@ -221,3 +221,10 @@
 **Hypothèse retenue par défaut** : Administration = DIRECTEUR ou RESPONSABLE_ENTITE ; DIRECTEUR est déclaré (Contracts/Commun/RolesApplication) mais déduit côté serveur seulement en P4 ; libellés en dur en français tant que l'i18n (resx) n'existe pas
 **Impact si l'hypothèse est fausse** : Politiques.cs à ajuster si besoin ; « Portefeuille direction » invisible pour tous jusqu'en P4 ; libellés à basculer en resx plus tard
 **Réponse utilisateur** : _en attente_
+
+### H-032 · P2-T06
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 16:05
+**Question** : Les rôles sont-ils figés dans le cookie, et les pages doivent-elles rediriger les anonymes vers /connexion ?
+**Hypothèse retenue par défaut** : Rôles lus au login et valables 8 h glissantes (shortcut jusqu'à Keycloak P18) ; pas de redirection automatique vers /connexion dans le socle, les gardes de pages viendront avec les pages métier ; anti-CSRF par en-tête X-CSRF: 1 obligatoire dès qu'un cookie de session est présent
+**Impact si l'hypothèse est fausse** : Un changement de rôle ne s'applique qu'à la reconnexion ; ajouter des gardes de pages au besoin
+**Réponse utilisateur** : _en attente_

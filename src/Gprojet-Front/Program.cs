@@ -11,9 +11,10 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 // Même origine que le backend (BFF) : adresses relatives, ni proxy ni CORS.
 builder.Services.AddHttpClient<SanteApiClient>(c => c.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
+builder.Services.AddHttpClient<BffApiClient>(c => c.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
 
 builder.Services.AddAuthorizationCore(Politiques.Enregistrer);
 builder.Services.AddCascadingAuthenticationState();
-builder.Services.AddScoped<AuthenticationStateProvider, AuthentificationProvisoire>();
+builder.Services.AddScoped<AuthenticationStateProvider, BffAuthenticationStateProvider>();
 
 await builder.Build().RunAsync();

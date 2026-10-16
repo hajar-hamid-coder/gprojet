@@ -1,5 +1,6 @@
 using System.Net.Http.Json;
 using System.Text.Json;
+using Gprojet.Backend.Contracts.Commun;
 
 namespace Gprojet.Front.Api;
 
@@ -25,6 +26,11 @@ public abstract class ApiClientBase(HttpClient http)
 
     private async Task<T?> EnvoyerAsync<T>(HttpRequestMessage requete, CancellationToken ct)
     {
+        if (requete.Method != HttpMethod.Get)
+        {
+            requete.Headers.Add(ProtectionCsrf.EnTete, ProtectionCsrf.Valeur); // anti-CSRF du BFF, sur toute méthode mutante
+        }
+
         using var reponse = await http.SendAsync(requete, ct);
         if (!reponse.IsSuccessStatusCode)
             throw await LireErreurAsync(reponse, ct);

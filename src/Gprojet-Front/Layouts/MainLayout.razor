@@ -3,6 +3,7 @@
 @using Microsoft.AspNetCore.Components.Authorization
 @inherits LayoutComponentBase
 @inject NavigationManager Navigation
+@inject Gprojet.Front.Api.BffApiClient Bff
 
 <a class="skip-link" href="#contenu">Aller au contenu</a>
 <div class="page @(_replie ? "sidebar-collapsed" : null) @(_mobileOuvert ? "mobile-open" : null)">
@@ -31,8 +32,15 @@
             <div class="user-row">
                 <span class="user-avatar" aria-hidden="true"><i class="fa-solid fa-user"></i></span>
                 <AuthorizeView>
-                    <Authorized><span class="user-name">@context.User.Identity?.Name</span></Authorized>
-                    <NotAuthorized><span class="user-name">Non connecté</span></NotAuthorized>
+                    <Authorized>
+                        <span class="user-name">@context.User.Identity?.Name</span>
+                        <button type="button" class="topbar-btn" aria-label="Se déconnecter" title="Se déconnecter" @onclick="DeconnecterAsync">
+                            <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i>
+                        </button>
+                    </Authorized>
+                    <NotAuthorized>
+                        <a class="user-name" href="connexion">Se connecter</a>
+                    </NotAuthorized>
                 </AuthorizeView>
             </div>
         </div>
@@ -71,6 +79,13 @@
     {
         _replie = !_replie;
         _mobileOuvert = !_mobileOuvert;
+    }
+
+    // Rechargement complet : l'état d'authentification (mis en cache) repart de /bff/user.
+    private async Task DeconnecterAsync()
+    {
+        await Bff.DeconnecterAsync();
+        Navigation.NavigateTo("connexion", forceLoad: true);
     }
 
     private void FermerMobile() => _mobileOuvert = false;
