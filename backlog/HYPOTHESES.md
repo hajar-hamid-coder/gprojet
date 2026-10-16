@@ -109,3 +109,10 @@
 **Hypothèse retenue par défaut** : PG_BIN est exclusif dans verifier-env.py (pas de repli), sinon le cas test PG_BIN vide ne peut jamais sortir en 1 ici
 **Impact si l'hypothèse est fausse** : pg-test.py retombe sur les chemins par défaut : comportement différent entre les deux scripts
 **Réponse utilisateur** : _en attente_
+
+### H-016 · P0-T03
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 11:52
+**Question** : database/03-tests-integrite.sql compte-t-il 13 blocs ERREUR + 5 OK comme l'indique la tâche ?
+**Hypothèse retenue par défaut** : Il contient 12 ERREUR + 6 OK (total 18 conforme) ; la répartition 13+5 est une erreur de décompte, seul le total compte
+**Impact si l'hypothèse est fausse** : Si faux, un bloc attendu ERREUR manquerait dans le fichier 03
+**Réponse utilisateur** : _en attente_
