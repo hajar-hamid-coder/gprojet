@@ -165,3 +165,10 @@
 **Hypothèse retenue par défaut** : Non : type, nullabilité, défaut, contraintes, index, triggers, fonctions et nombre de lignes par table suffisent ; les données sont une copie figée de 02 embarquée dans la migration
 **Impact si l'hypothèse est fausse** : Une différence d'ordre de colonnes ou de valeurs (même nombre de lignes) ne serait pas détectée
 **Réponse utilisateur** : _en attente_
+
+### H-024 · P1-T07
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 14:49
+**Question** : Quel agent pour les écritures hors requête (jobs, données initiales), et type_cible sans schéma est-il acceptable ?
+**Hypothèse retenue par défaut** : Un utilisateur système (ICurrentUser dédié) sera fourni pour les traitements hors requête ; type_cible = nom de table sans schéma (unique entre schémas, ≤ 30 caractères)
+**Impact si l'hypothèse est fausse** : Sans utilisateur système, cree_par/agent_id seraient vides pour ces écritures ; un futur doublon de nom de table entre schémas rendrait type_cible ambigu
+**Réponse utilisateur** : _en attente_

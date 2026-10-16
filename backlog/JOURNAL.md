@@ -113,3 +113,9 @@
 - **2026-10-16 14:45** — NOTE P1-T06 — vérificateur OK (essai 1) : 0 écart, auto-test 3/3, gprojet 60 tables + InitialCreate, 104/104
 - **2026-10-16 14:45** — NOTE P1-T06 — commit 1a296ed
 - **2026-10-16 14:45** — P1-T06 EN_COURS → A_VALIDER — preuve : comparer-schema.py → 0 écart (935 colonnes, 767 contraintes, 191 index); --auto-test → 3/3; ef database update gprojet → 60 tables/6 schémas; vérificateur OK; commit 1a296ed
+- **2026-10-16 14:45** — P1-T07 NON_FAIT → EN_COURS
+- **2026-10-16 14:45** — NOTE P1-T07 — délégué à executeur-sonnet (essai 1)
+- **2026-10-16 14:49** — Hypothèse H-024 créée pour P1-T07 (bloquante : non).
+- **2026-10-16 14:49** — NOTE P1-T07 — exécuteur OK (essai 1) : Integration 7/7, total 111/111 ; demande d'un test d'unicité des noms de table (essai 2 mineur)
+- **2026-10-16 14:50** — NOTE P1-T07 — essai 2 OK (unicité des noms de table) ; lancement vérificateur
+- **2026-10-16 14:51** — NOTE P1-T07 — vérificateur OK (essai 2) : Integration 7/7, total 111/111
