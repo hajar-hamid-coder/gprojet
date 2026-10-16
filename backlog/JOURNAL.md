@@ -79,3 +79,5 @@
 - **2026-10-16 13:01** — NOTE P1-T02 — exécuteur OK (essai 1) : 11 règles + 11 garde-fous + 1 couverture = 23 verts ; lancement vérificateur
 - **2026-10-16 13:02** — NOTE P1-T02 — vérificateur OK (essai 1) ; ponytail-review : manque Repositories ↛ Contracts/Mapping → renvoyé à executeur-opus (essai 2)
 - **2026-10-16 13:02** — NOTE P1-T02 — essai 2 : règle 12 Repositories ↛ Contracts/Mapping ajoutée ; rejoué par l'orchestrateur : 25 verts Architecture, 26 au total
+- **2026-10-16 13:02** — NOTE P1-T02 — commit caa6213
+- **2026-10-16 13:02** — P1-T02 EN_COURS → A_VALIDER — preuve : dotnet test --filter Category=Architecture → 25/25 (12 règles + 12 garde-fous + couverture); contre-épreuve Web→Entities détectée; vérificateur OK; commit caa6213
