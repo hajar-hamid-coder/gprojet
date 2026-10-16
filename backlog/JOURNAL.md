@@ -206,3 +206,5 @@
 - **2026-10-16 16:22** — Hypothèse H-034 créée pour P2-T08 (bloquante : non).
 - **2026-10-16 16:22** — NOTE P2-T08 — exécuteur OK (essai 1) : front 43/43 (I18n), backend 157/157 ; lancement vérificateur
 - **2026-10-16 16:22** — NOTE P2-T08 — vérificateur OK (essai 1) : I18n 11/11, front 43/43, backend 157/157
+- **2026-10-16 16:23** — NOTE P2-T08 — commit 9793d69
+- **2026-10-16 16:23** — P2-T08 EN_COURS → A_VALIDER — preuve : Category=I18n → 11/11 (ar-MA → dir=rtl; « Mes tâches » / « My tasks » / « مهامي »; aucun texte en dur + garde-fou; formats); front 43/43, backend 157/157; vérificateur OK; commit 9793d69

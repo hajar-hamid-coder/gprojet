@@ -19,13 +19,13 @@
 
 <!-- RESUME:DEBUT -->
 
-_Mis à jour le 2026-10-16 16:11 par scripts/backlog.py — ne pas modifier à la main._
+_Mis à jour le 2026-10-16 16:23 par scripts/backlog.py — ne pas modifier à la main._
 
 | Phase | Titre | Statut | Modèle | Avancement |
 |---|---|---|---|---|
 | P0 | Initialisation et outillage | ✅ VALIDEE | sonnet | 6/6 |
 | P1 | Socle backend .NET 10 | ✅ VALIDEE | opus | 11/11 |
-| P2 | Socle frontend Blazor WebAssembly et BFF | 🔄 EN_COURS | sonnet | 7/9 |
+| P2 | Socle frontend Blazor WebAssembly et BFF | 🔄 EN_COURS | sonnet | 8/9 |
 | P3 | Conteneurisation et intégration continue GitHub Actions | ⬜ NON_DEMARREE | sonnet | 0/5 |
 | P4 | Module Organisation et périmètre hiérarchique | ⬜ NON_DEMARREE | sonnet | 0/8 |
 | P5 | Projets et affectation en cascade | ⬜ NON_DEMARREE | opus | 0/10 |
@@ -212,7 +212,7 @@ _Mis à jour le 2026-10-16 16:11 par scripts/backlog.py — ne pas modifier à l
 **Test de validation** : tests bUnit : un composant abonné à `PerimetreState` se rafraîchit au changement ; une `ApiException` 403 affiche le message « Accès refusé » via le snackbar.
 
 ### P2-T08 · Internationalisation fr / en / ar (RTL)
-> **Statut** : EN_COURS · **Modèle** : sonnet · **Ordre** : 8 · **Dépend de** : P2-T03
+> **Statut** : A_VALIDER · **Modèle** : sonnet · **Ordre** : 8 · **Dépend de** : P2-T03
 
 **Explication** : `Resources/*.resx` (fr par défaut, en, ar), sélecteur de langue persistant (cookie BFF), `dir="rtl"` sur `<html>` et règles RTL dans `app.gp.css` (menu latéral à droite) pour l'arabe, formats de date et de nombre selon la culture.
 **Test de validation** : tests bUnit : en culture `ar-MA` le layout est rendu avec `dir="rtl"` ; un libellé du menu change selon la culture ; aucun texte en dur dans `Layouts/` (contrôle : test qui échoue si une chaîne littérale française apparaît dans un `.razor` du layout).
