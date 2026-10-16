@@ -48,3 +48,7 @@
 - **2026-10-16 11:56** — NOTE P0-T04 — vérificateur OK (essai 1) : dotnet 10.0.401, build 0 warn, TreatWarningsAsErrors=true
 - **2026-10-16 11:56** — NOTE P0-T04 — commit fa6386a
 - **2026-10-16 11:56** — P0-T04 EN_COURS → A_VALIDER — preuve : dotnet --version → 10.0.401; build .tmpcheck 0 avertissement/0 erreur; TreatWarningsAsErrors=true; vérificateur OK; commit fa6386a
+- **2026-10-16 11:56** — P0-T05 NON_FAIT → EN_COURS
+- **2026-10-16 11:56** — NOTE P0-T05 — délégué à executeur-haiku (essai 1)
+- **2026-10-16 11:57** — NOTE P0-T05 — exécuteur OK (essai 1); lancement vérificateur
+- **2026-10-16 11:58** — NOTE P0-T05 — vérificateur OK (essai 1) : 4 fichiers, 6 sections, cohérent avec CLAUDE.md
