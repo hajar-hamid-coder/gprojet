@@ -133,3 +133,18 @@ dialog[open], [role="dialog"] { animation: fadeIn 0.25s ease backwards; }
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+/* ── PAGES SYSTEME (P2-T09) : chargement initial et erreur non geree, avant/hors Blazor ── */
+.chargement-initial {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 100vh;
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+.chargement-initial .spinner { border-color: var(--border-strong); border-top-color: var(--accent); }
+#blazor-error-ui { background: var(--bg); color: var(--danger-text); border-top: 1px solid var(--border-strong); font-size: 12.5px; }
+#blazor-error-ui .reload { color: var(--accent); }
+#blazor-error-ui .dismiss { cursor: pointer; margin-inline-start: 12px; }

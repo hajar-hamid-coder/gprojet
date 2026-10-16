@@ -208,3 +208,8 @@
 - **2026-10-16 16:22** — NOTE P2-T08 — vérificateur OK (essai 1) : I18n 11/11, front 43/43, backend 157/157
 - **2026-10-16 16:23** — NOTE P2-T08 — commit 9793d69
 - **2026-10-16 16:23** — P2-T08 EN_COURS → A_VALIDER — preuve : Category=I18n → 11/11 (ar-MA → dir=rtl; « Mes tâches » / « My tasks » / « مهامي »; aucun texte en dur + garde-fou; formats); front 43/43, backend 157/157; vérificateur OK; commit 9793d69
+- **2026-10-16 16:23** — P2-T09 NON_FAIT → EN_COURS
+- **2026-10-16 16:23** — NOTE P2-T09 — délégué à executeur-haiku (essai 1)
+- **2026-10-16 16:26** — Hypothèse H-035 créée pour P2-T09 (bloquante : non).
+- **2026-10-16 16:26** — NOTE P2-T09 — exécuteur OK (essai 1) : PagesSysteme 7/7, front 50/50, backend 157/157 ; lancement vérificateur
+- **2026-10-16 16:27** — NOTE P2-T09 — vérificateur OK (essai 1) : PagesSysteme 7/7, front 50/50, backend 157/157

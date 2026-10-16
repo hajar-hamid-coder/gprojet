@@ -218,7 +218,7 @@ _Mis à jour le 2026-10-16 16:23 par scripts/backlog.py — ne pas modifier à l
 **Test de validation** : tests bUnit : en culture `ar-MA` le layout est rendu avec `dir="rtl"` ; un libellé du menu change selon la culture ; aucun texte en dur dans `Layouts/` (contrôle : test qui échoue si une chaîne littérale française apparaît dans un `.razor` du layout).
 
 ### P2-T09 · Pages système
-> **Statut** : NON_FAIT · **Modèle** : haiku · **Ordre** : 9 · **Dépend de** : P2-T08
+> **Statut** : EN_COURS · **Modèle** : haiku · **Ordre** : 9 · **Dépend de** : P2-T08
 
 **Explication** : pages Accueil (placeholder du tableau de bord), 404, Accès refusé, Erreur inattendue (avec identifiant de corrélation), Chargement initial.
 **Test de validation** : tests bUnit : chaque page se rend sans exception et contient son titre traduit.

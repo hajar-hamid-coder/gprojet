@@ -64,4 +64,12 @@
   <data name="MatriculeInconnu" xml:space="preserve"><value>رقم التسجيل غير معروف أو الموظف غير نشط.</value></data>
   <data name="Matricule" xml:space="preserve"><value>رقم التسجيل</value></data>
   <data name="Connexion" xml:space="preserve"><value>دخول</value></data>
+  <data name="AccueilTexte" xml:space="preserve"><value>ستتوفر لوحة القيادة الخاصة بنطاقك قريباً.</value></data>
+  <data name="AccueilVide" xml:space="preserve"><value>لا توجد بيانات للعرض حالياً.</value></data>
+  <data name="RetourAccueil" xml:space="preserve"><value>العودة إلى الرئيسية</value></data>
+  <data name="AccesRefuseTitre" xml:space="preserve"><value>الوصول مرفوض</value></data>
+  <data name="AccesRefuseTexte" xml:space="preserve"><value>ليست لديك الصلاحيات اللازمة لعرض هذه الصفحة.</value></data>
+  <data name="ErreurTitre" xml:space="preserve"><value>خطأ غير متوقع</value></data>
+  <data name="ErreurTexte" xml:space="preserve"><value>حدث خطأ غير متوقع. إذا استمرت المشكلة، فأرسل المعرف أدناه إلى الدعم.</value></data>
+  <data name="IdentifiantCorrelation" xml:space="preserve"><value>معرف الارتباط</value></data>
 </root>

@@ -242,3 +242,10 @@
 **Hypothèse retenue par défaut** : fr-MA par défaut (repli), en et ar-MA ; arabe affiché avec la pile système (Geist sans glyphes arabes, aucune police téléchargée) ; traductions en/ar rédigées sans relecture native
 **Impact si l'hypothèse est fausse** : Changer Langues.Defaut ; ajouter une police arabe auto-hébergée si le rendu système déplaît ; faire relire en et ar avant la mise en production
 **Réponse utilisateur** : _en attente_
+
+### H-035 · P2-T09
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 16:26
+**Question** : Faut-il brancher dès maintenant la page Erreur sur un ErrorBoundary et Accès refusé sur une garde de routes ?
+**Hypothèse retenue par défaut** : Non : pages prêtes mais non câblées (pas d'AuthorizeRouteView ni d'ErrorBoundary) jusqu'aux pages métier ; textes de chargement initial et d'erreur fatale de index.html en français (hors localizer)
+**Impact si l'hypothèse est fausse** : Câblage à ajouter avec les premières pages protégées ; en/ar voient deux textes français pendant le chargement
+**Réponse utilisateur** : _en attente_
