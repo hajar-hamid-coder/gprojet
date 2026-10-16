@@ -133,3 +133,5 @@
 - **2026-10-16 15:00** — Hypothèse H-026 créée pour P1-T09 (bloquante : non).
 - **2026-10-16 15:00** — NOTE P1-T09 — exécuteur OK (essai 1) : 124/124, dotnet run gprojet /health/ready 200 ; lancement vérificateur
 - **2026-10-16 15:00** — NOTE P1-T09 — vérificateur OK (essai 1) : 124/124, dotnet run /health/ready 200 sur gprojet, aucune fuite
+- **2026-10-16 15:00** — NOTE P1-T09 — commit 7440a30
+- **2026-10-16 15:00** — P1-T09 EN_COURS → A_VALIDER — preuve : dotnet test → 124/124 (/health, /health/ready, /openapi 200; Introuvable → 404 problem+json; 500 sans fuite); dotnet run + curl /health/ready → 200 sur gprojet; vérificateur OK; commit 7440a30

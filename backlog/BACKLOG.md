@@ -19,12 +19,12 @@
 
 <!-- RESUME:DEBUT -->
 
-_Mis à jour le 2026-10-16 14:55 par scripts/backlog.py — ne pas modifier à la main._
+_Mis à jour le 2026-10-16 15:00 par scripts/backlog.py — ne pas modifier à la main._
 
 | Phase | Titre | Statut | Modèle | Avancement |
 |---|---|---|---|---|
 | P0 | Initialisation et outillage | ✅ VALIDEE | sonnet | 6/6 |
-| P1 | Socle backend .NET 10 | 🔄 EN_COURS | opus | 8/11 |
+| P1 | Socle backend .NET 10 | 🔄 EN_COURS | opus | 9/11 |
 | P2 | Socle frontend Blazor WebAssembly et BFF | ⬜ NON_DEMARREE | sonnet | 0/9 |
 | P3 | Conteneurisation et intégration continue GitHub Actions | ⬜ NON_DEMARREE | sonnet | 0/5 |
 | P4 | Module Organisation et périmètre hiérarchique | ⬜ NON_DEMARREE | sonnet | 0/8 |
@@ -145,7 +145,7 @@ _Mis à jour le 2026-10-16 14:55 par scripts/backlog.py — ne pas modifier à l
 **Test de validation** : tests d'intégration : commit atomique (échec au milieu → rien n'est écrit) ; deux mises à jour concurrentes de la même ligne → `ConflitException`.
 
 ### P1-T09 · Socle API : DI, erreurs, OpenAPI, logs, santé
-> **Statut** : EN_COURS · **Modèle** : sonnet · **Ordre** : 9 · **Dépend de** : P1-T08
+> **Statut** : A_VALIDER · **Modèle** : sonnet · **Ordre** : 9 · **Dépend de** : P1-T08
 
 **Explication** : `Program.cs` minimal ; méthodes d'extension d'enregistrement par couche (`AddGpRepositories`, `AddGpServices`, `AddGpOrchestration`…) ; middleware d'exceptions → `ProblemDetails` (400/403/404/409/500 sans fuite de détail en production) ; OpenAPI natif + Scalar en Development ; Serilog (console JSON) ; `/health` (live) et `/health/ready` (base) ; chaîne de connexion via configuration (`ConnectionStrings:Gp`), fournie en local par la variable d'environnement `ConnectionStrings__Gp` (base `gprojet`, définie dans `.claude/settings.local.json`) ; **les tests n'utilisent jamais `gprojet`** : instance jetable `pg-test` ou `GP_TEST_CONNECTION`, qui écrasent explicitement cette valeur.
 **Test de validation** : test d'intégration `WebApplicationFactory` : `/health` 200, `/health/ready` 200 sur `pg-test`, `/openapi/v1.json` 200, une `IntrouvableException` levée par un contrôleur de test → 404 au format `application/problem+json` ; `dotnet run` de l'API puis `curl -s localhost:<port>/health/ready` → 200 sur `gprojet`.
