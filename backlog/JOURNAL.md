@@ -161,3 +161,8 @@
 - **2026-10-16 15:43** — NOTE P2-T01 — vérificateur OK (essai 2) : 4 projets, front 4/4, backend 143/143
 - **2026-10-16 15:43** — NOTE P2-T01 — commit 7fafa8d
 - **2026-10-16 15:43** — P2-T01 EN_COURS → A_VALIDER — preuve : dotnet sln list → 4 projets; GET / → 200 blazor.webassembly; GET /api/health → 200; règle front ↛ backend + garde-fou; front 4/4, backend 143/143; vérificateur OK; commit 7fafa8d
+- **2026-10-16 15:43** — P2-T02 NON_FAIT → EN_COURS
+- **2026-10-16 15:43** — NOTE P2-T02 — délégué à executeur-sonnet (essai 1)
+- **2026-10-16 15:47** — Hypothèse H-030 créée pour P2-T02 (bloquante : non).
+- **2026-10-16 15:47** — NOTE P2-T02 — exécuteur OK (essai 1) : verifier-charte OK, grep vide, front 7/7, backend 143/143 ; lancement vérificateur
+- **2026-10-16 15:48** — NOTE P2-T02 — vérificateur OK (essai 1) : diff = @import seul, contrastes 4,73 à 6,44, front 7/7, backend 143/143 ; réserve : badge sur fond gris (warning 4,73 sur blanc) à surveiller en P17

@@ -207,3 +207,10 @@
 **Hypothèse retenue par défaut** : SanteDto (record Statut) renvoyé par GET /api/health (minimal API anonyme), consommé par SanteApiClient ; /health et /health/ready restent pour l'exploitation
 **Impact si l'hypothèse est fausse** : Renommage ou déplacement minime si un autre DTO de référence est préféré
 **Réponse utilisateur** : _en attente_
+
+### H-030 · P2-T02
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 15:47
+**Question** : Quelles classes de badge de statut prévoir, et comment mapper les statuts configurables de tâche/ticket ?
+**Hypothèse retenue par défaut** : Classes kebab-case déduites des enums de statut du backend ; les workflows configurables (CategorieStatut) se mappent sur a-faire / en-cours / termine ; d'autres classes s'ajouteront au besoin
+**Impact si l'hypothèse est fausse** : Ajout de classes dans app.gp.css si un statut n'est pas couvert
+**Réponse utilisateur** : _en attente_
