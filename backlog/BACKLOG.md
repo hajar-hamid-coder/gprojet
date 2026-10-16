@@ -19,12 +19,12 @@
 
 <!-- RESUME:DEBUT -->
 
-_Mis à jour le 2026-10-16 15:19 par scripts/backlog.py — ne pas modifier à la main._
+_Mis à jour le 2026-10-16 15:35 par scripts/backlog.py — ne pas modifier à la main._
 
 | Phase | Titre | Statut | Modèle | Avancement |
 |---|---|---|---|---|
 | P0 | Initialisation et outillage | ✅ VALIDEE | sonnet | 6/6 |
-| P1 | Socle backend .NET 10 | 🟡 A_VALIDER | opus | 11/11 |
+| P1 | Socle backend .NET 10 | ✅ VALIDEE | opus | 11/11 |
 | P2 | Socle frontend Blazor WebAssembly et BFF | ⬜ NON_DEMARREE | sonnet | 0/9 |
 | P3 | Conteneurisation et intégration continue GitHub Actions | ⬜ NON_DEMARREE | sonnet | 0/5 |
 | P4 | Module Organisation et périmètre hiérarchique | ⬜ NON_DEMARREE | sonnet | 0/8 |
@@ -92,72 +92,72 @@ _Mis à jour le 2026-10-16 15:19 par scripts/backlog.py — ne pas modifier à l
 ---
 
 ## Phase P1 · Socle backend .NET 10
-> **Statut phase** : A_VALIDER · **Modèle conseillé** : opus
+> **Statut phase** : VALIDEE · **Modèle conseillé** : opus
 
 **Objectif** : solution en couches compilable, persistance PostgreSQL identique au schéma de référence, API démarrable. **Livrable** : `Gprojet.slnx` avec le projet unique `Gprojet-Backend` + API `/health` + tests d'architecture verts.
 
 ### P1-T01 · Créer la solution et le projet Gprojet-Backend
-> **Statut** : A_VALIDER · **Modèle** : sonnet · **Ordre** : 1 · **Dépend de** : —
+> **Statut** : VALIDE · **Modèle** : sonnet · **Ordre** : 1 · **Dépend de** : —
 
 **Explication** : `Gprojet.slnx` ; **un seul projet backend** `src/Gprojet-Backend/Gprojet-Backend.csproj` (`Microsoft.NET.Sdk.Web`, `RootNamespace Gprojet.Backend`) avec les dossiers-couches `Web/`, `Orchestration/`, `Services/`, `Mapping/`, `Repositories/`, `Entities/`, `Contracts/`, `Infrastructure/`, `Common/` (espaces de noms alignés sur les dossiers) ; projet de tests `tests/Gprojet-Backend.Tests` (xUnit) avec `Unitaires/`, `Integration/`, `Architecture/`. Aucun autre projet (le front arrive en P2-T01). **Demandes utilisateur à intégrer dans cette tâche** : `Directory.Packages.props` → FluentAssertions en dernière **7.x** stable (licence Apache 2.0, H-017) au lieu de 8.x ; migrer `.gitlab/` vers `.github/` (`pull_request_template.md`, `ISSUE_TEMPLATE/Anomalie.md` et `Demande.md`) et adapter `CONTRIBUTING.md` (pull requests GitHub).
 **Test de validation** : `dotnet build Gprojet.slnx` réussit sans avertissement ; `dotnet sln Gprojet.slnx list` affiche exactement 2 projets (`Gprojet-Backend`, `Gprojet-Backend.Tests`) ; `dotnet test` passe (test de fumée). `Directory.Packages.props` référence FluentAssertions 7.x ; `.gitlab/` n'existe plus et `.github/pull_request_template.md` existe.
 
 ### P1-T02 · Tests d'architecture par espace de noms
-> **Statut** : A_VALIDER · **Modèle** : opus · **Ordre** : 2 · **Dépend de** : P1-T01
+> **Statut** : VALIDE · **Modèle** : opus · **Ordre** : 2 · **Dépend de** : P1-T01
 
 **Explication** : les couches étant des dossiers d'un même projet, **ces tests remplacent le compilateur** comme garde. NetArchTest dans `tests/Gprojet-Backend.Tests/Architecture/`, une règle par interdiction entre espaces de noms `Gprojet.Backend.*` : Web ↛ Services / Repositories / Entities ; Orchestration ↛ implémentations de Repositories ; Services ↛ Contracts, Mapping, EF Core ; Entities ↛ toute autre couche sauf Common ; Contracts ↛ tout sauf BCL et FluentValidation (compilé dans le navigateur) ; types `*Dto` uniquement dans Contracts ; contrôleurs uniquement dans Web. Test « garde-fou » : des types de violation volontaire, définis dans le projet de test sous des espaces de noms simulés, sont bien détectés.
 **Test de validation** : `dotnet test tests/Gprojet-Backend.Tests --filter Category=Architecture` → tous verts, ≥ 10 règles ; le garde-fou prouve qu'une violation fait échouer la règle (assert inversé).
 
 ### P1-T03 · Common : primitives transverses
-> **Statut** : A_VALIDER · **Modèle** : sonnet · **Ordre** : 3 · **Dépend de** : P1-T01
+> **Statut** : VALIDE · **Modèle** : sonnet · **Ordre** : 3 · **Dépend de** : P1-T01
 
 **Explication** : `Result<T>` / `Result`, exceptions métier (`RegleMetierException`, `AccesRefuseException`, `IntrouvableException`, `ConflitException`), `PageRequete` / `PageResultat<T>` (tri, filtre, taille max 200), `ICurrentUser` (Id agent, matricule, entité, rôles), `IHorloge` (testable), `IGenerateurCode` (codes lisibles).
 **Test de validation** : `dotnet test tests/Gprojet-Backend.Tests --filter Category=Common` → tests de `Result`, pagination (bornes, taille max) et horloge factice verts.
 
 ### P1-T04 · Entités du domaine (6 schémas)
-> **Statut** : A_VALIDER · **Modèle** : opus · **Ordre** : 4 · **Dépend de** : P1-T03
+> **Statut** : VALIDE · **Modèle** : opus · **Ordre** : 4 · **Dépend de** : P1-T03
 
 **Explication** : `EntiteAuditable` (Id Guid v7, audit, suppression logique) et une classe par table de `database/01-schema.sql`, rangées par module (`Organisation`, `Projets`, `Planification`, `Temps`, `Commun`, `Modelisation`), avec propriétés de navigation, collections, et énumérations C# pour chaque `CHECK … IN`. `Historique` n'hérite pas d'`EntiteAuditable` (bigint, ajout seul).
 **Test de validation** : `dotnet build` OK ; test de réflexion : nombre de types entités = 60 et chaque énumération a les mêmes valeurs que la contrainte SQL correspondante (test paramétré lisant `01-schema.sql`).
 
 ### P1-T05 · DbContext et configurations EF Core
-> **Statut** : A_VALIDER · **Modèle** : opus · **Ordre** : 5 · **Dépend de** : P1-T04
+> **Statut** : VALIDE · **Modèle** : opus · **Ordre** : 5 · **Dépend de** : P1-T04
 
 **Explication** : `GpDbContext` (Npgsql, extension `ltree`), une `IEntityTypeConfiguration<T>` par entité : schéma, noms `snake_case`, types (`numeric(p,s)`, `ltree`, `jsonb`, `text[]`, `inet`), `uuidv7()` par défaut, contraintes `CHECK`, index uniques **partiels** (`HasFilter`), index GiST, colonne générée `criticite`, `xmin` (concurrence), filtre global `!EstSupprime`, conversions enum → texte.
 **Test de validation** : `dotnet build` OK ; `dotnet ef dbcontext info` réussit ; test unitaire : le modèle EF déclare 60 tables réparties dans les 6 schémas.
 
 ### P1-T06 · Migration initiale identique au schéma de référence
-> **Statut** : A_VALIDER · **Modèle** : opus · **Ordre** : 6 · **Dépend de** : P1-T05
+> **Statut** : VALIDE · **Modèle** : opus · **Ordre** : 6 · **Dépend de** : P1-T05
 
 **Explication** : migration `InitialCreate` (+ trigger d'ajout seul sur `commun.historique` et données de `02-donnees-reference.sql` via `migrationBuilder.Sql`). Écrire `scripts/comparer-schema.py` : crée deux bases sur l'instance de test (l'une par `01-schema.sql`, l'autre par `dotnet ef database update`), puis compare colonnes (type, nullabilité, défaut), contraintes, index (définition) et triggers via `pg_catalog`. Appliquer ensuite la migration à la **base de développement `gprojet`** (vide au départ ; connexion fournie par la variable `ConnectionStrings__Gp`, définie dans `.claude/settings.local.json` — ne jamais l'afficher ni la recopier).
 **Test de validation** : `python scripts/comparer-schema.py` → « 0 écart » ; toute différence est listée et fait échouer le script ; `dotnet ef database update` sur `gprojet` réussit et `gprojet` contient 60 tables dans les 6 schémas.
 
 ### P1-T07 · Intercepteurs : audit, suppression logique, historique chaîné
-> **Statut** : A_VALIDER · **Modèle** : sonnet · **Ordre** : 7 · **Dépend de** : P1-T06
+> **Statut** : VALIDE · **Modèle** : sonnet · **Ordre** : 7 · **Dépend de** : P1-T06
 
 **Explication** : `SaveChangesInterceptor` qui renseigne `cree_*` / `modifie_*` depuis `ICurrentUser` et `IHorloge`, transforme un `Remove` en suppression logique, et écrit une ligne `commun.historique` par champ modifié avec l'empreinte `sha256(empreinte_precedente + contenu)` et un `correlation_id` par requête.
 **Test de validation** : tests d'intégration sur `pg-test` : création → audit rempli ; suppression → `est_supprime = true` et ligne invisible via le filtre global ; modification → lignes d'historique avec chaîne d'empreintes valide (recalcul) ; altérer une ligne en SQL direct est détecté par le vérificateur de chaîne.
 
 ### P1-T08 · Unit of Work et repositories de base
-> **Statut** : A_VALIDER · **Modèle** : sonnet · **Ordre** : 8 · **Dépend de** : P1-T06
+> **Statut** : VALIDE · **Modèle** : sonnet · **Ordre** : 8 · **Dépend de** : P1-T06
 
 **Explication** : `IUnitOfWork` (CommitAsync, transaction explicite), classe de base **interne** `RepositoryBase<T>` (GetById, Ajouter, Supprimer logique, pagination), interfaces de repository par agrégat dans `Repositories/` (exposées via des interfaces consommées par les Services). Gestion de `DbUpdateConcurrencyException` → `ConflitException`.
 **Test de validation** : tests d'intégration : commit atomique (échec au milieu → rien n'est écrit) ; deux mises à jour concurrentes de la même ligne → `ConflitException`.
 
 ### P1-T09 · Socle API : DI, erreurs, OpenAPI, logs, santé
-> **Statut** : A_VALIDER · **Modèle** : sonnet · **Ordre** : 9 · **Dépend de** : P1-T08
+> **Statut** : VALIDE · **Modèle** : sonnet · **Ordre** : 9 · **Dépend de** : P1-T08
 
 **Explication** : `Program.cs` minimal ; méthodes d'extension d'enregistrement par couche (`AddGpRepositories`, `AddGpServices`, `AddGpOrchestration`…) ; middleware d'exceptions → `ProblemDetails` (400/403/404/409/500 sans fuite de détail en production) ; OpenAPI natif + Scalar en Development ; Serilog (console JSON) ; `/health` (live) et `/health/ready` (base) ; chaîne de connexion via configuration (`ConnectionStrings:Gp`), fournie en local par la variable d'environnement `ConnectionStrings__Gp` (base `gprojet`, définie dans `.claude/settings.local.json`) ; **les tests n'utilisent jamais `gprojet`** : instance jetable `pg-test` ou `GP_TEST_CONNECTION`, qui écrasent explicitement cette valeur.
 **Test de validation** : test d'intégration `WebApplicationFactory` : `/health` 200, `/health/ready` 200 sur `pg-test`, `/openapi/v1.json` 200, une `IntrouvableException` levée par un contrôleur de test → 404 au format `application/problem+json` ; `dotnet run` de l'API puis `curl -s localhost:<port>/health/ready` → 200 sur `gprojet`.
 
 ### P1-T10 · Authentification de développement et utilisateur courant
-> **Statut** : A_VALIDER · **Modèle** : sonnet · **Ordre** : 10 · **Dépend de** : P1-T09
+> **Statut** : VALIDE · **Modèle** : sonnet · **Ordre** : 10 · **Dépend de** : P1-T09
 
 **Explication** : `DevAuthHandler` (schéma « Dev », actif **uniquement** en environnement Development/Test) qui lit l'en-tête `X-Dev-Matricule`, charge l'agent et ses rôles déduits (responsable d'entité, délégation active) ; implémentation `ICurrentUser`. Keycloak le remplacera en P18.
 **Test de validation** : tests d'intégration : sans en-tête → 401 ; matricule inconnu → 401 ; matricule valide → 200 et `ICurrentUser` renseigné ; en environnement Production le schéma « Dev » n'est pas enregistré.
 
 ### P1-T11 · Données de démonstration
-> **Statut** : A_VALIDER · **Modèle** : haiku · **Ordre** : 11 · **Dépend de** : P1-T06
+> **Statut** : VALIDE · **Modèle** : haiku · **Ordre** : 11 · **Dépend de** : P1-T06
 
 **Explication** : `database/04-donnees-demo.sql` : 1 direction, 3 divisions, 6 services, 25 agents fictifs (responsables nommés, fonctions, compétences), 2 délégations, quelques absences, jours fériés de l'année. Uniquement des noms fictifs. Option `--demo` dans `pg-test.py demarrer`.
 **Test de validation** : `python scripts/pg-test.py demarrer --demo` puis requêtes de comptage : 10 entités, 25 agents, 10 responsables ; chaque service a un parent division (requête `ltree`).

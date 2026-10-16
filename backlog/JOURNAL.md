@@ -151,3 +151,4 @@
 - **2026-10-16 15:19** — NOTE P1-T11 — commit 282f387
 - **2026-10-16 15:19** — Phase P1 terminée par Claude : en attente de validation utilisateur (`/valider-phase P1`).
 - **2026-10-16 15:19** — P1-T11 EN_COURS → A_VALIDER — preuve : pg-test.py demarrer --demo → 10 entités, 25 agents, 10 responsables, 6/6 services sous division (ltree); vérificateur OK; commit 282f387
+- **2026-10-16 15:35** — Phase P1 VALIDÉE par l'utilisateur.
