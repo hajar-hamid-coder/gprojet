@@ -19,12 +19,12 @@
 
 <!-- RESUME:DEBUT -->
 
-_Mis à jour le 2026-10-16 15:14 par scripts/backlog.py — ne pas modifier à la main._
+_Mis à jour le 2026-10-16 15:19 par scripts/backlog.py — ne pas modifier à la main._
 
 | Phase | Titre | Statut | Modèle | Avancement |
 |---|---|---|---|---|
 | P0 | Initialisation et outillage | ✅ VALIDEE | sonnet | 6/6 |
-| P1 | Socle backend .NET 10 | 🔄 EN_COURS | opus | 10/11 |
+| P1 | Socle backend .NET 10 | 🟡 A_VALIDER | opus | 11/11 |
 | P2 | Socle frontend Blazor WebAssembly et BFF | ⬜ NON_DEMARREE | sonnet | 0/9 |
 | P3 | Conteneurisation et intégration continue GitHub Actions | ⬜ NON_DEMARREE | sonnet | 0/5 |
 | P4 | Module Organisation et périmètre hiérarchique | ⬜ NON_DEMARREE | sonnet | 0/8 |
@@ -92,7 +92,7 @@ _Mis à jour le 2026-10-16 15:14 par scripts/backlog.py — ne pas modifier à l
 ---
 
 ## Phase P1 · Socle backend .NET 10
-> **Statut phase** : EN_COURS · **Modèle conseillé** : opus
+> **Statut phase** : A_VALIDER · **Modèle conseillé** : opus
 
 **Objectif** : solution en couches compilable, persistance PostgreSQL identique au schéma de référence, API démarrable. **Livrable** : `Gprojet.slnx` avec le projet unique `Gprojet-Backend` + API `/health` + tests d'architecture verts.
 
@@ -157,7 +157,7 @@ _Mis à jour le 2026-10-16 15:14 par scripts/backlog.py — ne pas modifier à l
 **Test de validation** : tests d'intégration : sans en-tête → 401 ; matricule inconnu → 401 ; matricule valide → 200 et `ICurrentUser` renseigné ; en environnement Production le schéma « Dev » n'est pas enregistré.
 
 ### P1-T11 · Données de démonstration
-> **Statut** : EN_COURS · **Modèle** : haiku · **Ordre** : 11 · **Dépend de** : P1-T06
+> **Statut** : A_VALIDER · **Modèle** : haiku · **Ordre** : 11 · **Dépend de** : P1-T06
 
 **Explication** : `database/04-donnees-demo.sql` : 1 direction, 3 divisions, 6 services, 25 agents fictifs (responsables nommés, fonctions, compétences), 2 délégations, quelques absences, jours fériés de l'année. Uniquement des noms fictifs. Option `--demo` dans `pg-test.py demarrer`.
 **Test de validation** : `python scripts/pg-test.py demarrer --demo` puis requêtes de comptage : 10 entités, 25 agents, 10 responsables ; chaque service a un parent division (requête `ltree`).

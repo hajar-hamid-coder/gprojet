@@ -148,3 +148,6 @@
 - **2026-10-16 15:18** — Hypothèse H-028 créée pour P1-T11 (bloquante : non).
 - **2026-10-16 15:18** — NOTE P1-T11 — exécuteur OK (essai 1) : 10 entités, 25 agents, 10 responsables, 6/6 services sous une division ; tester-schema 18/18, comparer-schema 0 écart ; lancement vérificateur
 - **2026-10-16 15:19** — NOTE P1-T11 — vérificateur OK (essai 1) : 10/25/10, 6/6 services sous division, non-régression OK
+- **2026-10-16 15:19** — NOTE P1-T11 — commit 282f387
+- **2026-10-16 15:19** — Phase P1 terminée par Claude : en attente de validation utilisateur (`/valider-phase P1`).
+- **2026-10-16 15:19** — P1-T11 EN_COURS → A_VALIDER — preuve : pg-test.py demarrer --demo → 10 entités, 25 agents, 10 responsables, 6/6 services sous division (ltree); vérificateur OK; commit 282f387
