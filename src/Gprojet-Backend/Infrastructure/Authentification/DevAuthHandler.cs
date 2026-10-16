@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using System.Text.Encodings.Web;
 using Gprojet.Backend.Common;
+using Gprojet.Backend.Contracts.Commun;
 using Gprojet.Backend.Entities.Organisation;
 using Gprojet.Backend.Repositories;
 using Microsoft.AspNetCore.Authentication;

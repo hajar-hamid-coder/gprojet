@@ -214,3 +214,10 @@
 **Hypothèse retenue par défaut** : Classes kebab-case déduites des enums de statut du backend ; les workflows configurables (CategorieStatut) se mappent sur a-faire / en-cours / termine ; d'autres classes s'ajouteront au besoin
 **Impact si l'hypothèse est fausse** : Ajout de classes dans app.gp.css si un statut n'est pas couvert
 **Réponse utilisateur** : _en attente_
+
+### H-031 · P2-T03
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 15:52
+**Question** : Qui voit le menu Administration, et quand le rôle DIRECTEUR sera-t-il attribué ?
+**Hypothèse retenue par défaut** : Administration = DIRECTEUR ou RESPONSABLE_ENTITE ; DIRECTEUR est déclaré (Contracts/Commun/RolesApplication) mais déduit côté serveur seulement en P4 ; libellés en dur en français tant que l'i18n (resx) n'existe pas
+**Impact si l'hypothèse est fausse** : Politiques.cs à ajuster si besoin ; « Portefeuille direction » invisible pour tous jusqu'en P4 ; libellés à basculer en resx plus tard
+**Réponse utilisateur** : _en attente_

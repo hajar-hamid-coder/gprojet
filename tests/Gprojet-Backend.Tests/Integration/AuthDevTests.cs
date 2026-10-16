@@ -2,6 +2,7 @@ using System.Net;
 using System.Net.Http.Json;
 using FluentAssertions;
 using Gprojet.Backend.Common;
+using Gprojet.Backend.Contracts.Commun;
 using Gprojet.Backend.Infrastructure.Authentification;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Hosting;

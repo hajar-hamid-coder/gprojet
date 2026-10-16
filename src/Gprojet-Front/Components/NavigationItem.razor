@@ -1,0 +1,11 @@
+<NavLink class="nav-item" ActiveClass="active" href="@Href" Match="@Match">
+    <i class="fa-solid @Icone nav-icon" aria-hidden="true"></i>
+    <span>@Libelle</span>
+</NavLink>
+
+@code {
+    [Parameter, EditorRequired] public string Href { get; set; } = "";
+    [Parameter, EditorRequired] public string Icone { get; set; } = "";
+    [Parameter, EditorRequired] public string Libelle { get; set; } = "";
+    [Parameter] public NavLinkMatch Match { get; set; } = NavLinkMatch.Prefix;
+}

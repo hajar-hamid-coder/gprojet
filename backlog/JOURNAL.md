@@ -168,3 +168,8 @@
 - **2026-10-16 15:48** — NOTE P2-T02 — vérificateur OK (essai 1) : diff = @import seul, contrastes 4,73 à 6,44, front 7/7, backend 143/143 ; réserve : badge sur fond gris (warning 4,73 sur blanc) à surveiller en P17
 - **2026-10-16 15:48** — NOTE P2-T02 — commit 8a0a992
 - **2026-10-16 15:48** — P2-T02 EN_COURS → A_VALIDER — preuve : verifier-charte.py → seule la ligne @import remplacée; grep https? → rien; Category=Charte → 3/3 (contrastes 4,73 à 6,44); front 7/7, backend 143/143; vérificateur OK; commit 8a0a992
+- **2026-10-16 15:48** — P2-T03 NON_FAIT → EN_COURS
+- **2026-10-16 15:48** — NOTE P2-T03 — délégué à executeur-sonnet (essai 1)
+- **2026-10-16 15:52** — Hypothèse H-031 créée pour P2-T03 (bloquante : non).
+- **2026-10-16 15:52** — NOTE P2-T03 — exécuteur OK (essai 1) : Layout 5/5, front 12/12, backend 143/143 ; limite aria-expanded en mobile (shortcut) ; lancement vérificateur
+- **2026-10-16 15:53** — NOTE P2-T03 — vérificateur OK (essai 1) : Layout 5/5, front 12/12, backend 143/143

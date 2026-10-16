@@ -24,6 +24,7 @@ Layout : `.page`, `.sidebar`, `.sidebar-brand`, `.nav-section-label`, `.nav-item
   - violet : `a-valider`, `soumise`, `en-validation` ;
   - neutre (texte principal sur `--bg-muted`) : `a-faire`, `a-venir`, `a-produire`, `brouillon`, `ouvert`, `cloture`, `archive`, `annule`, `verrouillee`.
 - Textes : `.text-success`, `.text-warning`, `.text-danger`, `.text-info`, `.text-purple`. Messages : `.message-erreur`, `.message-succes`.
+- Layout (P2-T03) : `.page.sidebar-collapsed .sidebar` (repli en bureau, largeur 0, transition 0.25s) ; `.page.mobile-open .sidebar` (tiroir fixe sous 768 px, transition 0.25s, seul `mobile-open` pilote le menu en mobile) ; `.skip-link` (lien « Aller au contenu », visible au focus) ; `.nav-item .nav-icon` ajusté pour les icônes Font Awesome. Variables de la charte uniquement ; transitions neutralisées sous `prefers-reduced-motion`. Raccourci Ctrl+K et lien d'évitement : `wwwroot/js/layout.js` (sans bibliothèque).
 - Accessibilité : `.sr-only`, `:focus-visible` (anneau `--accent-soft` de la charte), neutralisation des animations sous `prefers-reduced-motion: reduce`.
 
 ## Bibliothèques auto-hébergées (aucune ressource Internet)
