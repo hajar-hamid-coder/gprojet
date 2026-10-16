@@ -141,3 +141,5 @@
 - **2026-10-16 15:11** — NOTE P1-T10 — exécuteur OK (essai 1) : AuthDev 8/8, total 132/132 ; lancement vérificateur
 - **2026-10-16 15:13** — NOTE P1-T10 — vérificateur KO (essai 1) : filtre global jugé absent (faux : HasQueryFilter dans ConfigurationEntiteAuditable:22) mais test agent supprimé manquant → renvoyé à executeur-sonnet (essai 2)
 - **2026-10-16 15:14** — NOTE P1-T10 — essai 2 : 3 tests de suppression logique ajoutés ; rejoué par l'orchestrateur : AuthDev 11/11, total 135/135 ; seul écart du vérificateur levé
+- **2026-10-16 15:14** — NOTE P1-T10 — commit b14995e
+- **2026-10-16 15:14** — P1-T10 EN_COURS → A_VALIDER — preuve : AuthDevTests → 11/11 (sans en-tête 401, inconnu 401, valide 200 + ICurrentUser, Production schéma Dev absent); dotnet test → 135/135; vérificateur : seul écart (test suppression logique) corrigé; commit b14995e
