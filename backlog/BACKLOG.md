@@ -19,13 +19,13 @@
 
 <!-- RESUME:DEBUT -->
 
-_Mis à jour le 2026-10-16 15:58 par scripts/backlog.py — ne pas modifier à la main._
+_Mis à jour le 2026-10-16 16:07 par scripts/backlog.py — ne pas modifier à la main._
 
 | Phase | Titre | Statut | Modèle | Avancement |
 |---|---|---|---|---|
 | P0 | Initialisation et outillage | ✅ VALIDEE | sonnet | 6/6 |
 | P1 | Socle backend .NET 10 | ✅ VALIDEE | opus | 11/11 |
-| P2 | Socle frontend Blazor WebAssembly et BFF | 🔄 EN_COURS | sonnet | 5/9 |
+| P2 | Socle frontend Blazor WebAssembly et BFF | 🔄 EN_COURS | sonnet | 6/9 |
 | P3 | Conteneurisation et intégration continue GitHub Actions | ⬜ NON_DEMARREE | sonnet | 0/5 |
 | P4 | Module Organisation et périmètre hiérarchique | ⬜ NON_DEMARREE | sonnet | 0/8 |
 | P5 | Projets et affectation en cascade | ⬜ NON_DEMARREE | opus | 0/10 |
@@ -200,7 +200,7 @@ _Mis à jour le 2026-10-16 15:58 par scripts/backlog.py — ne pas modifier à l
 **Test de validation** : tests unitaires avec `HttpMessageHandler` simulé : 200 → DTO ; 400 `problem+json` → `ApiException` contenant les erreurs par champ ; 404 → `ApiException.Statut == 404`.
 
 ### P2-T06 · Authentification côté front (BFF, mode dev)
-> **Statut** : EN_COURS · **Modèle** : sonnet · **Ordre** : 6 · **Dépend de** : P2-T05
+> **Statut** : A_VALIDER · **Modèle** : sonnet · **Ordre** : 6 · **Dépend de** : P2-T05
 
 **Explication** : endpoints BFF dans `Gprojet-Backend/Web/Auth/` : `/bff/login` (dev : choix d'un matricule de démo), `/bff/logout`, `/bff/user` ; cookie `HttpOnly`, `Secure`, `SameSite=Strict` ; jeton anti-CSRF exigé sur les appels mutants ; `BffAuthenticationStateProvider` côté WASM ; page de connexion de développement.
 **Test de validation** : tests d'intégration BFF : `/bff/user` sans cookie → 401 ; après login dev → 200 avec matricule ; POST `/api/...` sans en-tête anti-CSRF → 400/403 ; test bUnit de `AuthorizeView` avec le provider.

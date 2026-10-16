@@ -192,3 +192,5 @@
 - **2026-10-16 16:05** — Hypothèse H-032 créée pour P2-T06 (bloquante : non).
 - **2026-10-16 16:05** — NOTE P2-T06 — exécuteur OK (essai 1) : backend 150/150, front 24/24 ; lancement vérificateur (sécurité)
 - **2026-10-16 16:07** — NOTE P2-T06 — vérificateur OK (essai 1, revue sécurité) : backend 150/150, front 24/24
+- **2026-10-16 16:07** — NOTE P2-T06 — commit 0087971
+- **2026-10-16 16:07** — P2-T06 EN_COURS → A_VALIDER — preuve : BffTests 7/7 (/bff/user sans cookie 401; login dev → cookie HttpOnly/Secure/Strict puis 200; POST /api sans X-CSRF → 403; Production sans login); bUnit AuthorizeView 3/3; backend 150/150, front 24/24; vérificateur OK; commit 0087971
