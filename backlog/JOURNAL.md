@@ -59,3 +59,6 @@
 - **2026-10-16 11:58** — Hypothèse H-018 créée pour P0-T06 (bloquante : non).
 - **2026-10-16 11:59** — NOTE P0-T06 — exécuteur OK (essai 1); lancement vérificateur
 - **2026-10-16 12:00** — NOTE P0-T06 — vérificateur OK (essai 1) : 4 outils avec statut, contexte exit 0
+- **2026-10-16 12:00** — NOTE P0-T06 — commit 40d7469
+- **2026-10-16 12:00** — Phase P0 terminée par Claude : en attente de validation utilisateur (`/valider-phase P0`).
+- **2026-10-16 12:00** — P0-T06 EN_COURS → A_VALIDER — preuve : OUTILLAGE.md liste 4 outils avec statut; backlog.py contexte → exit 0; vérificateur OK; commit 40d7469

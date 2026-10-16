@@ -19,11 +19,11 @@
 
 <!-- RESUME:DEBUT -->
 
-_Mis à jour le 2026-10-16 11:58 par scripts/backlog.py — ne pas modifier à la main._
+_Mis à jour le 2026-10-16 12:00 par scripts/backlog.py — ne pas modifier à la main._
 
 | Phase | Titre | Statut | Modèle | Avancement |
 |---|---|---|---|---|
-| P0 | Initialisation et outillage | 🔄 EN_COURS | sonnet | 5/6 |
+| P0 | Initialisation et outillage | 🟡 A_VALIDER | sonnet | 6/6 |
 | P1 | Socle backend .NET 10 | ⬜ NON_DEMARREE | opus | 0/11 |
 | P2 | Socle frontend Blazor WebAssembly et BFF | ⬜ NON_DEMARREE | sonnet | 0/9 |
 | P3 | Conteneurisation et intégration continue GitLab | ⬜ NON_DEMARREE | sonnet | 0/5 |
@@ -49,7 +49,7 @@ _Mis à jour le 2026-10-16 11:58 par scripts/backlog.py — ne pas modifier à l
 ---
 
 ## Phase P0 · Initialisation et outillage
-> **Statut phase** : EN_COURS · **Modèle conseillé** : sonnet
+> **Statut phase** : A_VALIDER · **Modèle conseillé** : sonnet
 
 **Objectif** : dépôt Git propre, conventions, environnement vérifié, base de test opérationnelle. **Livrable** : un dépôt prêt à recevoir la solution .NET.
 
@@ -84,7 +84,7 @@ _Mis à jour le 2026-10-16 11:58 par scripts/backlog.py — ne pas modifier à l
 **Test de validation** : les 4 fichiers existent ; `CONTRIBUTING.md` contient les sections « Branches », « Commits », « Architecture », « Tests » (`grep -c "^## "` ≥ 4).
 
 ### P0-T06 · Rapport d'outillage Claude Code
-> **Statut** : EN_COURS · **Modèle** : haiku · **Ordre** : 6 · **Dépend de** : P0-T02
+> **Statut** : A_VALIDER · **Modèle** : haiku · **Ordre** : 6 · **Dépend de** : P0-T02
 
 **Explication** : `docs/OUTILLAGE.md` : état réel des plugins / skills (graphify, ponytail, ui-ux-pro-max, motion-design) détecté sur le poste (`~/.claude/skills`, `.claude/skills`, `~/.claude/plugins`), des hooks et des sous-agents du projet, avec la commande d'installation de chaque élément manquant (voir `scripts/installer-outils.ps1`). Si un outil manque, créer une hypothèse **non bloquante**.
 **Test de validation** : `docs/OUTILLAGE.md` liste les 4 outils avec un statut chacun ; `python scripts/backlog.py contexte` s'exécute sans erreur.
