@@ -19,12 +19,12 @@
 
 <!-- RESUME:DEBUT -->
 
-_Mis à jour le 2026-10-16 13:02 par scripts/backlog.py — ne pas modifier à la main._
+_Mis à jour le 2026-10-16 13:08 par scripts/backlog.py — ne pas modifier à la main._
 
 | Phase | Titre | Statut | Modèle | Avancement |
 |---|---|---|---|---|
 | P0 | Initialisation et outillage | ✅ VALIDEE | sonnet | 6/6 |
-| P1 | Socle backend .NET 10 | 🔄 EN_COURS | opus | 2/11 |
+| P1 | Socle backend .NET 10 | 🔄 EN_COURS | opus | 3/11 |
 | P2 | Socle frontend Blazor WebAssembly et BFF | ⬜ NON_DEMARREE | sonnet | 0/9 |
 | P3 | Conteneurisation et intégration continue GitHub Actions | ⬜ NON_DEMARREE | sonnet | 0/5 |
 | P4 | Module Organisation et périmètre hiérarchique | ⬜ NON_DEMARREE | sonnet | 0/8 |
@@ -109,7 +109,7 @@ _Mis à jour le 2026-10-16 13:02 par scripts/backlog.py — ne pas modifier à l
 **Test de validation** : `dotnet test tests/Gprojet-Backend.Tests --filter Category=Architecture` → tous verts, ≥ 10 règles ; le garde-fou prouve qu'une violation fait échouer la règle (assert inversé).
 
 ### P1-T03 · Common : primitives transverses
-> **Statut** : EN_COURS · **Modèle** : sonnet · **Ordre** : 3 · **Dépend de** : P1-T01
+> **Statut** : A_VALIDER · **Modèle** : sonnet · **Ordre** : 3 · **Dépend de** : P1-T01
 
 **Explication** : `Result<T>` / `Result`, exceptions métier (`RegleMetierException`, `AccesRefuseException`, `IntrouvableException`, `ConflitException`), `PageRequete` / `PageResultat<T>` (tri, filtre, taille max 200), `ICurrentUser` (Id agent, matricule, entité, rôles), `IHorloge` (testable), `IGenerateurCode` (codes lisibles).
 **Test de validation** : `dotnet test tests/Gprojet-Backend.Tests --filter Category=Common` → tests de `Result`, pagination (bornes, taille max) et horloge factice verts.

@@ -87,3 +87,5 @@
 - **2026-10-16 13:05** — NOTE P1-T03 — revue orchestrateur : Aujourdhui en UTC (décalage d'un jour à Casablanca) → renvoyé à executeur-sonnet (essai 2)
 - **2026-10-16 13:07** — NOTE P1-T03 — essai 2 OK : 42 tests ; risque : données Windows Africa/Casablanca fausses après 2025 (prod Linux/tzdata OK), shortcut commenté ; lancement vérificateur
 - **2026-10-16 13:08** — NOTE P1-T03 — vérificateur OK (essai 2) : Common 16/16, total 42/42, build 0 warn
+- **2026-10-16 13:08** — NOTE P1-T03 — commit 0aa8ecd
+- **2026-10-16 13:08** — P1-T03 EN_COURS → A_VALIDER — preuve : dotnet test --filter Category=Common → 16/16; dotnet test → 42/42; vérificateur OK; commit 0aa8ecd
