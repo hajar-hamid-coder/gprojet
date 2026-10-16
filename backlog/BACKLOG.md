@@ -84,7 +84,7 @@ _Mis à jour le 2026-10-16 11:58 par scripts/backlog.py — ne pas modifier à l
 **Test de validation** : les 4 fichiers existent ; `CONTRIBUTING.md` contient les sections « Branches », « Commits », « Architecture », « Tests » (`grep -c "^## "` ≥ 4).
 
 ### P0-T06 · Rapport d'outillage Claude Code
-> **Statut** : NON_FAIT · **Modèle** : haiku · **Ordre** : 6 · **Dépend de** : P0-T02
+> **Statut** : EN_COURS · **Modèle** : haiku · **Ordre** : 6 · **Dépend de** : P0-T02
 
 **Explication** : `docs/OUTILLAGE.md` : état réel des plugins / skills (graphify, ponytail, ui-ux-pro-max, motion-design) détecté sur le poste (`~/.claude/skills`, `.claude/skills`, `~/.claude/plugins`), des hooks et des sous-agents du projet, avec la commande d'installation de chaque élément manquant (voir `scripts/installer-outils.ps1`). Si un outil manque, créer une hypothèse **non bloquante**.
 **Test de validation** : `docs/OUTILLAGE.md` liste les 4 outils avec un statut chacun ; `python scripts/backlog.py contexte` s'exécute sans erreur.

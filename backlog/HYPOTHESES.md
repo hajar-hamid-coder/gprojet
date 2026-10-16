@@ -123,3 +123,10 @@
 **Hypothèse retenue par défaut** : Version 8.11.0 retenue pour l'instant ; si la licence pose problème, épingler 7.x (Apache 2.0) dans Directory.Packages.props
 **Impact si l'hypothèse est fausse** : Aucun avant l'écriture des premiers tests (P0-T05+ ou P1)
 **Réponse utilisateur** : _en attente_
+
+### H-018 · P0-T06
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 11:58
+**Question** : graphify (CLI, paquet PyPI graphifyy) est absent du poste et uv (requis pour l'installer) est absent aussi : faut-il les installer maintenant pour le graphe de connaissances du code ?
+**Hypothèse retenue par défaut** : Ne pas installer maintenant : graphify n'est utile qu'à partir de la première phase qui produit du code (P1). Installation prévue via scripts/installer-outils.ps1 (étapes uv puis uv tool install graphifyy, puis graphify install --project) avant P1 ; en attendant, la recherche se fait par Grep/Explore.
+**Impact si l'hypothèse est fausse** : Sans graphify, les requêtes 'graphify query' de CLAUDE.md ne fonctionnent pas : le repérage du code se fait par recherche classique (plus lent, plus de tokens). Aucun blocage de P0.
+**Réponse utilisateur** : _en attente_

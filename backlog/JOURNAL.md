@@ -54,3 +54,8 @@
 - **2026-10-16 11:58** — NOTE P0-T05 — vérificateur OK (essai 1) : 4 fichiers, 6 sections, cohérent avec CLAUDE.md
 - **2026-10-16 11:58** — NOTE P0-T05 — commit bc0bbd6
 - **2026-10-16 11:58** — P0-T05 EN_COURS → A_VALIDER — preuve : 4 fichiers présents; grep -c '^## ' CONTRIBUTING.md → 6; vérificateur OK; commit bc0bbd6
+- **2026-10-16 11:58** — P0-T06 NON_FAIT → EN_COURS
+- **2026-10-16 11:58** — NOTE P0-T06 — délégué à executeur-haiku (essai 1)
+- **2026-10-16 11:58** — Hypothèse H-018 créée pour P0-T06 (bloquante : non).
+- **2026-10-16 11:59** — NOTE P0-T06 — exécuteur OK (essai 1); lancement vérificateur
+- **2026-10-16 12:00** — NOTE P0-T06 — vérificateur OK (essai 1) : 4 outils avec statut, contexte exit 0
