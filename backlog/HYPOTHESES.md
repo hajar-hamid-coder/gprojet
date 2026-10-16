@@ -186,3 +186,10 @@
 **Hypothèse retenue par défaut** : ICurrentUser provisoire = agent SYSTEME (Id Guid.Empty, sans rôle), shortcut à remplacer en P18 ; RegleMetierException → 422, validation FluentValidation → 400
 **Impact si l'hypothèse est fausse** : cree_par/agent_id valent Guid.Empty jusqu'en P18 (colonnes sans FK) ; changer le code 422 est une ligne dans GestionnaireExceptions
 **Réponse utilisateur** : _en attente_
+
+### H-027 · P1-T10
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 15:11
+**Question** : Quels rôles déduire dans le socle, et comment traiter une délégation révoquée ?
+**Hypothèse retenue par défaut** : Deux rôles déduits : RESPONSABLE_ENTITE (responsable d'une entité active) et DELEGATAIRE (délégation non supprimée couvrant aujourd'hui) ; révocation = suppression logique ; les rôles Directeur/Chef de division/Chef de service seront déduits du niveau de l'entité dans le module Organisation (P4). Hors requête et en Production avant P18 : utilisateur SYSTEME et 401 sur les contrôleurs
+**Impact si l'hypothèse est fausse** : Enrichir DevAuthHandler si d'autres rôles sont requis ; prévoir un agent système en base si cree_par doit référencer un agent réel
+**Réponse utilisateur** : _en attente_

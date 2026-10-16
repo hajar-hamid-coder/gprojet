@@ -13,7 +13,7 @@ builder.Host.UseSerilog((ctx, cfg) => cfg
     .WriteTo.Console(new RenderedCompactJsonFormatter()));
 
 builder.Services
-    .AddGpInfrastructure()
+    .AddGpInfrastructure(builder.Environment)
     .AddGpRepositories(builder.Configuration)
     .AddGpWeb();
 
@@ -22,7 +22,11 @@ var app = builder.Build();
 app.UseExceptionHandler();
 app.UseSerilogRequestLogging();
 
-app.MapControllers();
+app.UseAuthentication();
+app.UseAuthorization();
+
+// Tout contrôleur exige un utilisateur authentifié (/health*, /openapi, /scalar restent anonymes).
+app.MapControllers().RequireAuthorization();
 app.MapOpenApi();
 if (app.Environment.IsDevelopment())
 {

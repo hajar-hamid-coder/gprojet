@@ -135,3 +135,9 @@
 - **2026-10-16 15:00** — NOTE P1-T09 — vérificateur OK (essai 1) : 124/124, dotnet run /health/ready 200 sur gprojet, aucune fuite
 - **2026-10-16 15:00** — NOTE P1-T09 — commit 7440a30
 - **2026-10-16 15:00** — P1-T09 EN_COURS → A_VALIDER — preuve : dotnet test → 124/124 (/health, /health/ready, /openapi 200; Introuvable → 404 problem+json; 500 sans fuite); dotnet run + curl /health/ready → 200 sur gprojet; vérificateur OK; commit 7440a30
+- **2026-10-16 15:01** — P1-T10 NON_FAIT → EN_COURS
+- **2026-10-16 15:01** — NOTE P1-T10 — délégué à executeur-sonnet (essai 1)
+- **2026-10-16 15:11** — Hypothèse H-027 créée pour P1-T10 (bloquante : non).
+- **2026-10-16 15:11** — NOTE P1-T10 — exécuteur OK (essai 1) : AuthDev 8/8, total 132/132 ; lancement vérificateur
+- **2026-10-16 15:13** — NOTE P1-T10 — vérificateur KO (essai 1) : filtre global jugé absent (faux : HasQueryFilter dans ConfigurationEntiteAuditable:22) mais test agent supprimé manquant → renvoyé à executeur-sonnet (essai 2)
+- **2026-10-16 15:14** — NOTE P1-T10 — essai 2 : 3 tests de suppression logique ajoutés ; rejoué par l'orchestrateur : AuthDev 11/11, total 135/135 ; seul écart du vérificateur levé

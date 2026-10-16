@@ -3,6 +3,7 @@ using System.Net;
 using System.Text.Json;
 using FluentAssertions;
 using Gprojet.Backend.Common;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -18,12 +19,19 @@ namespace Gprojet.Backend.Tests.Integration;
 [Route("test-erreurs")]
 public sealed class ControleurDeTest : ControllerBase
 {
+    // Authentifié (politique par défaut des contrôleurs) : renvoie l'utilisateur courant résolu par ICurrentUser.
+    [HttpGet("moi")]
+    public IActionResult Moi([FromServices] ICurrentUser u) => Ok(new { u.Id, u.Matricule, u.EntiteId, u.Roles });
+
+    [AllowAnonymous]
     [HttpGet("introuvable")]
     public IActionResult Introuvable() => throw new IntrouvableException("Projet inconnu.");
 
+    [AllowAnonymous]
     [HttpGet("conflit")]
     public IActionResult Conflit() => throw new ConflitException("Déjà modifié.");
 
+    [AllowAnonymous]
     [HttpGet("explose")]
     public IActionResult Explose() => throw new InvalidOperationException("secret-interne Host=db;Password=xyz");
 }

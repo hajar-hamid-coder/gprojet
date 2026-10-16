@@ -19,7 +19,7 @@
 
 <!-- RESUME:DEBUT -->
 
-_Mis à jour le 2026-10-16 15:00 par scripts/backlog.py — ne pas modifier à la main._
+_Mis à jour le 2026-10-16 15:01 par scripts/backlog.py — ne pas modifier à la main._
 
 | Phase | Titre | Statut | Modèle | Avancement |
 |---|---|---|---|---|
@@ -151,7 +151,7 @@ _Mis à jour le 2026-10-16 15:00 par scripts/backlog.py — ne pas modifier à l
 **Test de validation** : test d'intégration `WebApplicationFactory` : `/health` 200, `/health/ready` 200 sur `pg-test`, `/openapi/v1.json` 200, une `IntrouvableException` levée par un contrôleur de test → 404 au format `application/problem+json` ; `dotnet run` de l'API puis `curl -s localhost:<port>/health/ready` → 200 sur `gprojet`.
 
 ### P1-T10 · Authentification de développement et utilisateur courant
-> **Statut** : NON_FAIT · **Modèle** : sonnet · **Ordre** : 10 · **Dépend de** : P1-T09
+> **Statut** : EN_COURS · **Modèle** : sonnet · **Ordre** : 10 · **Dépend de** : P1-T09
 
 **Explication** : `DevAuthHandler` (schéma « Dev », actif **uniquement** en environnement Development/Test) qui lit l'en-tête `X-Dev-Matricule`, charge l'agent et ses rôles déduits (responsable d'entité, délégation active) ; implémentation `ICurrentUser`. Keycloak le remplacera en P18.
 **Test de validation** : tests d'intégration : sans en-tête → 401 ; matricule inconnu → 401 ; matricule valide → 200 et `ICurrentUser` renseigné ; en environnement Production le schéma « Dev » n'est pas enregistré.
