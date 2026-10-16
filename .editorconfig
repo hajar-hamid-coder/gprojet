@@ -31,3 +31,7 @@ dotnet_naming_symbols.private_fields.applicable_accessibilities = private
 
 dotnet_naming_style.underscore_camel.required_prefix = _
 dotnet_naming_style.underscore_camel.capitalization = camel_case
+
+# Migrations EF générées : tableaux de colonnes littéraux exécutés une seule fois (CA1861 sans objet ici uniquement).
+[src/Gprojet-Backend/Repositories/Migrations/*.cs]
+dotnet_diagnostic.CA1861.severity = none

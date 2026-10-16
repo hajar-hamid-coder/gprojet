@@ -158,3 +158,10 @@
 **Hypothèse retenue par défaut** : Le modèle EF déclare ux_agent_email sur email (shortcut commenté) ; la migration initiale P1-T06 recrée l'index sur lower(email) et le trigger tg_historique_lecture_seule en SQL brut
 **Impact si l'hypothèse est fausse** : Si oublié en P1-T06 : unicité de l'email sensible à la casse et journal d'historique modifiable
 **Réponse utilisateur** : _en attente_
+
+### H-023 · P1-T06
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 14:45
+**Question** : La comparaison de schéma doit-elle couvrir l'ordre des colonnes et le contenu des données de référence ?
+**Hypothèse retenue par défaut** : Non : type, nullabilité, défaut, contraintes, index, triggers, fonctions et nombre de lignes par table suffisent ; les données sont une copie figée de 02 embarquée dans la migration
+**Impact si l'hypothèse est fausse** : Une différence d'ordre de colonnes ou de valeurs (même nombre de lignes) ne serait pas détectée
+**Réponse utilisateur** : _en attente_

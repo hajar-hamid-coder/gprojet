@@ -27,7 +27,8 @@ public sealed class AgentConfiguration : ConfigurationEntiteAuditable<Agent>
         builder.HasOne(e => e.Fonction).WithMany().HasForeignKey(e => e.FonctionId).OnDelete(DeleteBehavior.SetNull);
 
         builder.HasIndex(e => e.Matricule, "ux_agent_matricule").IsUnique().HasFilter("NOT est_supprime");
-        // shortcut: EF ne modélise pas l'index sur expression lower(email) ; la migration (P1-T06) doit le recréer en SQL brut.
+        // shortcut: EF ne modélise pas l'index sur expression lower(email) ; InitialCreate le crée en SQL brut. Toute migration
+        // future qui toucherait cet index doit être retouchée à la main (scripts/comparer-schema.py le détecte).
         builder.HasIndex(e => e.Email, "ux_agent_email").IsUnique().HasFilter("NOT est_supprime");
         builder.HasIndex(e => e.KeycloakSub, "ux_agent_keycloak").IsUnique().HasFilter("keycloak_sub IS NOT NULL");
         builder.HasIndex(e => e.EntiteId, "ix_agent_entite");

@@ -11,4 +11,9 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" PrivateAssets="all" />
   </ItemGroup>
 
+  <ItemGroup>
+    <!-- Données de référence des migrations : embarquées dans l'assembly (aucune lecture de fichier à l'exécution). -->
+    <EmbeddedResource Include="Repositories\Migrations\Sql\*.sql" LogicalName="Migrations.Sql.%(Filename)%(Extension)" />
+  </ItemGroup>
+
 </Project>

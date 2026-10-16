@@ -106,3 +106,8 @@
 - **2026-10-16 14:32** — NOTE P1-T05 — vérificateur OK (essai 1) : dbcontext info OK, Persistance 5/5, total 104/104
 - **2026-10-16 14:32** — NOTE P1-T05 — commit 9efdfb0
 - **2026-10-16 14:32** — P1-T05 EN_COURS → A_VALIDER — preuve : dotnet ef dbcontext info → OK (Npgsql); --filter Category=Persistance → 5/5 (60 tables, 6 schémas, colonnes/index = SQL); dotnet test → 104/104; vérificateur OK; commit 9efdfb0
+- **2026-10-16 14:32** — P1-T06 NON_FAIT → EN_COURS
+- **2026-10-16 14:32** — NOTE P1-T06 — délégué à executeur-opus (essai 1)
+- **2026-10-16 14:43** — NOTE P1-T06 — exécuteur OK (essai 1) : comparer-schema 0 écart, auto-test 3/3, gprojet 60 tables/6 schémas, 104/104 ; lancement vérificateur
+- **2026-10-16 14:45** — Hypothèse H-023 créée pour P1-T06 (bloquante : non).
+- **2026-10-16 14:45** — NOTE P1-T06 — vérificateur OK (essai 1) : 0 écart, auto-test 3/3, gprojet 60 tables + InitialCreate, 104/104
