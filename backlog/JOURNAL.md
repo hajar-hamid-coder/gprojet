@@ -159,3 +159,5 @@
 - **2026-10-16 15:42** — Hypothèse H-029 créée pour P2-T01 (bloquante : non).
 - **2026-10-16 15:42** — NOTE P2-T01 — essai 2 OK : ReferenceOutputAssembly=false, NoWarn retiré, front 4/4, backend 143/143 ; lancement vérificateur
 - **2026-10-16 15:43** — NOTE P2-T01 — vérificateur OK (essai 2) : 4 projets, front 4/4, backend 143/143
+- **2026-10-16 15:43** — NOTE P2-T01 — commit 7fafa8d
+- **2026-10-16 15:43** — P2-T01 EN_COURS → A_VALIDER — preuve : dotnet sln list → 4 projets; GET / → 200 blazor.webassembly; GET /api/health → 200; règle front ↛ backend + garde-fou; front 4/4, backend 143/143; vérificateur OK; commit 7fafa8d

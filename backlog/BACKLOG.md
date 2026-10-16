@@ -19,13 +19,13 @@
 
 <!-- RESUME:DEBUT -->
 
-_Mis à jour le 2026-10-16 15:37 par scripts/backlog.py — ne pas modifier à la main._
+_Mis à jour le 2026-10-16 15:43 par scripts/backlog.py — ne pas modifier à la main._
 
 | Phase | Titre | Statut | Modèle | Avancement |
 |---|---|---|---|---|
 | P0 | Initialisation et outillage | ✅ VALIDEE | sonnet | 6/6 |
 | P1 | Socle backend .NET 10 | ✅ VALIDEE | opus | 11/11 |
-| P2 | Socle frontend Blazor WebAssembly et BFF | 🔄 EN_COURS | sonnet | 0/9 |
+| P2 | Socle frontend Blazor WebAssembly et BFF | 🔄 EN_COURS | sonnet | 1/9 |
 | P3 | Conteneurisation et intégration continue GitHub Actions | ⬜ NON_DEMARREE | sonnet | 0/5 |
 | P4 | Module Organisation et périmètre hiérarchique | ⬜ NON_DEMARREE | sonnet | 0/8 |
 | P5 | Projets et affectation en cascade | ⬜ NON_DEMARREE | opus | 0/10 |
@@ -170,7 +170,7 @@ _Mis à jour le 2026-10-16 15:37 par scripts/backlog.py — ne pas modifier à l
 **Objectif** : projet unique `Gprojet-Front` servi par `Gprojet-Backend` (BFF intégré), charte et layout définitifs, couches front en place. **Livrable** : coquille navigable authentifiée (auth de dev).
 
 ### P2-T01 · Projet Gprojet-Front, hébergement par le backend et tests bUnit
-> **Statut** : EN_COURS · **Modèle** : sonnet · **Ordre** : 1 · **Dépend de** : —
+> **Statut** : A_VALIDER · **Modèle** : sonnet · **Ordre** : 1 · **Dépend de** : —
 
 **Explication** : **un seul projet front** `src/Gprojet-Front/Gprojet-Front.csproj` (`Microsoft.NET.Sdk.BlazorWebAssembly`, `RootNamespace Gprojet.Front`) ; les DTO y sont des **fichiers liés** (`<Compile Include="..\Gprojet-Backend\Contracts\**\*.cs" Link="Contracts\%(RecursiveDir)%(Filename)%(Extension)" />`), jamais copiés ; `Gprojet-Backend` référence `Gprojet-Front` et le sert (`UseBlazorFrameworkFiles`, `MapFallbackToFile("index.html")`, paquet `Microsoft.AspNetCore.Components.WebAssembly.Server`) : même origine, pas de proxy ni de CORS ; tests `tests/Gprojet-Front.Tests` (bUnit). Arborescence des couches front : `Api/`, `Services/`, `Models/`, `Pages/`, `Components/`, `Layouts/`, `State/`, `Auth/`, `Resources/`, `wwwroot/css/`, `wwwroot/fonts/`, `wwwroot/lib/`, `wwwroot/images/`.
 **Test de validation** : `dotnet build Gprojet.slnx` OK et `dotnet sln list` affiche exactement 4 projets ; test d'intégration backend : `GET /` → 200 HTML contenant `blazor.webassembly`, `GET /api/health` → 200 ; un DTO de `Gprojet-Backend/Contracts` est utilisé dans le front (compilation) ; règle d'architecture : le front ne référence aucun autre code du backend.
