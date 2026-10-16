@@ -121,3 +121,8 @@
 - **2026-10-16 14:51** — NOTE P1-T07 — vérificateur OK (essai 2) : Integration 7/7, total 111/111
 - **2026-10-16 14:51** — NOTE P1-T07 — commit 1998be5
 - **2026-10-16 14:51** — P1-T07 EN_COURS → A_VALIDER — preuve : dotnet test --filter Category=Integration → 7/7 (altération SQL détectée, concurrence 3×10); dotnet test → 111/111; vérificateur OK; commit 1998be5
+- **2026-10-16 14:51** — P1-T08 NON_FAIT → EN_COURS
+- **2026-10-16 14:51** — NOTE P1-T08 — délégué à executeur-sonnet (essai 1)
+- **2026-10-16 14:54** — Hypothèse H-025 créée pour P1-T08 (bloquante : non).
+- **2026-10-16 14:54** — NOTE P1-T08 — exécuteur OK (essai 1) : Integration 12/12, total 116/116 ; lancement vérificateur
+- **2026-10-16 14:55** — NOTE P1-T08 — vérificateur OK (essai 1) : Integration 12/12, total 116/116

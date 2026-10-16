@@ -139,7 +139,7 @@ _Mis à jour le 2026-10-16 14:51 par scripts/backlog.py — ne pas modifier à l
 **Test de validation** : tests d'intégration sur `pg-test` : création → audit rempli ; suppression → `est_supprime = true` et ligne invisible via le filtre global ; modification → lignes d'historique avec chaîne d'empreintes valide (recalcul) ; altérer une ligne en SQL direct est détecté par le vérificateur de chaîne.
 
 ### P1-T08 · Unit of Work et repositories de base
-> **Statut** : NON_FAIT · **Modèle** : sonnet · **Ordre** : 8 · **Dépend de** : P1-T06
+> **Statut** : EN_COURS · **Modèle** : sonnet · **Ordre** : 8 · **Dépend de** : P1-T06
 
 **Explication** : `IUnitOfWork` (CommitAsync, transaction explicite), classe de base **interne** `RepositoryBase<T>` (GetById, Ajouter, Supprimer logique, pagination), interfaces de repository par agrégat dans `Repositories/` (exposées via des interfaces consommées par les Services). Gestion de `DbUpdateConcurrencyException` → `ConflitException`.
 **Test de validation** : tests d'intégration : commit atomique (échec au milieu → rien n'est écrit) ; deux mises à jour concurrentes de la même ligne → `ConflitException`.

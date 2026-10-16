@@ -16,4 +16,8 @@
     <EmbeddedResource Include="Repositories\Migrations\Sql\*.sql" LogicalName="Migrations.Sql.%(Filename)%(Extension)" />
   </ItemGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="Gprojet-Backend.Tests" />
+  </ItemGroup>
+
 </Project>

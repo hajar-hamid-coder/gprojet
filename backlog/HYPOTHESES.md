@@ -172,3 +172,10 @@
 **Hypothèse retenue par défaut** : Un utilisateur système (ICurrentUser dédié) sera fourni pour les traitements hors requête ; type_cible = nom de table sans schéma (unique entre schémas, ≤ 30 caractères)
 **Impact si l'hypothèse est fausse** : Sans utilisateur système, cree_par/agent_id seraient vides pour ces écritures ; un futur doublon de nom de table entre schémas rendrait type_cible ambigu
 **Réponse utilisateur** : _en attente_
+
+### H-025 · P1-T08
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 14:54
+**Question** : Quels repositories d'agrégat livrer dans le socle, et où enregistrer UnitOfWork/repositories dans la DI ?
+**Hypothèse retenue par défaut** : Un seul repository réel (Compétence) pour démontrer le motif ; les autres arrivent avec leurs modules (P4, P5…). Enregistrement DI dans la tâche de composition (P1-T09/T10)
+**Impact si l'hypothèse est fausse** : Effort minime pour changer d'agrégat ; aucun enregistrement DI tant que Program.cs n'est pas composé
+**Réponse utilisateur** : _en attente_
