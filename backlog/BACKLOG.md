@@ -19,13 +19,13 @@
 
 <!-- RESUME:DEBUT -->
 
-_Mis à jour le 2026-10-16 15:53 par scripts/backlog.py — ne pas modifier à la main._
+_Mis à jour le 2026-10-16 15:56 par scripts/backlog.py — ne pas modifier à la main._
 
 | Phase | Titre | Statut | Modèle | Avancement |
 |---|---|---|---|---|
 | P0 | Initialisation et outillage | ✅ VALIDEE | sonnet | 6/6 |
 | P1 | Socle backend .NET 10 | ✅ VALIDEE | opus | 11/11 |
-| P2 | Socle frontend Blazor WebAssembly et BFF | 🔄 EN_COURS | sonnet | 3/9 |
+| P2 | Socle frontend Blazor WebAssembly et BFF | 🔄 EN_COURS | sonnet | 4/9 |
 | P3 | Conteneurisation et intégration continue GitHub Actions | ⬜ NON_DEMARREE | sonnet | 0/5 |
 | P4 | Module Organisation et périmètre hiérarchique | ⬜ NON_DEMARREE | sonnet | 0/8 |
 | P5 | Projets et affectation en cascade | ⬜ NON_DEMARREE | opus | 0/10 |
@@ -188,7 +188,7 @@ _Mis à jour le 2026-10-16 15:53 par scripts/backlog.py — ne pas modifier à l
 **Test de validation** : tests bUnit : le rendu contient `.page .sidebar`, `.main-area .topbar` et `.content-area` ; un agent ne voit pas l'entrée « Portefeuille direction », un directeur la voit ; l'action de repli ajoute `sidebar-collapsed`.
 
 ### P2-T04 · Mouvement selon la charte (motion-design)
-> **Statut** : EN_COURS · **Modèle** : sonnet · **Ordre** : 4 · **Dépend de** : P2-T02
+> **Statut** : A_VALIDER · **Modèle** : sonnet · **Ordre** : 4 · **Dépend de** : P2-T02
 
 **Explication** : réutiliser **uniquement** les mouvements de la charte (`0.15s ease` pour les survols, `fadeIn 0.25s` / `.animate-in` pour les apparitions, `0.6s` pour les barres de progression) ; **motion-design** sert à décider où les appliquer (apparition des pages et des listes, dialogues, repli du menu), pas à créer d'autres durées. Neutralisation complète sous `prefers-reduced-motion: reduce` dans `app.gp.css`. Documenter dans `docs/DESIGN.md`.
 **Test de validation** : `app.gp.css` contient un bloc `@media (prefers-reduced-motion: reduce)` qui neutralise `transition` et `animation` ; aucune durée autre que 0.1s, 0.15s, 0.25s, 0.6s dans les CSS du projet (grep) ; aucune bibliothèque JS d'animation ajoutée (`git diff --stat` sur `wwwroot/lib` vide).

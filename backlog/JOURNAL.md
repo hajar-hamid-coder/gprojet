@@ -179,3 +179,5 @@
 - **2026-10-16 15:53** — NOTE P2-T04 — délégué à executeur-sonnet (essai 1)
 - **2026-10-16 15:55** — NOTE P2-T04 — exécuteur OK (essai 1) : Mouvement 3/3, front 15/15, backend 143/143 ; grep des durées sur tout le CSS vide (orchestrateur) ; lancement vérificateur
 - **2026-10-16 15:56** — NOTE P2-T04 — vérificateur OK (essai 1) : Mouvement 3/3, front 15/15, backend 143/143, lib inchangé
+- **2026-10-16 15:56** — NOTE P2-T04 — commit 13d6072
+- **2026-10-16 15:56** — P2-T04 EN_COURS → A_VALIDER — preuve : bloc reduced-motion présent; grep durées CSS → seulement 0.1/0.15/0.25/0.6s; git diff --stat wwwroot/lib → vide; Category=Mouvement 3/3; front 15/15; vérificateur OK; commit 13d6072
