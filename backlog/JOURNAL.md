@@ -89,3 +89,8 @@
 - **2026-10-16 13:08** — NOTE P1-T03 — vérificateur OK (essai 2) : Common 16/16, total 42/42, build 0 warn
 - **2026-10-16 13:08** — NOTE P1-T03 — commit 0aa8ecd
 - **2026-10-16 13:08** — P1-T03 EN_COURS → A_VALIDER — preuve : dotnet test --filter Category=Common → 16/16; dotnet test → 42/42; vérificateur OK; commit 0aa8ecd
+- **2026-10-16 13:08** — P1-T04 NON_FAIT → EN_COURS
+- **2026-10-16 13:08** — NOTE P1-T04 — délégué à executeur-opus (essai 1)
+- **2026-10-16 13:15** — Hypothèse H-021 créée pour P1-T04 (bloquante : non).
+- **2026-10-16 13:15** — NOTE P1-T04 — exécuteur OK (essai 1) : 60 entités, 49 enums, Entites 57/57, total 99/99 ; lancement vérificateur
+- **2026-10-16 13:16** — NOTE P1-T04 — vérificateur OK (essai 1) : Entites 57/57, total 99/99, contre-épreuve enum détectée

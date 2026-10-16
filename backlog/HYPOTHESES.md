@@ -144,3 +144,10 @@
 **Hypothèse retenue par défaut** : Fuseau Africa/Casablanca (HCP) ; IHorloge.Aujourdhui est calculé dans ce fuseau, Maintenant reste en UTC
 **Impact si l'hypothèse est fausse** : Si un autre fuseau est attendu, changer la valeur passée à HorlogeSysteme ; en UTC pur, les saisies entre minuit et 1 h seraient datées de la veille
 **Réponse utilisateur** : _en attente_
+
+### H-021 · P1-T04
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 13:15
+**Question** : patte.card_min (CHECK IN numérique 0,1) et correspondance_type.type_logique (sans CHECK) doivent-ils devenir des énumérations ?
+**Hypothèse retenue par défaut** : Non : card_min reste short, correspondance_type.type_logique reste string ; seuls les CHECK IN à valeurs texte deviennent des enums (49 enums, 54 contraintes contrôlées)
+**Impact si l'hypothèse est fausse** : Si faux : créer CardinaliteMin et/ou ajouter le CHECK au SQL puis typer en TypeLogique
+**Réponse utilisateur** : _en attente_
