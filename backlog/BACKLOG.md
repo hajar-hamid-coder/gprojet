@@ -19,11 +19,11 @@
 
 <!-- RESUME:DEBUT -->
 
-_Mis à jour le 2026-10-16 11:48 par scripts/backlog.py — ne pas modifier à la main._
+_Mis à jour le 2026-10-16 11:50 par scripts/backlog.py — ne pas modifier à la main._
 
 | Phase | Titre | Statut | Modèle | Avancement |
 |---|---|---|---|---|
-| P0 | Initialisation et outillage | 🔄 EN_COURS | sonnet | 0/6 |
+| P0 | Initialisation et outillage | 🔄 EN_COURS | sonnet | 1/6 |
 | P1 | Socle backend .NET 10 | ⬜ NON_DEMARREE | opus | 0/11 |
 | P2 | Socle frontend Blazor WebAssembly et BFF | ⬜ NON_DEMARREE | sonnet | 0/9 |
 | P3 | Conteneurisation et intégration continue GitLab | ⬜ NON_DEMARREE | sonnet | 0/5 |
@@ -54,7 +54,7 @@ _Mis à jour le 2026-10-16 11:48 par scripts/backlog.py — ne pas modifier à l
 **Objectif** : dépôt Git propre, conventions, environnement vérifié, base de test opérationnelle. **Livrable** : un dépôt prêt à recevoir la solution .NET.
 
 ### P0-T01 · Initialiser le dépôt Git et la branche de phase
-> **Statut** : EN_COURS · **Modèle** : haiku · **Ordre** : 1 · **Dépend de** : —
+> **Statut** : A_VALIDER · **Modèle** : haiku · **Ordre** : 1 · **Dépend de** : —
 
 **Explication** : `git init -b main` à la racine du projet, premier commit contenant l'existant (`CLAUDE.md`, `.claude/`, `backlog/`, `scripts/`, `database/`), puis branche `phase/P0-initialisation`. Le `.gitignore` existe déjà (secrets locaux dont `.claude/settings.local.json`, `.pgtest/`, .NET) : le vérifier **avant** le premier `git add`, le compléter si besoin. Créer `.gitattributes` (`* text=auto eol=lf`, `*.sql` et `*.md` en LF, `*.ps1` en CRLF).
 **Test de validation** : `git log --oneline` montre au moins 2 commits ; `git status --porcelain` est vide ; `git check-ignore .pgtest/x bin/x .claude/settings.local.json` renvoie les trois chemins ; `git ls-files | grep -c settings.local` renvoie 0.

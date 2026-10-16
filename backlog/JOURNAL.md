@@ -23,3 +23,7 @@
 - **2026-10-16 11:48** — Phase P0 lancée par l'utilisateur.
 - **2026-10-16 11:48** — P0-T01 NON_FAIT → EN_COURS
 - **2026-10-16 11:48** — NOTE P0-T01 — délégué à executeur-haiku (essai 1)
+- **2026-10-16 11:49** — NOTE P0-T01 — exécuteur: commits 400bdae, e0433e8; lancement vérificateur (essai 1)
+- **2026-10-16 11:50** — NOTE P0-T01 — vérificateur OK (essai 1) : 4 commandes du test rejouées, .gitattributes conforme, aucun secret suivi
+- **2026-10-16 11:50** — NOTE P0-T01 — commit e0433e8
+- **2026-10-16 11:50** — P0-T01 EN_COURS → A_VALIDER — preuve : git log --oneline → 2 commits; check-ignore → 3 chemins; ls-files|grep -c settings.local → 0; vérificateur OK; commit e0433e8
