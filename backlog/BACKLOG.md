@@ -19,13 +19,13 @@
 
 <!-- RESUME:DEBUT -->
 
-_Mis à jour le 2026-10-16 16:27 par scripts/backlog.py — ne pas modifier à la main._
+_Mis à jour le 2026-10-19 09:42 par scripts/backlog.py — ne pas modifier à la main._
 
 | Phase | Titre | Statut | Modèle | Avancement |
 |---|---|---|---|---|
 | P0 | Initialisation et outillage | ✅ VALIDEE | sonnet | 6/6 |
 | P1 | Socle backend .NET 10 | ✅ VALIDEE | opus | 11/11 |
-| P2 | Socle frontend Blazor WebAssembly et BFF | 🟡 A_VALIDER | sonnet | 9/9 |
+| P2 | Socle frontend Blazor WebAssembly et BFF | ✅ VALIDEE | sonnet | 9/9 |
 | P3 | Conteneurisation et intégration continue GitHub Actions | ⬜ NON_DEMARREE | sonnet | 0/5 |
 | P4 | Module Organisation et périmètre hiérarchique | ⬜ NON_DEMARREE | sonnet | 0/8 |
 | P5 | Projets et affectation en cascade | ⬜ NON_DEMARREE | opus | 0/10 |
@@ -165,60 +165,60 @@ _Mis à jour le 2026-10-16 16:27 par scripts/backlog.py — ne pas modifier à l
 ---
 
 ## Phase P2 · Socle frontend Blazor WebAssembly et BFF
-> **Statut phase** : A_VALIDER · **Modèle conseillé** : sonnet
+> **Statut phase** : VALIDEE · **Modèle conseillé** : sonnet
 
 **Objectif** : projet unique `Gprojet-Front` servi par `Gprojet-Backend` (BFF intégré), charte et layout définitifs, couches front en place. **Livrable** : coquille navigable authentifiée (auth de dev).
 
 ### P2-T01 · Projet Gprojet-Front, hébergement par le backend et tests bUnit
-> **Statut** : A_VALIDER · **Modèle** : sonnet · **Ordre** : 1 · **Dépend de** : —
+> **Statut** : VALIDE · **Modèle** : sonnet · **Ordre** : 1 · **Dépend de** : —
 
 **Explication** : **un seul projet front** `src/Gprojet-Front/Gprojet-Front.csproj` (`Microsoft.NET.Sdk.BlazorWebAssembly`, `RootNamespace Gprojet.Front`) ; les DTO y sont des **fichiers liés** (`<Compile Include="..\Gprojet-Backend\Contracts\**\*.cs" Link="Contracts\%(RecursiveDir)%(Filename)%(Extension)" />`), jamais copiés ; `Gprojet-Backend` référence `Gprojet-Front` et le sert (`UseBlazorFrameworkFiles`, `MapFallbackToFile("index.html")`, paquet `Microsoft.AspNetCore.Components.WebAssembly.Server`) : même origine, pas de proxy ni de CORS ; tests `tests/Gprojet-Front.Tests` (bUnit). Arborescence des couches front : `Api/`, `Services/`, `Models/`, `Pages/`, `Components/`, `Layouts/`, `State/`, `Auth/`, `Resources/`, `wwwroot/css/`, `wwwroot/fonts/`, `wwwroot/lib/`, `wwwroot/images/`.
 **Test de validation** : `dotnet build Gprojet.slnx` OK et `dotnet sln list` affiche exactement 4 projets ; test d'intégration backend : `GET /` → 200 HTML contenant `blazor.webassembly`, `GET /api/health` → 200 ; un DTO de `Gprojet-Backend/Contracts` est utilisé dans le front (compilation) ; règle d'architecture : le front ne référence aucun autre code du backend.
 
 ### P2-T02 · Charte HCP : intégration de app.css et des ressources
-> **Statut** : A_VALIDER · **Modèle** : sonnet · **Ordre** : 2 · **Dépend de** : P2-T01
+> **Statut** : VALIDE · **Modèle** : sonnet · **Ordre** : 2 · **Dépend de** : P2-T01
 
 **Explication** : appliquer `design/charte-hcp/README.md`. Copier `design/charte-hcp/app.css` dans `wwwroot/css/app.css` **sans autre modification** que le remplacement de l'`@import` Google Fonts par un `@font-face` local (Geist, licence OFL, fichiers dans `wwwroot/fonts/`). Créer `wwwroot/css/app.gp.css` (chargé après) : variantes de texte accessibles (`--success-text`, `--warning-text`, `--danger-text`, `--info-text`, `--purple-text`), badges des statuts GestionProjet (`.status-badge.a-faire`, `.a-valider`, `.bloque`, `.valide`…), classes manquantes, le tout à partir des variables de la charte. Auto-héberger Font Awesome Free 6 et Chart.js dans `wwwroot/lib/` ; logo HCP dans `wwwroot/images/`. `docs/DESIGN.md` : renvoi vers la charte et inventaire des classes utilisées / ajoutées.
 **Test de validation** : un script compare `design/charte-hcp/app.css` et `wwwroot/css/app.css` : seule la ligne `@import` diffère ; `grep -rE "https?://" src/Gprojet-Front/wwwroot/index.html src/Gprojet-Front/wwwroot/css` ne renvoie rien (aucune ressource externe) ; aucune couleur hexadécimale dans `Pages/`, `Components/`, `Layouts/` ni dans `app.gp.css` hors des 5 variables de texte documentées ; contraste de chaque variable de texte ≥ 4,5:1 (calcul dans un test).
 
 ### P2-T03 · Layout principal et navigation par rôle
-> **Statut** : A_VALIDER · **Modèle** : sonnet · **Ordre** : 3 · **Dépend de** : P2-T02
+> **Statut** : VALIDE · **Modèle** : sonnet · **Ordre** : 3 · **Dépend de** : P2-T02
 
 **Explication** : `MainLayout` identique à celui de la GED HCP : `.page` > `aside.sidebar` (`.sidebar-brand` avec logo HCP, sections `.nav-section-label`, `.nav-item` avec icône et `.nav-badge`, pied `.user-row`) + `.main-area` > `.topbar` (bouton de repli, `.breadcrumb-nav`, `.search-box` avec raccourci Ctrl+K, notifications) + `.content-area`. Menu construit selon les rôles / politiques (`AuthorizeView`) ; repli du menu et mode mobile (classes `sidebar-collapsed`, `mobile-open` dans `app.gp.css`).
 **Test de validation** : tests bUnit : le rendu contient `.page .sidebar`, `.main-area .topbar` et `.content-area` ; un agent ne voit pas l'entrée « Portefeuille direction », un directeur la voit ; l'action de repli ajoute `sidebar-collapsed`.
 
 ### P2-T04 · Mouvement selon la charte (motion-design)
-> **Statut** : A_VALIDER · **Modèle** : sonnet · **Ordre** : 4 · **Dépend de** : P2-T02
+> **Statut** : VALIDE · **Modèle** : sonnet · **Ordre** : 4 · **Dépend de** : P2-T02
 
 **Explication** : réutiliser **uniquement** les mouvements de la charte (`0.15s ease` pour les survols, `fadeIn 0.25s` / `.animate-in` pour les apparitions, `0.6s` pour les barres de progression) ; **motion-design** sert à décider où les appliquer (apparition des pages et des listes, dialogues, repli du menu), pas à créer d'autres durées. Neutralisation complète sous `prefers-reduced-motion: reduce` dans `app.gp.css`. Documenter dans `docs/DESIGN.md`.
 **Test de validation** : `app.gp.css` contient un bloc `@media (prefers-reduced-motion: reduce)` qui neutralise `transition` et `animation` ; aucune durée autre que 0.1s, 0.15s, 0.25s, 0.6s dans les CSS du projet (grep) ; aucune bibliothèque JS d'animation ajoutée (`git diff --stat` sur `wwwroot/lib` vide).
 
 ### P2-T05 · Couche Api : clients HTTP typés
-> **Statut** : A_VALIDER · **Modèle** : sonnet · **Ordre** : 5 · **Dépend de** : P2-T01
+> **Statut** : VALIDE · **Modèle** : sonnet · **Ordre** : 5 · **Dépend de** : P2-T01
 
 **Explication** : `ApiClientBase` (sérialisation System.Text.Json, conversion `ProblemDetails` → `ApiException` typée avec erreurs de validation, annulation), enregistrement des clients via `IHttpClientFactory` en adresses relatives (même origine que le backend), premier client `SanteApiClient`.
 **Test de validation** : tests unitaires avec `HttpMessageHandler` simulé : 200 → DTO ; 400 `problem+json` → `ApiException` contenant les erreurs par champ ; 404 → `ApiException.Statut == 404`.
 
 ### P2-T06 · Authentification côté front (BFF, mode dev)
-> **Statut** : A_VALIDER · **Modèle** : sonnet · **Ordre** : 6 · **Dépend de** : P2-T05
+> **Statut** : VALIDE · **Modèle** : sonnet · **Ordre** : 6 · **Dépend de** : P2-T05
 
 **Explication** : endpoints BFF dans `Gprojet-Backend/Web/Auth/` : `/bff/login` (dev : choix d'un matricule de démo), `/bff/logout`, `/bff/user` ; cookie `HttpOnly`, `Secure`, `SameSite=Strict` ; jeton anti-CSRF exigé sur les appels mutants ; `BffAuthenticationStateProvider` côté WASM ; page de connexion de développement.
 **Test de validation** : tests d'intégration BFF : `/bff/user` sans cookie → 401 ; après login dev → 200 avec matricule ; POST `/api/...` sans en-tête anti-CSRF → 400/403 ; test bUnit de `AuthorizeView` avec le provider.
 
 ### P2-T07 · État partagé et services front de base
-> **Statut** : A_VALIDER · **Modèle** : sonnet · **Ordre** : 7 · **Dépend de** : P2-T06
+> **Statut** : VALIDE · **Modèle** : sonnet · **Ordre** : 7 · **Dépend de** : P2-T06
 
 **Explication** : `State/UtilisateurCourantState`, `State/PerimetreState` (entité, niveau, chemin), `Services/NotificationUiService` (snackbar), `Services/ChargementService` (indicateur global), gestion centralisée des `ApiException` (message utilisateur, journal console).
 **Test de validation** : tests bUnit : un composant abonné à `PerimetreState` se rafraîchit au changement ; une `ApiException` 403 affiche le message « Accès refusé » via le snackbar.
 
 ### P2-T08 · Internationalisation fr / en / ar (RTL)
-> **Statut** : A_VALIDER · **Modèle** : sonnet · **Ordre** : 8 · **Dépend de** : P2-T03
+> **Statut** : VALIDE · **Modèle** : sonnet · **Ordre** : 8 · **Dépend de** : P2-T03
 
 **Explication** : `Resources/*.resx` (fr par défaut, en, ar), sélecteur de langue persistant (cookie BFF), `dir="rtl"` sur `<html>` et règles RTL dans `app.gp.css` (menu latéral à droite) pour l'arabe, formats de date et de nombre selon la culture.
 **Test de validation** : tests bUnit : en culture `ar-MA` le layout est rendu avec `dir="rtl"` ; un libellé du menu change selon la culture ; aucun texte en dur dans `Layouts/` (contrôle : test qui échoue si une chaîne littérale française apparaît dans un `.razor` du layout).
 
 ### P2-T09 · Pages système
-> **Statut** : A_VALIDER · **Modèle** : haiku · **Ordre** : 9 · **Dépend de** : P2-T08
+> **Statut** : VALIDE · **Modèle** : haiku · **Ordre** : 9 · **Dépend de** : P2-T08
 
 **Explication** : pages Accueil (placeholder du tableau de bord), 404, Accès refusé, Erreur inattendue (avec identifiant de corrélation), Chargement initial.
 **Test de validation** : tests bUnit : chaque page se rend sans exception et contient son titre traduit.
