@@ -19,14 +19,14 @@
 
 <!-- RESUME:DEBUT -->
 
-_Mis à jour le 2026-10-19 09:42 par scripts/backlog.py — ne pas modifier à la main._
+_Mis à jour le 2026-10-21 10:51 par scripts/backlog.py — ne pas modifier à la main._
 
 | Phase | Titre | Statut | Modèle | Avancement |
 |---|---|---|---|---|
 | P0 | Initialisation et outillage | ✅ VALIDEE | sonnet | 6/6 |
 | P1 | Socle backend .NET 10 | ✅ VALIDEE | opus | 11/11 |
 | P2 | Socle frontend Blazor WebAssembly et BFF | ✅ VALIDEE | sonnet | 9/9 |
-| P3 | Conteneurisation et intégration continue GitHub Actions | ⬜ NON_DEMARREE | sonnet | 0/5 |
+| P3 | Conteneurisation et intégration continue GitHub Actions | 🔄 EN_COURS | sonnet | 0/5 |
 | P4 | Module Organisation et périmètre hiérarchique | ⬜ NON_DEMARREE | sonnet | 0/8 |
 | P5 | Projets et affectation en cascade | ⬜ NON_DEMARREE | opus | 0/10 |
 | P6 | Planification et ordonnancement | ⬜ NON_DEMARREE | opus | 0/12 |
@@ -226,12 +226,12 @@ _Mis à jour le 2026-10-19 09:42 par scripts/backlog.py — ne pas modifier à l
 ---
 
 ## Phase P3 · Conteneurisation et intégration continue GitHub Actions
-> **Statut phase** : NON_DEMARREE · **Modèle conseillé** : sonnet
+> **Statut phase** : EN_COURS · **Modèle conseillé** : sonnet
 
 **Objectif** : images Docker, environnement local complet par docker compose, intégration continue **GitHub Actions** sur le dépôt `hajar-hamid-coder/gprojet`. **Livrable** : `docker compose up` fonctionnel et `.github/workflows/ci.yml`. ⚠️ Nécessite Docker (hypothèse H-001).
 
 ### P3-T01 · Dockerfile de l'application
-> **Statut** : NON_FAIT · **Modèle** : sonnet · **Ordre** : 1 · **Dépend de** : —
+> **Statut** : EN_COURS · **Modèle** : sonnet · **Ordre** : 1 · **Dépend de** : —
 
 **Explication** : `deploy/docker/Dockerfile` unique, multi-étapes, qui publie `Gprojet-Backend` (le front publié est servi par le backend) (`sdk:10.0` → `aspnet:10.0` chiseled ou alpine), utilisateur non-root, `HEALTHCHECK`, variables `ASPNETCORE_*`, pas de secret dans l'image ; `.dockerignore`.
 **Test de validation** : `docker build -f deploy/docker/Dockerfile -t gprojet:test .` réussit ; `docker run --rm gprojet:test id -u` ≠ 0 ; l'image contient le front (`wwwroot/_framework`) ; taille d'image affichée dans la preuve.

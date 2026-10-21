@@ -217,3 +217,8 @@
 - **2026-10-16 16:27** — Phase P2 terminée par Claude : en attente de validation utilisateur (`/valider-phase P2`).
 - **2026-10-16 16:27** — P2-T09 EN_COURS → A_VALIDER — preuve : Category=PagesSysteme → 7/7 (chaque page rendue avec titre traduit fr-MA/en; Erreur sans détail technique); front 50/50, backend 157/157; vérificateur OK; commit ade779d
 - **2026-10-19 09:42** — Phase P2 VALIDÉE par l'utilisateur.
+- **2026-10-21 10:51** — Phase P3 lancée par l'utilisateur.
+- **2026-10-21 10:51** — P3-T01 NON_FAIT → EN_COURS
+- **2026-10-21 10:51** — NOTE P3-T01 — délégué à executeur-sonnet (essai 1)
+- **2026-10-21 10:57** — NOTE P3-T01 — exécuteur OK (essai 1) : image alpine 259MB, uid 1654 ; vérification lancée
+- **2026-10-21 10:58** — NOTE P3-T01 — vérificateur OK (essai 1) : aucun écart
