@@ -222,3 +222,5 @@
 - **2026-10-21 10:51** — NOTE P3-T01 — délégué à executeur-sonnet (essai 1)
 - **2026-10-21 10:57** — NOTE P3-T01 — exécuteur OK (essai 1) : image alpine 259MB, uid 1654 ; vérification lancée
 - **2026-10-21 10:58** — NOTE P3-T01 — vérificateur OK (essai 1) : aucun écart
+- **2026-10-21 10:58** — NOTE P3-T01 — commit 1173099
+- **2026-10-21 10:58** — P3-T01 EN_COURS → A_VALIDER — preuve : docker build -f deploy/docker/Dockerfile -t gprojet:test . → OK ; id -u → 1654 ; wwwroot/_framework présent ; image 259MB ; healthcheck healthy; vérificateur OK; commit 1173099
