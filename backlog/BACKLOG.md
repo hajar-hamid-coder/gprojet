@@ -19,14 +19,14 @@
 
 <!-- RESUME:DEBUT -->
 
-_Mis à jour le 2026-10-21 11:20 par scripts/backlog.py — ne pas modifier à la main._
+_Mis à jour le 2026-10-21 14:52 par scripts/backlog.py — ne pas modifier à la main._
 
 | Phase | Titre | Statut | Modèle | Avancement |
 |---|---|---|---|---|
 | P0 | Initialisation et outillage | ✅ VALIDEE | sonnet | 6/6 |
 | P1 | Socle backend .NET 10 | ✅ VALIDEE | opus | 11/11 |
 | P2 | Socle frontend Blazor WebAssembly et BFF | ✅ VALIDEE | sonnet | 9/9 |
-| P3 | Conteneurisation et intégration continue GitHub Actions | 🟡 A_VALIDER | sonnet | 5/5 |
+| P3 | Conteneurisation et intégration continue GitHub Actions | ✅ VALIDEE | sonnet | 5/5 |
 | P4 | Module Organisation et périmètre hiérarchique | ⬜ NON_DEMARREE | sonnet | 0/8 |
 | P5 | Projets et affectation en cascade | ⬜ NON_DEMARREE | opus | 0/10 |
 | P6 | Planification et ordonnancement | ⬜ NON_DEMARREE | opus | 0/12 |
@@ -226,36 +226,36 @@ _Mis à jour le 2026-10-21 11:20 par scripts/backlog.py — ne pas modifier à l
 ---
 
 ## Phase P3 · Conteneurisation et intégration continue GitHub Actions
-> **Statut phase** : A_VALIDER · **Modèle conseillé** : sonnet
+> **Statut phase** : VALIDEE · **Modèle conseillé** : sonnet
 
 **Objectif** : images Docker, environnement local complet par docker compose, intégration continue **GitHub Actions** sur le dépôt `hajar-hamid-coder/gprojet`. **Livrable** : `docker compose up` fonctionnel et `.github/workflows/ci.yml`. ⚠️ Nécessite Docker (hypothèse H-001).
 
 ### P3-T01 · Dockerfile de l'application
-> **Statut** : A_VALIDER · **Modèle** : sonnet · **Ordre** : 1 · **Dépend de** : —
+> **Statut** : VALIDE · **Modèle** : sonnet · **Ordre** : 1 · **Dépend de** : —
 
 **Explication** : `deploy/docker/Dockerfile` unique, multi-étapes, qui publie `Gprojet-Backend` (le front publié est servi par le backend) (`sdk:10.0` → `aspnet:10.0` chiseled ou alpine), utilisateur non-root, `HEALTHCHECK`, variables `ASPNETCORE_*`, pas de secret dans l'image ; `.dockerignore`.
 **Test de validation** : `docker build -f deploy/docker/Dockerfile -t gprojet:test .` réussit ; `docker run --rm gprojet:test id -u` ≠ 0 ; l'image contient le front (`wwwroot/_framework`) ; taille d'image affichée dans la preuve.
 
 ### P3-T02 · docker compose de développement
-> **Statut** : A_VALIDER · **Modèle** : sonnet · **Ordre** : 2 · **Dépend de** : P3-T01
+> **Statut** : VALIDE · **Modèle** : sonnet · **Ordre** : 2 · **Dépend de** : P3-T01
 
 **Explication** : `deploy/docker-compose.yml` : `postgres:18` (volume, base vide), service `migrations` (bundle EF `dotnet ef migrations bundle` qui crée le schéma — pas les scripts SQL, pour rester aligné sur les migrations), `app` (image unique), profil `keycloak` (préparé pour P18), réseau dédié, dépendances sur la santé ; `deploy/.env.example` sans valeur sensible.
 **Test de validation** : `docker compose -f deploy/docker-compose.yml up -d --wait` puis `curl -s http://localhost:8080/api/health` → 200 et `curl -s http://localhost:8080/` → HTML ; `docker compose down -v` propre.
 
 ### P3-T03 · Tests en CI avec PostgreSQL de service
-> **Statut** : A_VALIDER · **Modèle** : sonnet · **Ordre** : 3 · **Dépend de** : —
+> **Statut** : VALIDE · **Modèle** : sonnet · **Ordre** : 3 · **Dépend de** : —
 
 **Explication** : rendre les tests d'intégration indépendants de `pg-test.py` via la variable `GP_TEST_CONNECTION` (si définie : base fournie par la CI ; sinon : instance locale jetable). Fixture xUnit commune.
 **Test de validation** : `dotnet test` local (instance jetable) vert ; avec `GP_TEST_CONNECTION` pointant sur l'instance démarrée manuellement, les mêmes tests passent.
 
 ### P3-T04 · Workflow GitHub Actions
-> **Statut** : A_VALIDER · **Modèle** : sonnet · **Ordre** : 4 · **Dépend de** : P3-T01, P3-T03
+> **Statut** : VALIDE · **Modèle** : sonnet · **Ordre** : 4 · **Dépend de** : P3-T01, P3-T03
 
 **Explication** : `.github/workflows/ci.yml` déclenché sur push et pull request : jobs `build`, `test` (service `postgres:18`, `GP_TEST_CONNECTION`, rapport de tests et couverture publiés comme artefacts), `qualite` (`dotnet format --verify-no-changes`), `securite` (CodeQL C#, `dependency-review` sur les pull requests, scan d'image Trivy), `paquet` (build et push de l'image vers **GitHub Container Registry** `ghcr.io` sur `main` et les tags, avec `GITHUB_TOKEN`), `deploiement` (`workflow_dispatch` + environnement protégé, préparé pour P13). Cache NuGet, versions d'actions épinglées. Vérifier que les modèles `.github/` (faits en P1-T01) sont cohérents avec le workflow.
 **Test de validation** : `python scripts/verifier-ci.py` (à écrire, parse YAML) confirme les 6 jobs, leurs dépendances, le service PostgreSQL et l'absence de secret en clair ; les modèles `.github/` sont présents. L'exécution réelle sur GitHub se constate après le push de l'utilisateur (signalé dans le bilan de phase).
 
 ### P3-T05 · Documentation de déploiement local
-> **Statut** : A_VALIDER · **Modèle** : haiku · **Ordre** : 5 · **Dépend de** : P3-T02, P3-T04
+> **Statut** : VALIDE · **Modèle** : haiku · **Ordre** : 5 · **Dépend de** : P3-T02, P3-T04
 
 **Explication** : `docs/DEPLOIEMENT.md` : prérequis, variables, démarrage compose, migrations, dépannage, description du workflow GitHub Actions, des secrets à créer (Settings → Secrets and variables → Actions) et de la publication d'image sur ghcr.io.
 **Test de validation** : le document contient les sections Prérequis, Démarrage, Variables, Pipeline, Dépannage ; chaque commande citée existe dans le dépôt.

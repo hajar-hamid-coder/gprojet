@@ -251,3 +251,4 @@
 - **2026-10-21 11:20** — NOTE P3-T05 — commit 92b6925
 - **2026-10-21 11:20** — Phase P3 terminée par Claude : en attente de validation utilisateur (`/valider-phase P3`).
 - **2026-10-21 11:20** — P3-T05 EN_COURS → A_VALIDER — preuve : grep sections → 5/5 (+ Migrations) ; chemins/commandes cités → tous présents ; compose config -q OK ; up --wait + /api/health 200 ; vérificateur OK; commit 92b6925
+- **2026-10-21 14:52** — Phase P3 VALIDÉE par l'utilisateur.
