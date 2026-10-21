@@ -224,3 +224,8 @@
 - **2026-10-21 10:58** — NOTE P3-T01 — vérificateur OK (essai 1) : aucun écart
 - **2026-10-21 10:58** — NOTE P3-T01 — commit 1173099
 - **2026-10-21 10:58** — P3-T01 EN_COURS → A_VALIDER — preuve : docker build -f deploy/docker/Dockerfile -t gprojet:test . → OK ; id -u → 1654 ; wwwroot/_framework présent ; image 259MB ; healthcheck healthy; vérificateur OK; commit 1173099
+- **2026-10-21 10:59** — P3-T02 NON_FAIT → EN_COURS
+- **2026-10-21 10:59** — NOTE P3-T02 — délégué à executeur-sonnet (essai 1)
+- **2026-10-21 11:03** — NOTE P3-T02 — exécuteur OK (essai 1) : test sur APP_HOST_PORT=18080 (8080 occupé par youtrack) ; vérification lancée
+- **2026-10-21 11:03** — Hypothèse H-036 créée pour P3-T02 (bloquante : non).
+- **2026-10-21 11:04** — NOTE P3-T02 — vérificateur OK (essai 1) : réserve KEYCLOAK_ADMIN_PASSWORD obligatoire hors profil → corrigée (:-), config -q OK

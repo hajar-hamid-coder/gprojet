@@ -19,7 +19,7 @@
 
 <!-- RESUME:DEBUT -->
 
-_Mis à jour le 2026-10-21 10:58 par scripts/backlog.py — ne pas modifier à la main._
+_Mis à jour le 2026-10-21 10:59 par scripts/backlog.py — ne pas modifier à la main._
 
 | Phase | Titre | Statut | Modèle | Avancement |
 |---|---|---|---|---|
@@ -237,7 +237,7 @@ _Mis à jour le 2026-10-21 10:58 par scripts/backlog.py — ne pas modifier à l
 **Test de validation** : `docker build -f deploy/docker/Dockerfile -t gprojet:test .` réussit ; `docker run --rm gprojet:test id -u` ≠ 0 ; l'image contient le front (`wwwroot/_framework`) ; taille d'image affichée dans la preuve.
 
 ### P3-T02 · docker compose de développement
-> **Statut** : NON_FAIT · **Modèle** : sonnet · **Ordre** : 2 · **Dépend de** : P3-T01
+> **Statut** : EN_COURS · **Modèle** : sonnet · **Ordre** : 2 · **Dépend de** : P3-T01
 
 **Explication** : `deploy/docker-compose.yml` : `postgres:18` (volume, base vide), service `migrations` (bundle EF `dotnet ef migrations bundle` qui crée le schéma — pas les scripts SQL, pour rester aligné sur les migrations), `app` (image unique), profil `keycloak` (préparé pour P18), réseau dédié, dépendances sur la santé ; `deploy/.env.example` sans valeur sensible.
 **Test de validation** : `docker compose -f deploy/docker-compose.yml up -d --wait` puis `curl -s http://localhost:8080/api/health` → 200 et `curl -s http://localhost:8080/` → HTML ; `docker compose down -v` propre.

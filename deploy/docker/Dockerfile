@@ -5,6 +5,22 @@ COPY .editorconfig global.json Directory.Build.props Directory.Packages.props ./
 COPY src/ src/
 RUN dotnet publish src/Gprojet-Backend/Gprojet-Backend.csproj -c Release -o /out
 
+# Bundle de migrations EF (cible `migrations`) : GpDbContextFactory lit ConnectionStrings__Gp à l'exécution.
+FROM build AS migrations-build
+COPY .config/ .config/
+# Chaîne factice, build uniquement (aucune connexion) ; la vraie est fournie à l'exécution.
+RUN dotnet tool restore \
+ && ConnectionStrings__Gp='Host=build;Database=build' dotnet ef migrations bundle --project src/Gprojet-Backend/Gprojet-Backend.csproj \
+    --self-contained -r linux-musl-x64 --force -o /efbundle
+
+FROM mcr.microsoft.com/dotnet/runtime-deps:10.0-alpine AS migrations
+RUN apk add --no-cache icu-libs
+ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
+WORKDIR /app
+COPY --from=migrations-build /efbundle .
+USER $APP_UID
+ENTRYPOINT ["./efbundle"]
+
 FROM mcr.microsoft.com/dotnet/aspnet:10.0-alpine AS final
 # ICU : le projet n'est pas en InvariantGlobalization (cultures fr-MA / ar-MA).
 RUN apk add --no-cache icu-libs tzdata

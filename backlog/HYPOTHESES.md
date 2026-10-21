@@ -249,3 +249,10 @@
 **Hypothèse retenue par défaut** : Non : pages prêtes mais non câblées (pas d'AuthorizeRouteView ni d'ErrorBoundary) jusqu'aux pages métier ; textes de chargement initial et d'erreur fatale de index.html en français (hors localizer)
 **Impact si l'hypothèse est fausse** : Câblage à ajouter avec les premières pages protégées ; en/ar voient deux textes français pendant le chargement
 **Réponse utilisateur** : _en attente_
+
+### H-036 · P3-T02
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-21 11:03
+**Question** : Le port 8080 du poste est occupé par un conteneur youtrack étranger au projet : faut-il changer le port par défaut de l'app dans le compose ?
+**Hypothèse retenue par défaut** : Port par défaut 8080 conservé, surchargeable par APP_HOST_PORT dans deploy/.env ; tests faits sur 18080 sans arrêter youtrack.
+**Impact si l'hypothèse est fausse** : Avec youtrack actif, http://localhost:8080 répond YouTrack et non GestionProjet tant que APP_HOST_PORT n'est pas défini.
+**Réponse utilisateur** : _en attente_
