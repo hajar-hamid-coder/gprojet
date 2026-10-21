@@ -19,14 +19,14 @@
 
 <!-- RESUME:DEBUT -->
 
-_Mis à jour le 2026-10-21 11:17 par scripts/backlog.py — ne pas modifier à la main._
+_Mis à jour le 2026-10-21 11:20 par scripts/backlog.py — ne pas modifier à la main._
 
 | Phase | Titre | Statut | Modèle | Avancement |
 |---|---|---|---|---|
 | P0 | Initialisation et outillage | ✅ VALIDEE | sonnet | 6/6 |
 | P1 | Socle backend .NET 10 | ✅ VALIDEE | opus | 11/11 |
 | P2 | Socle frontend Blazor WebAssembly et BFF | ✅ VALIDEE | sonnet | 9/9 |
-| P3 | Conteneurisation et intégration continue GitHub Actions | 🔄 EN_COURS | sonnet | 4/5 |
+| P3 | Conteneurisation et intégration continue GitHub Actions | 🟡 A_VALIDER | sonnet | 5/5 |
 | P4 | Module Organisation et périmètre hiérarchique | ⬜ NON_DEMARREE | sonnet | 0/8 |
 | P5 | Projets et affectation en cascade | ⬜ NON_DEMARREE | opus | 0/10 |
 | P6 | Planification et ordonnancement | ⬜ NON_DEMARREE | opus | 0/12 |
@@ -226,7 +226,7 @@ _Mis à jour le 2026-10-21 11:17 par scripts/backlog.py — ne pas modifier à l
 ---
 
 ## Phase P3 · Conteneurisation et intégration continue GitHub Actions
-> **Statut phase** : EN_COURS · **Modèle conseillé** : sonnet
+> **Statut phase** : A_VALIDER · **Modèle conseillé** : sonnet
 
 **Objectif** : images Docker, environnement local complet par docker compose, intégration continue **GitHub Actions** sur le dépôt `hajar-hamid-coder/gprojet`. **Livrable** : `docker compose up` fonctionnel et `.github/workflows/ci.yml`. ⚠️ Nécessite Docker (hypothèse H-001).
 
@@ -255,7 +255,7 @@ _Mis à jour le 2026-10-21 11:17 par scripts/backlog.py — ne pas modifier à l
 **Test de validation** : `python scripts/verifier-ci.py` (à écrire, parse YAML) confirme les 6 jobs, leurs dépendances, le service PostgreSQL et l'absence de secret en clair ; les modèles `.github/` sont présents. L'exécution réelle sur GitHub se constate après le push de l'utilisateur (signalé dans le bilan de phase).
 
 ### P3-T05 · Documentation de déploiement local
-> **Statut** : EN_COURS · **Modèle** : haiku · **Ordre** : 5 · **Dépend de** : P3-T02, P3-T04
+> **Statut** : A_VALIDER · **Modèle** : haiku · **Ordre** : 5 · **Dépend de** : P3-T02, P3-T04
 
 **Explication** : `docs/DEPLOIEMENT.md` : prérequis, variables, démarrage compose, migrations, dépannage, description du workflow GitHub Actions, des secrets à créer (Settings → Secrets and variables → Actions) et de la publication d'image sur ghcr.io.
 **Test de validation** : le document contient les sections Prérequis, Démarrage, Variables, Pipeline, Dépannage ; chaque commande citée existe dans le dépôt.
