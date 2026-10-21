@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using FluentAssertions;
 
 namespace Gprojet.Backend.Tests.Architecture;
@@ -31,7 +31,7 @@ public class DependancesEntreCouchesTests
     [InlineData("Web_ne_depend_pas_de_Entities", "Web.WebQuiExposeUneEntite")]
     [InlineData("Orchestration_ne_depend_pas_des_implementations_de_Repositories", "Orchestration.OrchestrateurQuiInstancieLeRepository")]
     [InlineData("Repositories_ne_depend_pas_de_Contracts_ni_Mapping", "Repositories.RepositoryQuiRenvoieUnContrat")]
-    [InlineData("Services_ne_depend_pas_de_Contracts","Services.ServiceQuiConnaitUnContrat")]
+    [InlineData("Services_ne_depend_pas_de_Contracts", "Services.ServiceQuiConnaitUnContrat")]
     [InlineData("Services_ne_depend_pas_de_Mapping", "Services.ServiceQuiMappe")]
     [InlineData("Services_ne_depend_pas_de_EF_Core", "Services.ServiceQuiUtiliseEfCore")]
     [InlineData("Entities_ne_depend_que_de_Common", "Entities.EntiteQuiAppelleUnService")]

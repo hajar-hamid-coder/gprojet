@@ -131,8 +131,15 @@ public sealed class AuditInterceptor(ICurrentUser utilisateur, IHorloge horloge,
 
     private Historique Ligne(string table, Guid cibleId, ActionHistorique action, string? champ, string? ancienne, string? nouvelle) => new()
     {
-        TypeCible = table, CibleId = cibleId, Action = action, Champ = champ, AncienneValeur = ancienne, NouvelleValeur = nouvelle,
-        AgentId = utilisateur.Id, DateAction = EmpreinteHistorique.Microseconde(horloge.Maintenant), CorrelationId = requete.CorrelationId,
+        TypeCible = table,
+        CibleId = cibleId,
+        Action = action,
+        Champ = champ,
+        AncienneValeur = ancienne,
+        NouvelleValeur = nouvelle,
+        AgentId = utilisateur.Id,
+        DateAction = EmpreinteHistorique.Microseconde(horloge.Maintenant),
+        CorrelationId = requete.CorrelationId,
     };
 
     private IEnumerable<Historique> Modifications(EntityEntry<EntiteAuditable> e, string table)

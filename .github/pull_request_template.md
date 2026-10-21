@@ -33,5 +33,6 @@
 - [ ] Tests exécutés sur l'instance jetable (`python scripts/pg-test.py demarrer`), jamais sur `gprojet`
 - [ ] `python scripts/tester-schema.py` vert si le schéma ou les migrations ont changé
 - [ ] `dotnet build` sans avertissement nouveau
+- [ ] CI verte (jobs build, test, qualite, securite du workflow `.github/workflows/ci.yml`) ; `python scripts/verifier-ci.py` vert si le workflow a changé
 - [ ] Aucun secret, chaîne de connexion ou donnée réelle dans le diff
 - [ ] Charte HCP respectée pour toute page ou composant front

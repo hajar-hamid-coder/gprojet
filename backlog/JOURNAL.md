@@ -237,3 +237,8 @@
 - **2026-10-21 11:08** — NOTE P3-T03 — vérificateur OK (essai 1) : aucun écart (local, GP_TEST_CONNECTION, avec mot de passe)
 - **2026-10-21 11:08** — NOTE P3-T03 — commit b2015f9
 - **2026-10-21 11:08** — P3-T03 EN_COURS → A_VALIDER — preuve : dotnet test local → 157/157 + 50/50 ; GP_TEST_CONNECTION (pg-test 55432) → 157/157 ; postgres:18 avec mot de passe → 157/157; vérificateur OK; commit b2015f9
+- **2026-10-21 11:09** — P3-T04 NON_FAIT → EN_COURS
+- **2026-10-21 11:09** — NOTE P3-T04 — délégué à executeur-sonnet (essai 1)
+- **2026-10-21 11:16** — NOTE P3-T04 — exécuteur OK (essai 1) : verifier-ci OK + auto-test, format propre (30 .cs reformatés, règle .editorconfig static PascalCase), coverlet ajouté ; vérification lancée
+- **2026-10-21 11:16** — Hypothèse H-037 créée pour P3-T04 (bloquante : non).
+- **2026-10-21 11:17** — NOTE P3-T04 — vérificateur OK (essai 1) : aucun écart ; exécution GitHub à constater après push (H-037)

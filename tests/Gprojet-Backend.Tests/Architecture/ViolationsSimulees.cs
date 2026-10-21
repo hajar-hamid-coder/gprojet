@@ -1,4 +1,4 @@
-﻿// Violations volontaires pour le test garde-fou : elles reproduisent la hiérarchie des couches
+// Violations volontaires pour le test garde-fou : elles reproduisent la hiérarchie des couches
 // sous le préfixe Gprojet.Backend.Tests.Architecture.Violations, dans le projet de test uniquement
 // (jamais dans l'assembly backend). Plusieurs types par fichier : exception assumée, c'est un jeu d'essai.
 #pragma warning disable CA1812, CA1822, IDE0051, IDE0052

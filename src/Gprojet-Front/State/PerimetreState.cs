@@ -11,7 +11,11 @@ public sealed class PerimetreState
 
     public void Definir(Guid? entiteId, string? niveau, string? chemin)
     {
-        if (EntiteId == entiteId && Niveau == niveau && Chemin == chemin) return;
+        if (EntiteId == entiteId && Niveau == niveau && Chemin == chemin)
+        {
+            return;
+        }
+
         (EntiteId, Niveau, Chemin) = (entiteId, niveau, chemin);
         Changed?.Invoke();
     }

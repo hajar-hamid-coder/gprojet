@@ -33,9 +33,15 @@ public abstract class ApiClientBase(HttpClient http)
 
         using var reponse = await http.SendAsync(requete, ct);
         if (!reponse.IsSuccessStatusCode)
+        {
             throw await LireErreurAsync(reponse, ct);
+        }
+
         if (reponse.Content.Headers.ContentLength is 0 || reponse.StatusCode == System.Net.HttpStatusCode.NoContent)
+        {
             return default;
+        }
+
         return await reponse.Content.ReadFromJsonAsync<T>(Json, ct);
     }
 

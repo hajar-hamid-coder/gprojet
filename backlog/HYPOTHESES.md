@@ -256,3 +256,10 @@
 **Hypothèse retenue par défaut** : Port par défaut 8080 conservé, surchargeable par APP_HOST_PORT dans deploy/.env ; tests faits sur 18080 sans arrêter youtrack.
 **Impact si l'hypothèse est fausse** : Avec youtrack actif, http://localhost:8080 répond YouTrack et non GestionProjet tant que APP_HOST_PORT n'est pas défini.
 **Réponse utilisateur** : _en attente_
+
+### H-037 · P3-T04
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-21 11:16
+**Question** : Les versions d'actions épinglées et le comportement réel du workflow (Trivy bloquant sur CRITICAL/HIGH, environnement production) ne peuvent être constatés qu'après le push : faut-il assouplir Trivy ?
+**Hypothèse retenue par défaut** : Trivy bloquant (exit-code 1, CRITICAL/HIGH, unfixed ignorés) ; environnement 'production' à créer dans les réglages GitHub avec relecteurs ; déploiement manuel lancé depuis main ; actions épinglées par SHA (checkout v4.2.2, etc.).
+**Impact si l'hypothèse est fausse** : Premier run possiblement rouge (vulnérabilité de l'image de base, version d'action) : à corriger après le premier push.
+**Réponse utilisateur** : _en attente_

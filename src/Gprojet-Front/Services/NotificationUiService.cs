@@ -21,7 +21,10 @@ public sealed class NotificationUiService : IDisposable
     public void Fermer(Guid id)
     {
         if (_minuteries.Remove(id, out var cts)) { cts.Cancel(); cts.Dispose(); }
-        if (_messages.RemoveAll(m => m.Id == id) > 0) Changed?.Invoke();
+        if (_messages.RemoveAll(m => m.Id == id) > 0)
+        {
+            Changed?.Invoke();
+        }
     }
 
     private void Ajouter(TypeNotification type, string message)

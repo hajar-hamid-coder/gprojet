@@ -9,7 +9,11 @@ public sealed class ArchitectureFrontTests
     private static string CsprojFront()
     {
         var dir = new DirectoryInfo(AppContext.BaseDirectory);
-        while (dir is not null && !File.Exists(Path.Combine(dir.FullName, "Gprojet.slnx"))) dir = dir.Parent;
+        while (dir is not null && !File.Exists(Path.Combine(dir.FullName, "Gprojet.slnx")))
+        {
+            dir = dir.Parent;
+        }
+
         return File.ReadAllText(Path.Combine(dir!.FullName, "src", "Gprojet-Front", "Gprojet-Front.csproj"));
     }
 

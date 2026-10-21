@@ -132,7 +132,10 @@ public sealed class UnitOfWorkTests(PgTestFixture pg)
         {
             var p = await r.ListerAsync(new PageRequete { Page = page, Taille = 200 });
             tous.AddRange(p.Elements.Select(e => e.Id).Where(attendus.Contains));
-            if (page >= p.NombrePages) break;
+            if (page >= p.NombrePages)
+            {
+                break;
+            }
         }
 
         tous.Should().Equal(items.Select(i => i.Id).Order()); // trié par Id

@@ -21,7 +21,11 @@ public sealed class ChargementService
 
         public void Dispose()
         {
-            if (Interlocked.Exchange(ref _termine, 1) == 1) return;
+            if (Interlocked.Exchange(ref _termine, 1) == 1)
+            {
+                return;
+            }
+
             Interlocked.Decrement(ref service._compteur);
             service.Changed?.Invoke();
         }

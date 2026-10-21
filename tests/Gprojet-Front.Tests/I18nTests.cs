@@ -119,17 +119,29 @@ public sealed partial class I18nTests : BunitContext
             var texte = string.Join(' ', m.Groups[1].Value.Split('\n')
                 .Select(l => l.Trim()).Where(l => l.Length > 0 && l[0] is not ('@' or '{' or '}') && !l.StartsWith("else", StringComparison.Ordinal)));
             texte = ExpressionRazor().Replace(texte, "").Trim();
-            if (Lettres().IsMatch(texte) && !NonTraduisibles.Contains(texte)) yield return texte;
+            if (Lettres().IsMatch(texte) && !NonTraduisibles.Contains(texte))
+            {
+                yield return texte;
+            }
         }
 
         foreach (Match m in AttributTexte().Matches(vue))
-            if (Lettres().IsMatch(m.Groups[1].Value)) yield return m.Groups[1].Value;
+        {
+            if (Lettres().IsMatch(m.Groups[1].Value))
+            {
+                yield return m.Groups[1].Value;
+            }
+        }
     }
 
     private static string Racine()
     {
         var d = new DirectoryInfo(AppContext.BaseDirectory);
-        while (d is not null && !File.Exists(Path.Combine(d.FullName, "CLAUDE.md"))) d = d.Parent;
+        while (d is not null && !File.Exists(Path.Combine(d.FullName, "CLAUDE.md")))
+        {
+            d = d.Parent;
+        }
+
         return d?.FullName ?? throw new InvalidOperationException("Racine du dépôt introuvable.");
     }
 

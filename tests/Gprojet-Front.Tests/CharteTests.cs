@@ -15,7 +15,11 @@ public sealed partial class CharteTests
     private static string Racine()
     {
         var d = new DirectoryInfo(AppContext.BaseDirectory);
-        while (d is not null && !File.Exists(Path.Combine(d.FullName, "CLAUDE.md"))) d = d.Parent;
+        while (d is not null && !File.Exists(Path.Combine(d.FullName, "CLAUDE.md")))
+        {
+            d = d.Parent;
+        }
+
         return d?.FullName ?? throw new InvalidOperationException("Racine du dépôt introuvable.");
     }
 

@@ -11,8 +11,15 @@ public sealed partial class GestionnaireErreursUi(NotificationUiService notifica
     public void Gerer(Exception e)
     {
         // Journal : statut et type seulement, jamais le détail ni le message serveur.
-        if (e is ApiException api) JournaliserApi(api.Statut, api.Type);
-        else JournaliserInattendue(e);
+        if (e is ApiException api)
+        {
+            JournaliserApi(api.Statut, api.Type);
+        }
+        else
+        {
+            JournaliserInattendue(e);
+        }
+
         notifications.Erreur(Message(e));
     }
 
