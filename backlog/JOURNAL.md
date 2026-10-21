@@ -244,3 +244,7 @@
 - **2026-10-21 11:17** — NOTE P3-T04 — vérificateur OK (essai 1) : aucun écart ; exécution GitHub à constater après push (H-037)
 - **2026-10-21 11:17** — NOTE P3-T04 — commit 8a77b23
 - **2026-10-21 11:17** — P3-T04 EN_COURS → A_VALIDER — preuve : python scripts/verifier-ci.py → conforme (6 jobs, needs, postgres:18, aucun secret, épinglage, modèles) ; --auto-test → 4 pièges rejetés ; dotnet format propre ; tests 157/157 + 50/50; vérificateur OK; commit 8a77b23
+- **2026-10-21 11:17** — P3-T05 NON_FAIT → EN_COURS
+- **2026-10-21 11:17** — NOTE P3-T05 — délégué à executeur-haiku (essai 1)
+- **2026-10-21 11:19** — NOTE P3-T05 — exécuteur OK (essai 1) : 5 sections + Migrations, chemins cités OK ; pas de README racine → pas de lien ; vérification lancée
+- **2026-10-21 11:20** — NOTE P3-T05 — vérificateur OK (essai 1) : aucun écart ; compose up/down rejoué

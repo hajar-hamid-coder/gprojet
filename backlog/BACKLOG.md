@@ -255,7 +255,7 @@ _Mis à jour le 2026-10-21 11:17 par scripts/backlog.py — ne pas modifier à l
 **Test de validation** : `python scripts/verifier-ci.py` (à écrire, parse YAML) confirme les 6 jobs, leurs dépendances, le service PostgreSQL et l'absence de secret en clair ; les modèles `.github/` sont présents. L'exécution réelle sur GitHub se constate après le push de l'utilisateur (signalé dans le bilan de phase).
 
 ### P3-T05 · Documentation de déploiement local
-> **Statut** : NON_FAIT · **Modèle** : haiku · **Ordre** : 5 · **Dépend de** : P3-T02, P3-T04
+> **Statut** : EN_COURS · **Modèle** : haiku · **Ordre** : 5 · **Dépend de** : P3-T02, P3-T04
 
 **Explication** : `docs/DEPLOIEMENT.md` : prérequis, variables, démarrage compose, migrations, dépannage, description du workflow GitHub Actions, des secrets à créer (Settings → Secrets and variables → Actions) et de la publication d'image sur ghcr.io.
 **Test de validation** : le document contient les sections Prérequis, Démarrage, Variables, Pipeline, Dépannage ; chaque commande citée existe dans le dépôt.
