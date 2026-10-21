@@ -373,9 +373,6 @@ def cmd_voir(args) -> str:
     if hyps:
         hl = lire(HYPOTHESES)
         bloc += "\n\n#### Hypothèses liées\n" + "\n\n".join("\n".join(hl[h.debut:h.fin]).rstrip() for h in hyps)
-    notes = [l for l in lire(JOURNAL) if f"NOTE {t.id} " in l]
-    if notes:
-        bloc += "\n\n#### Notes du journal (demandes et progression — à prendre en compte)\n" + "\n".join(notes)
     return bloc
 
 

@@ -1,11 +1,8 @@
 #!/usr/bin/env python3
 """Instance PostgreSQL 18 jetable pour les tests (aucun mot de passe, aucune donnée réelle).
 
-  python scripts/pg-test.py demarrer [--vide | --demo]
-                                                initdb + start sur le port 55432, base gp_test
-                                                (schéma + données de référence sauf --vide ;
-                                                --demo ajoute database/04-donnees-demo.sql ;
-                                                --vide et --demo sont incompatibles)
+  python scripts/pg-test.py demarrer [--vide]   initdb + start sur le port 55432, base gp_test
+                                                (schéma + données de référence sauf --vide)
   python scripts/pg-test.py sql "SELECT 1"      exécute une requête sur gp_test
   python scripts/pg-test.py fichier chemin.sql  exécute un fichier SQL sur gp_test
   python scripts/pg-test.py arreter             stoppe et supprime l'instance
@@ -52,11 +49,9 @@ def en_marche() -> bool:
     return DONNEES.exists() and lancer(binaire("pg_ctl"), "-D", str(DONNEES), "status", verifier=False).returncode == 0
 
 
-def demarrer(vide: bool, demo: bool = False) -> None:
-    if vide and demo:
-        sys.exit("ERREUR : --vide et --demo sont incompatibles.")
+def demarrer(vide: bool) -> None:
     if en_marche():
-        print(f"Déjà démarrée (options ignorées : arrêter d'abord pour recréer). {CHAINE}")
+        print(f"Déjà démarrée. {CHAINE}")
         return
     if DONNEES.exists():
         shutil.rmtree(DONNEES)
@@ -69,10 +64,7 @@ def demarrer(vide: bool, demo: bool = False) -> None:
     if not vide:
         for f in ("01-schema.sql", "02-donnees-reference.sql"):
             psql("-q", "-f", str(RACINE / "database" / f))
-        if demo:
-            psql("-q", "-f", str(RACINE / "database" / "04-donnees-demo.sql"))
-    mode = "vide" if vide else "schéma + référence" + (" + démo" if demo else "")
-    print(f"Instance de test prête ({mode}). {CHAINE}")
+    print(f"Instance de test prête ({'vide' if vide else 'schéma + référence'}). {CHAINE}")
 
 
 def arreter() -> None:
@@ -90,7 +82,7 @@ def main() -> int:
     cmd, reste = sys.argv[1], sys.argv[2:]
     try:
         if cmd == "demarrer":
-            demarrer("--vide" in reste, "--demo" in reste)
+            demarrer("--vide" in reste)
         elif cmd == "arreter":
             arreter()
         elif cmd == "chaine":

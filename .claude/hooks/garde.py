@@ -18,7 +18,7 @@ RACINES_AUTORISEES = [PROJET, (PROJET.parent / "Documentation").resolve()]
 FICHIERS_PILOTAGE = ("BACKLOG.md", "HYPOTHESES.md", "BACKLOG.xlsx")
 COMMANDES_UTILISATEUR = ("lancer-phase", "valider-phase", "refuser-tache", "repondre-hypothese")
 INTERDITS_SHELL = [
-    (r"\bgit\s+push\b", "Le push vers GitHub est fait par l'utilisateur après validation de phase."),
+    (r"\bgit\s+push\b", "Le push vers GitLab est fait par l'utilisateur après validation de phase."),
     (r"\bgit\s+reset\s+--hard\b", "reset --hard détruit du travail : utilise git revert ou git restore ciblé."),
     (r"\bgit\s+clean\s+-[a-z]*f", "git clean -f supprime des fichiers non suivis."),
     (r"\brm\s+-[a-z]*r[a-z]*f?\s+(/|~|\.\.|\*|\"?C:)", "Suppression récursive hors périmètre."),

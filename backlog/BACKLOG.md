@@ -19,14 +19,14 @@
 
 <!-- RESUME:DEBUT -->
 
-_Mis à jour le 2026-10-21 14:52 par scripts/backlog.py — ne pas modifier à la main._
+_Mis à jour le 2026-10-16 11:48 par scripts/backlog.py — ne pas modifier à la main._
 
 | Phase | Titre | Statut | Modèle | Avancement |
 |---|---|---|---|---|
-| P0 | Initialisation et outillage | ✅ VALIDEE | sonnet | 6/6 |
-| P1 | Socle backend .NET 10 | ✅ VALIDEE | opus | 11/11 |
-| P2 | Socle frontend Blazor WebAssembly et BFF | ✅ VALIDEE | sonnet | 9/9 |
-| P3 | Conteneurisation et intégration continue GitHub Actions | ✅ VALIDEE | sonnet | 5/5 |
+| P0 | Initialisation et outillage | 🔄 EN_COURS | sonnet | 0/6 |
+| P1 | Socle backend .NET 10 | ⬜ NON_DEMARREE | opus | 0/11 |
+| P2 | Socle frontend Blazor WebAssembly et BFF | ⬜ NON_DEMARREE | sonnet | 0/9 |
+| P3 | Conteneurisation et intégration continue GitLab | ⬜ NON_DEMARREE | sonnet | 0/5 |
 | P4 | Module Organisation et périmètre hiérarchique | ⬜ NON_DEMARREE | sonnet | 0/8 |
 | P5 | Projets et affectation en cascade | ⬜ NON_DEMARREE | opus | 0/10 |
 | P6 | Planification et ordonnancement | ⬜ NON_DEMARREE | opus | 0/12 |
@@ -49,42 +49,42 @@ _Mis à jour le 2026-10-21 14:52 par scripts/backlog.py — ne pas modifier à l
 ---
 
 ## Phase P0 · Initialisation et outillage
-> **Statut phase** : VALIDEE · **Modèle conseillé** : sonnet
+> **Statut phase** : EN_COURS · **Modèle conseillé** : sonnet
 
 **Objectif** : dépôt Git propre, conventions, environnement vérifié, base de test opérationnelle. **Livrable** : un dépôt prêt à recevoir la solution .NET.
 
 ### P0-T01 · Initialiser le dépôt Git et la branche de phase
-> **Statut** : VALIDE · **Modèle** : haiku · **Ordre** : 1 · **Dépend de** : —
+> **Statut** : EN_COURS · **Modèle** : haiku · **Ordre** : 1 · **Dépend de** : —
 
 **Explication** : `git init -b main` à la racine du projet, premier commit contenant l'existant (`CLAUDE.md`, `.claude/`, `backlog/`, `scripts/`, `database/`), puis branche `phase/P0-initialisation`. Le `.gitignore` existe déjà (secrets locaux dont `.claude/settings.local.json`, `.pgtest/`, .NET) : le vérifier **avant** le premier `git add`, le compléter si besoin. Créer `.gitattributes` (`* text=auto eol=lf`, `*.sql` et `*.md` en LF, `*.ps1` en CRLF).
 **Test de validation** : `git log --oneline` montre au moins 2 commits ; `git status --porcelain` est vide ; `git check-ignore .pgtest/x bin/x .claude/settings.local.json` renvoie les trois chemins ; `git ls-files | grep -c settings.local` renvoie 0.
 
 ### P0-T02 · Script de vérification de l'environnement
-> **Statut** : VALIDE · **Modèle** : haiku · **Ordre** : 2 · **Dépend de** : P0-T01
+> **Statut** : NON_FAIT · **Modèle** : haiku · **Ordre** : 2 · **Dépend de** : P0-T01
 
 **Explication** : `scripts/verifier-env.py` affiche un tableau OK / MANQUANT / OPTIONNEL pour : .NET SDK 10, Python ≥ 3.12 avec le module openpyxl (export Excel du backlog), binaires PostgreSQL 18 (`PG_BIN`), Git, Node.js (optionnel : ponytail, motion), Docker (requis à partir de P3), uv et graphify (optionnels). Code de sortie 1 si un outil requis manque.
 **Test de validation** : `python scripts/verifier-env.py` affiche le tableau et sort en 0 sur ce poste (dotnet, python, PostgreSQL, git présents) ; en masquant `PG_BIN` vers un dossier vide, il sort en 1.
 
 ### P0-T03 · Valider l'instance PostgreSQL de test et le schéma de référence
-> **Statut** : VALIDE · **Modèle** : sonnet · **Ordre** : 3 · **Dépend de** : P0-T01
+> **Statut** : NON_FAIT · **Modèle** : sonnet · **Ordre** : 3 · **Dépend de** : P0-T01
 
 **Explication** : utiliser `scripts/pg-test.py` pour démarrer l'instance jetable, appliquer `database/01` et `02`, exécuter `database/03-tests-integrite.sql`, puis arrêter. Ajouter `scripts/tester-schema.py` qui automatise cela et vérifie que les 13 blocs « attendu ERREUR » échouent et que les autres réussissent (analyse de la sortie psql).
 **Test de validation** : `python scripts/tester-schema.py` sort en 0 et affiche « 18/18 vérifications conformes » ; `.pgtest/` n'existe plus après exécution.
 
 ### P0-T04 · Conventions de build .NET centralisées
-> **Statut** : VALIDE · **Modèle** : haiku · **Ordre** : 4 · **Dépend de** : P0-T01
+> **Statut** : NON_FAIT · **Modèle** : haiku · **Ordre** : 4 · **Dépend de** : P0-T01
 
 **Explication** : `global.json` (SDK 10.0.4xx, `rollForward: latestFeature`), `Directory.Build.props` (`net10.0`, `Nullable enable`, `ImplicitUsings enable`, `TreatWarningsAsErrors true`, `AnalysisLevel latest-recommended`, `InvariantGlobalization false`), `Directory.Packages.props` (gestion centralisée des versions : EF Core 10, Npgsql 10, Mapperly, FluentValidation, Serilog, xUnit, FluentAssertions, bUnit, NetArchTest, Microsoft.AspNetCore.Components.WebAssembly et .Server), `.editorconfig` (style C# : file-scoped namespaces, `var` si évident, accolades, nommage `_champ`).
 **Test de validation** : `dotnet --version` (dans le dossier) renvoie une version 10.0.4xx ; `dotnet new console -o .tmpcheck && dotnet build .tmpcheck` réussit avec les props appliquées (vérifier `TreatWarningsAsErrors` dans `obj/*.nuget.g.props` ou via `dotnet msbuild -getProperty:TreatWarningsAsErrors`) ; supprimer `.tmpcheck`.
 
 ### P0-T05 · Modèles GitLab et guide de contribution
-> **Statut** : VALIDE · **Modèle** : haiku · **Ordre** : 5 · **Dépend de** : P0-T01
+> **Statut** : NON_FAIT · **Modèle** : haiku · **Ordre** : 5 · **Dépend de** : P0-T01
 
 **Explication** : `.gitlab/merge_request_templates/Phase.md` (résumé de phase, tâches, preuves, hypothèses, checklist de revue), `.gitlab/issue_templates/Anomalie.md` et `Demande.md`, `CONTRIBUTING.md` (branches `phase/Pn-…`, commits `Pn-Tnn: …`, revue, règles des couches, comment lancer les tests).
 **Test de validation** : les 4 fichiers existent ; `CONTRIBUTING.md` contient les sections « Branches », « Commits », « Architecture », « Tests » (`grep -c "^## "` ≥ 4).
 
 ### P0-T06 · Rapport d'outillage Claude Code
-> **Statut** : VALIDE · **Modèle** : haiku · **Ordre** : 6 · **Dépend de** : P0-T02
+> **Statut** : NON_FAIT · **Modèle** : haiku · **Ordre** : 6 · **Dépend de** : P0-T02
 
 **Explication** : `docs/OUTILLAGE.md` : état réel des plugins / skills (graphify, ponytail, ui-ux-pro-max, motion-design) détecté sur le poste (`~/.claude/skills`, `.claude/skills`, `~/.claude/plugins`), des hooks et des sous-agents du projet, avec la commande d'installation de chaque élément manquant (voir `scripts/installer-outils.ps1`). Si un outil manque, créer une hypothèse **non bloquante**.
 **Test de validation** : `docs/OUTILLAGE.md` liste les 4 outils avec un statut chacun ; `python scripts/backlog.py contexte` s'exécute sans erreur.
@@ -92,72 +92,72 @@ _Mis à jour le 2026-10-21 14:52 par scripts/backlog.py — ne pas modifier à l
 ---
 
 ## Phase P1 · Socle backend .NET 10
-> **Statut phase** : VALIDEE · **Modèle conseillé** : opus
+> **Statut phase** : NON_DEMARREE · **Modèle conseillé** : opus
 
 **Objectif** : solution en couches compilable, persistance PostgreSQL identique au schéma de référence, API démarrable. **Livrable** : `Gprojet.slnx` avec le projet unique `Gprojet-Backend` + API `/health` + tests d'architecture verts.
 
 ### P1-T01 · Créer la solution et le projet Gprojet-Backend
-> **Statut** : VALIDE · **Modèle** : sonnet · **Ordre** : 1 · **Dépend de** : —
+> **Statut** : NON_FAIT · **Modèle** : sonnet · **Ordre** : 1 · **Dépend de** : —
 
-**Explication** : `Gprojet.slnx` ; **un seul projet backend** `src/Gprojet-Backend/Gprojet-Backend.csproj` (`Microsoft.NET.Sdk.Web`, `RootNamespace Gprojet.Backend`) avec les dossiers-couches `Web/`, `Orchestration/`, `Services/`, `Mapping/`, `Repositories/`, `Entities/`, `Contracts/`, `Infrastructure/`, `Common/` (espaces de noms alignés sur les dossiers) ; projet de tests `tests/Gprojet-Backend.Tests` (xUnit) avec `Unitaires/`, `Integration/`, `Architecture/`. Aucun autre projet (le front arrive en P2-T01). **Demandes utilisateur à intégrer dans cette tâche** : `Directory.Packages.props` → FluentAssertions en dernière **7.x** stable (licence Apache 2.0, H-017) au lieu de 8.x ; migrer `.gitlab/` vers `.github/` (`pull_request_template.md`, `ISSUE_TEMPLATE/Anomalie.md` et `Demande.md`) et adapter `CONTRIBUTING.md` (pull requests GitHub).
-**Test de validation** : `dotnet build Gprojet.slnx` réussit sans avertissement ; `dotnet sln Gprojet.slnx list` affiche exactement 2 projets (`Gprojet-Backend`, `Gprojet-Backend.Tests`) ; `dotnet test` passe (test de fumée). `Directory.Packages.props` référence FluentAssertions 7.x ; `.gitlab/` n'existe plus et `.github/pull_request_template.md` existe.
+**Explication** : `Gprojet.slnx` ; **un seul projet backend** `src/Gprojet-Backend/Gprojet-Backend.csproj` (`Microsoft.NET.Sdk.Web`, `RootNamespace Gprojet.Backend`) avec les dossiers-couches `Web/`, `Orchestration/`, `Services/`, `Mapping/`, `Repositories/`, `Entities/`, `Contracts/`, `Infrastructure/`, `Common/` (espaces de noms alignés sur les dossiers) ; projet de tests `tests/Gprojet-Backend.Tests` (xUnit) avec `Unitaires/`, `Integration/`, `Architecture/`. Aucun autre projet (le front arrive en P2-T01).
+**Test de validation** : `dotnet build Gprojet.slnx` réussit sans avertissement ; `dotnet sln Gprojet.slnx list` affiche exactement 2 projets (`Gprojet-Backend`, `Gprojet-Backend.Tests`) ; `dotnet test` passe (test de fumée).
 
 ### P1-T02 · Tests d'architecture par espace de noms
-> **Statut** : VALIDE · **Modèle** : opus · **Ordre** : 2 · **Dépend de** : P1-T01
+> **Statut** : NON_FAIT · **Modèle** : opus · **Ordre** : 2 · **Dépend de** : P1-T01
 
 **Explication** : les couches étant des dossiers d'un même projet, **ces tests remplacent le compilateur** comme garde. NetArchTest dans `tests/Gprojet-Backend.Tests/Architecture/`, une règle par interdiction entre espaces de noms `Gprojet.Backend.*` : Web ↛ Services / Repositories / Entities ; Orchestration ↛ implémentations de Repositories ; Services ↛ Contracts, Mapping, EF Core ; Entities ↛ toute autre couche sauf Common ; Contracts ↛ tout sauf BCL et FluentValidation (compilé dans le navigateur) ; types `*Dto` uniquement dans Contracts ; contrôleurs uniquement dans Web. Test « garde-fou » : des types de violation volontaire, définis dans le projet de test sous des espaces de noms simulés, sont bien détectés.
 **Test de validation** : `dotnet test tests/Gprojet-Backend.Tests --filter Category=Architecture` → tous verts, ≥ 10 règles ; le garde-fou prouve qu'une violation fait échouer la règle (assert inversé).
 
 ### P1-T03 · Common : primitives transverses
-> **Statut** : VALIDE · **Modèle** : sonnet · **Ordre** : 3 · **Dépend de** : P1-T01
+> **Statut** : NON_FAIT · **Modèle** : sonnet · **Ordre** : 3 · **Dépend de** : P1-T01
 
 **Explication** : `Result<T>` / `Result`, exceptions métier (`RegleMetierException`, `AccesRefuseException`, `IntrouvableException`, `ConflitException`), `PageRequete` / `PageResultat<T>` (tri, filtre, taille max 200), `ICurrentUser` (Id agent, matricule, entité, rôles), `IHorloge` (testable), `IGenerateurCode` (codes lisibles).
 **Test de validation** : `dotnet test tests/Gprojet-Backend.Tests --filter Category=Common` → tests de `Result`, pagination (bornes, taille max) et horloge factice verts.
 
 ### P1-T04 · Entités du domaine (6 schémas)
-> **Statut** : VALIDE · **Modèle** : opus · **Ordre** : 4 · **Dépend de** : P1-T03
+> **Statut** : NON_FAIT · **Modèle** : opus · **Ordre** : 4 · **Dépend de** : P1-T03
 
 **Explication** : `EntiteAuditable` (Id Guid v7, audit, suppression logique) et une classe par table de `database/01-schema.sql`, rangées par module (`Organisation`, `Projets`, `Planification`, `Temps`, `Commun`, `Modelisation`), avec propriétés de navigation, collections, et énumérations C# pour chaque `CHECK … IN`. `Historique` n'hérite pas d'`EntiteAuditable` (bigint, ajout seul).
 **Test de validation** : `dotnet build` OK ; test de réflexion : nombre de types entités = 60 et chaque énumération a les mêmes valeurs que la contrainte SQL correspondante (test paramétré lisant `01-schema.sql`).
 
 ### P1-T05 · DbContext et configurations EF Core
-> **Statut** : VALIDE · **Modèle** : opus · **Ordre** : 5 · **Dépend de** : P1-T04
+> **Statut** : NON_FAIT · **Modèle** : opus · **Ordre** : 5 · **Dépend de** : P1-T04
 
 **Explication** : `GpDbContext` (Npgsql, extension `ltree`), une `IEntityTypeConfiguration<T>` par entité : schéma, noms `snake_case`, types (`numeric(p,s)`, `ltree`, `jsonb`, `text[]`, `inet`), `uuidv7()` par défaut, contraintes `CHECK`, index uniques **partiels** (`HasFilter`), index GiST, colonne générée `criticite`, `xmin` (concurrence), filtre global `!EstSupprime`, conversions enum → texte.
 **Test de validation** : `dotnet build` OK ; `dotnet ef dbcontext info` réussit ; test unitaire : le modèle EF déclare 60 tables réparties dans les 6 schémas.
 
 ### P1-T06 · Migration initiale identique au schéma de référence
-> **Statut** : VALIDE · **Modèle** : opus · **Ordre** : 6 · **Dépend de** : P1-T05
+> **Statut** : NON_FAIT · **Modèle** : opus · **Ordre** : 6 · **Dépend de** : P1-T05
 
 **Explication** : migration `InitialCreate` (+ trigger d'ajout seul sur `commun.historique` et données de `02-donnees-reference.sql` via `migrationBuilder.Sql`). Écrire `scripts/comparer-schema.py` : crée deux bases sur l'instance de test (l'une par `01-schema.sql`, l'autre par `dotnet ef database update`), puis compare colonnes (type, nullabilité, défaut), contraintes, index (définition) et triggers via `pg_catalog`. Appliquer ensuite la migration à la **base de développement `gprojet`** (vide au départ ; connexion fournie par la variable `ConnectionStrings__Gp`, définie dans `.claude/settings.local.json` — ne jamais l'afficher ni la recopier).
 **Test de validation** : `python scripts/comparer-schema.py` → « 0 écart » ; toute différence est listée et fait échouer le script ; `dotnet ef database update` sur `gprojet` réussit et `gprojet` contient 60 tables dans les 6 schémas.
 
 ### P1-T07 · Intercepteurs : audit, suppression logique, historique chaîné
-> **Statut** : VALIDE · **Modèle** : sonnet · **Ordre** : 7 · **Dépend de** : P1-T06
+> **Statut** : NON_FAIT · **Modèle** : sonnet · **Ordre** : 7 · **Dépend de** : P1-T06
 
 **Explication** : `SaveChangesInterceptor` qui renseigne `cree_*` / `modifie_*` depuis `ICurrentUser` et `IHorloge`, transforme un `Remove` en suppression logique, et écrit une ligne `commun.historique` par champ modifié avec l'empreinte `sha256(empreinte_precedente + contenu)` et un `correlation_id` par requête.
 **Test de validation** : tests d'intégration sur `pg-test` : création → audit rempli ; suppression → `est_supprime = true` et ligne invisible via le filtre global ; modification → lignes d'historique avec chaîne d'empreintes valide (recalcul) ; altérer une ligne en SQL direct est détecté par le vérificateur de chaîne.
 
 ### P1-T08 · Unit of Work et repositories de base
-> **Statut** : VALIDE · **Modèle** : sonnet · **Ordre** : 8 · **Dépend de** : P1-T06
+> **Statut** : NON_FAIT · **Modèle** : sonnet · **Ordre** : 8 · **Dépend de** : P1-T06
 
 **Explication** : `IUnitOfWork` (CommitAsync, transaction explicite), classe de base **interne** `RepositoryBase<T>` (GetById, Ajouter, Supprimer logique, pagination), interfaces de repository par agrégat dans `Repositories/` (exposées via des interfaces consommées par les Services). Gestion de `DbUpdateConcurrencyException` → `ConflitException`.
 **Test de validation** : tests d'intégration : commit atomique (échec au milieu → rien n'est écrit) ; deux mises à jour concurrentes de la même ligne → `ConflitException`.
 
 ### P1-T09 · Socle API : DI, erreurs, OpenAPI, logs, santé
-> **Statut** : VALIDE · **Modèle** : sonnet · **Ordre** : 9 · **Dépend de** : P1-T08
+> **Statut** : NON_FAIT · **Modèle** : sonnet · **Ordre** : 9 · **Dépend de** : P1-T08
 
 **Explication** : `Program.cs` minimal ; méthodes d'extension d'enregistrement par couche (`AddGpRepositories`, `AddGpServices`, `AddGpOrchestration`…) ; middleware d'exceptions → `ProblemDetails` (400/403/404/409/500 sans fuite de détail en production) ; OpenAPI natif + Scalar en Development ; Serilog (console JSON) ; `/health` (live) et `/health/ready` (base) ; chaîne de connexion via configuration (`ConnectionStrings:Gp`), fournie en local par la variable d'environnement `ConnectionStrings__Gp` (base `gprojet`, définie dans `.claude/settings.local.json`) ; **les tests n'utilisent jamais `gprojet`** : instance jetable `pg-test` ou `GP_TEST_CONNECTION`, qui écrasent explicitement cette valeur.
 **Test de validation** : test d'intégration `WebApplicationFactory` : `/health` 200, `/health/ready` 200 sur `pg-test`, `/openapi/v1.json` 200, une `IntrouvableException` levée par un contrôleur de test → 404 au format `application/problem+json` ; `dotnet run` de l'API puis `curl -s localhost:<port>/health/ready` → 200 sur `gprojet`.
 
 ### P1-T10 · Authentification de développement et utilisateur courant
-> **Statut** : VALIDE · **Modèle** : sonnet · **Ordre** : 10 · **Dépend de** : P1-T09
+> **Statut** : NON_FAIT · **Modèle** : sonnet · **Ordre** : 10 · **Dépend de** : P1-T09
 
 **Explication** : `DevAuthHandler` (schéma « Dev », actif **uniquement** en environnement Development/Test) qui lit l'en-tête `X-Dev-Matricule`, charge l'agent et ses rôles déduits (responsable d'entité, délégation active) ; implémentation `ICurrentUser`. Keycloak le remplacera en P18.
 **Test de validation** : tests d'intégration : sans en-tête → 401 ; matricule inconnu → 401 ; matricule valide → 200 et `ICurrentUser` renseigné ; en environnement Production le schéma « Dev » n'est pas enregistré.
 
 ### P1-T11 · Données de démonstration
-> **Statut** : VALIDE · **Modèle** : haiku · **Ordre** : 11 · **Dépend de** : P1-T06
+> **Statut** : NON_FAIT · **Modèle** : haiku · **Ordre** : 11 · **Dépend de** : P1-T06
 
 **Explication** : `database/04-donnees-demo.sql` : 1 direction, 3 divisions, 6 services, 25 agents fictifs (responsables nommés, fonctions, compétences), 2 délégations, quelques absences, jours fériés de l'année. Uniquement des noms fictifs. Option `--demo` dans `pg-test.py demarrer`.
 **Test de validation** : `python scripts/pg-test.py demarrer --demo` puis requêtes de comptage : 10 entités, 25 agents, 10 responsables ; chaque service a un parent division (requête `ltree`).
@@ -165,99 +165,99 @@ _Mis à jour le 2026-10-21 14:52 par scripts/backlog.py — ne pas modifier à l
 ---
 
 ## Phase P2 · Socle frontend Blazor WebAssembly et BFF
-> **Statut phase** : VALIDEE · **Modèle conseillé** : sonnet
+> **Statut phase** : NON_DEMARREE · **Modèle conseillé** : sonnet
 
 **Objectif** : projet unique `Gprojet-Front` servi par `Gprojet-Backend` (BFF intégré), charte et layout définitifs, couches front en place. **Livrable** : coquille navigable authentifiée (auth de dev).
 
 ### P2-T01 · Projet Gprojet-Front, hébergement par le backend et tests bUnit
-> **Statut** : VALIDE · **Modèle** : sonnet · **Ordre** : 1 · **Dépend de** : —
+> **Statut** : NON_FAIT · **Modèle** : sonnet · **Ordre** : 1 · **Dépend de** : —
 
 **Explication** : **un seul projet front** `src/Gprojet-Front/Gprojet-Front.csproj` (`Microsoft.NET.Sdk.BlazorWebAssembly`, `RootNamespace Gprojet.Front`) ; les DTO y sont des **fichiers liés** (`<Compile Include="..\Gprojet-Backend\Contracts\**\*.cs" Link="Contracts\%(RecursiveDir)%(Filename)%(Extension)" />`), jamais copiés ; `Gprojet-Backend` référence `Gprojet-Front` et le sert (`UseBlazorFrameworkFiles`, `MapFallbackToFile("index.html")`, paquet `Microsoft.AspNetCore.Components.WebAssembly.Server`) : même origine, pas de proxy ni de CORS ; tests `tests/Gprojet-Front.Tests` (bUnit). Arborescence des couches front : `Api/`, `Services/`, `Models/`, `Pages/`, `Components/`, `Layouts/`, `State/`, `Auth/`, `Resources/`, `wwwroot/css/`, `wwwroot/fonts/`, `wwwroot/lib/`, `wwwroot/images/`.
 **Test de validation** : `dotnet build Gprojet.slnx` OK et `dotnet sln list` affiche exactement 4 projets ; test d'intégration backend : `GET /` → 200 HTML contenant `blazor.webassembly`, `GET /api/health` → 200 ; un DTO de `Gprojet-Backend/Contracts` est utilisé dans le front (compilation) ; règle d'architecture : le front ne référence aucun autre code du backend.
 
 ### P2-T02 · Charte HCP : intégration de app.css et des ressources
-> **Statut** : VALIDE · **Modèle** : sonnet · **Ordre** : 2 · **Dépend de** : P2-T01
+> **Statut** : NON_FAIT · **Modèle** : sonnet · **Ordre** : 2 · **Dépend de** : P2-T01
 
 **Explication** : appliquer `design/charte-hcp/README.md`. Copier `design/charte-hcp/app.css` dans `wwwroot/css/app.css` **sans autre modification** que le remplacement de l'`@import` Google Fonts par un `@font-face` local (Geist, licence OFL, fichiers dans `wwwroot/fonts/`). Créer `wwwroot/css/app.gp.css` (chargé après) : variantes de texte accessibles (`--success-text`, `--warning-text`, `--danger-text`, `--info-text`, `--purple-text`), badges des statuts GestionProjet (`.status-badge.a-faire`, `.a-valider`, `.bloque`, `.valide`…), classes manquantes, le tout à partir des variables de la charte. Auto-héberger Font Awesome Free 6 et Chart.js dans `wwwroot/lib/` ; logo HCP dans `wwwroot/images/`. `docs/DESIGN.md` : renvoi vers la charte et inventaire des classes utilisées / ajoutées.
 **Test de validation** : un script compare `design/charte-hcp/app.css` et `wwwroot/css/app.css` : seule la ligne `@import` diffère ; `grep -rE "https?://" src/Gprojet-Front/wwwroot/index.html src/Gprojet-Front/wwwroot/css` ne renvoie rien (aucune ressource externe) ; aucune couleur hexadécimale dans `Pages/`, `Components/`, `Layouts/` ni dans `app.gp.css` hors des 5 variables de texte documentées ; contraste de chaque variable de texte ≥ 4,5:1 (calcul dans un test).
 
 ### P2-T03 · Layout principal et navigation par rôle
-> **Statut** : VALIDE · **Modèle** : sonnet · **Ordre** : 3 · **Dépend de** : P2-T02
+> **Statut** : NON_FAIT · **Modèle** : sonnet · **Ordre** : 3 · **Dépend de** : P2-T02
 
 **Explication** : `MainLayout` identique à celui de la GED HCP : `.page` > `aside.sidebar` (`.sidebar-brand` avec logo HCP, sections `.nav-section-label`, `.nav-item` avec icône et `.nav-badge`, pied `.user-row`) + `.main-area` > `.topbar` (bouton de repli, `.breadcrumb-nav`, `.search-box` avec raccourci Ctrl+K, notifications) + `.content-area`. Menu construit selon les rôles / politiques (`AuthorizeView`) ; repli du menu et mode mobile (classes `sidebar-collapsed`, `mobile-open` dans `app.gp.css`).
 **Test de validation** : tests bUnit : le rendu contient `.page .sidebar`, `.main-area .topbar` et `.content-area` ; un agent ne voit pas l'entrée « Portefeuille direction », un directeur la voit ; l'action de repli ajoute `sidebar-collapsed`.
 
 ### P2-T04 · Mouvement selon la charte (motion-design)
-> **Statut** : VALIDE · **Modèle** : sonnet · **Ordre** : 4 · **Dépend de** : P2-T02
+> **Statut** : NON_FAIT · **Modèle** : sonnet · **Ordre** : 4 · **Dépend de** : P2-T02
 
 **Explication** : réutiliser **uniquement** les mouvements de la charte (`0.15s ease` pour les survols, `fadeIn 0.25s` / `.animate-in` pour les apparitions, `0.6s` pour les barres de progression) ; **motion-design** sert à décider où les appliquer (apparition des pages et des listes, dialogues, repli du menu), pas à créer d'autres durées. Neutralisation complète sous `prefers-reduced-motion: reduce` dans `app.gp.css`. Documenter dans `docs/DESIGN.md`.
 **Test de validation** : `app.gp.css` contient un bloc `@media (prefers-reduced-motion: reduce)` qui neutralise `transition` et `animation` ; aucune durée autre que 0.1s, 0.15s, 0.25s, 0.6s dans les CSS du projet (grep) ; aucune bibliothèque JS d'animation ajoutée (`git diff --stat` sur `wwwroot/lib` vide).
 
 ### P2-T05 · Couche Api : clients HTTP typés
-> **Statut** : VALIDE · **Modèle** : sonnet · **Ordre** : 5 · **Dépend de** : P2-T01
+> **Statut** : NON_FAIT · **Modèle** : sonnet · **Ordre** : 5 · **Dépend de** : P2-T01
 
 **Explication** : `ApiClientBase` (sérialisation System.Text.Json, conversion `ProblemDetails` → `ApiException` typée avec erreurs de validation, annulation), enregistrement des clients via `IHttpClientFactory` en adresses relatives (même origine que le backend), premier client `SanteApiClient`.
 **Test de validation** : tests unitaires avec `HttpMessageHandler` simulé : 200 → DTO ; 400 `problem+json` → `ApiException` contenant les erreurs par champ ; 404 → `ApiException.Statut == 404`.
 
 ### P2-T06 · Authentification côté front (BFF, mode dev)
-> **Statut** : VALIDE · **Modèle** : sonnet · **Ordre** : 6 · **Dépend de** : P2-T05
+> **Statut** : NON_FAIT · **Modèle** : sonnet · **Ordre** : 6 · **Dépend de** : P2-T05
 
 **Explication** : endpoints BFF dans `Gprojet-Backend/Web/Auth/` : `/bff/login` (dev : choix d'un matricule de démo), `/bff/logout`, `/bff/user` ; cookie `HttpOnly`, `Secure`, `SameSite=Strict` ; jeton anti-CSRF exigé sur les appels mutants ; `BffAuthenticationStateProvider` côté WASM ; page de connexion de développement.
 **Test de validation** : tests d'intégration BFF : `/bff/user` sans cookie → 401 ; après login dev → 200 avec matricule ; POST `/api/...` sans en-tête anti-CSRF → 400/403 ; test bUnit de `AuthorizeView` avec le provider.
 
 ### P2-T07 · État partagé et services front de base
-> **Statut** : VALIDE · **Modèle** : sonnet · **Ordre** : 7 · **Dépend de** : P2-T06
+> **Statut** : NON_FAIT · **Modèle** : sonnet · **Ordre** : 7 · **Dépend de** : P2-T06
 
 **Explication** : `State/UtilisateurCourantState`, `State/PerimetreState` (entité, niveau, chemin), `Services/NotificationUiService` (snackbar), `Services/ChargementService` (indicateur global), gestion centralisée des `ApiException` (message utilisateur, journal console).
 **Test de validation** : tests bUnit : un composant abonné à `PerimetreState` se rafraîchit au changement ; une `ApiException` 403 affiche le message « Accès refusé » via le snackbar.
 
 ### P2-T08 · Internationalisation fr / en / ar (RTL)
-> **Statut** : VALIDE · **Modèle** : sonnet · **Ordre** : 8 · **Dépend de** : P2-T03
+> **Statut** : NON_FAIT · **Modèle** : sonnet · **Ordre** : 8 · **Dépend de** : P2-T03
 
 **Explication** : `Resources/*.resx` (fr par défaut, en, ar), sélecteur de langue persistant (cookie BFF), `dir="rtl"` sur `<html>` et règles RTL dans `app.gp.css` (menu latéral à droite) pour l'arabe, formats de date et de nombre selon la culture.
 **Test de validation** : tests bUnit : en culture `ar-MA` le layout est rendu avec `dir="rtl"` ; un libellé du menu change selon la culture ; aucun texte en dur dans `Layouts/` (contrôle : test qui échoue si une chaîne littérale française apparaît dans un `.razor` du layout).
 
 ### P2-T09 · Pages système
-> **Statut** : VALIDE · **Modèle** : haiku · **Ordre** : 9 · **Dépend de** : P2-T08
+> **Statut** : NON_FAIT · **Modèle** : haiku · **Ordre** : 9 · **Dépend de** : P2-T08
 
 **Explication** : pages Accueil (placeholder du tableau de bord), 404, Accès refusé, Erreur inattendue (avec identifiant de corrélation), Chargement initial.
 **Test de validation** : tests bUnit : chaque page se rend sans exception et contient son titre traduit.
 
 ---
 
-## Phase P3 · Conteneurisation et intégration continue GitHub Actions
-> **Statut phase** : VALIDEE · **Modèle conseillé** : sonnet
+## Phase P3 · Conteneurisation et intégration continue GitLab
+> **Statut phase** : NON_DEMARREE · **Modèle conseillé** : sonnet
 
-**Objectif** : images Docker, environnement local complet par docker compose, intégration continue **GitHub Actions** sur le dépôt `hajar-hamid-coder/gprojet`. **Livrable** : `docker compose up` fonctionnel et `.github/workflows/ci.yml`. ⚠️ Nécessite Docker (hypothèse H-001).
+**Objectif** : images Docker, environnement local complet par docker compose, pipeline GitLab CI. **Livrable** : `docker compose up` fonctionnel et `.gitlab-ci.yml`. ⚠️ Nécessite Docker (hypothèse H-001).
 
 ### P3-T01 · Dockerfile de l'application
-> **Statut** : VALIDE · **Modèle** : sonnet · **Ordre** : 1 · **Dépend de** : —
+> **Statut** : NON_FAIT · **Modèle** : sonnet · **Ordre** : 1 · **Dépend de** : —
 
 **Explication** : `deploy/docker/Dockerfile` unique, multi-étapes, qui publie `Gprojet-Backend` (le front publié est servi par le backend) (`sdk:10.0` → `aspnet:10.0` chiseled ou alpine), utilisateur non-root, `HEALTHCHECK`, variables `ASPNETCORE_*`, pas de secret dans l'image ; `.dockerignore`.
 **Test de validation** : `docker build -f deploy/docker/Dockerfile -t gprojet:test .` réussit ; `docker run --rm gprojet:test id -u` ≠ 0 ; l'image contient le front (`wwwroot/_framework`) ; taille d'image affichée dans la preuve.
 
 ### P3-T02 · docker compose de développement
-> **Statut** : VALIDE · **Modèle** : sonnet · **Ordre** : 2 · **Dépend de** : P3-T01
+> **Statut** : NON_FAIT · **Modèle** : sonnet · **Ordre** : 2 · **Dépend de** : P3-T01
 
 **Explication** : `deploy/docker-compose.yml` : `postgres:18` (volume, base vide), service `migrations` (bundle EF `dotnet ef migrations bundle` qui crée le schéma — pas les scripts SQL, pour rester aligné sur les migrations), `app` (image unique), profil `keycloak` (préparé pour P18), réseau dédié, dépendances sur la santé ; `deploy/.env.example` sans valeur sensible.
 **Test de validation** : `docker compose -f deploy/docker-compose.yml up -d --wait` puis `curl -s http://localhost:8080/api/health` → 200 et `curl -s http://localhost:8080/` → HTML ; `docker compose down -v` propre.
 
 ### P3-T03 · Tests en CI avec PostgreSQL de service
-> **Statut** : VALIDE · **Modèle** : sonnet · **Ordre** : 3 · **Dépend de** : —
+> **Statut** : NON_FAIT · **Modèle** : sonnet · **Ordre** : 3 · **Dépend de** : —
 
 **Explication** : rendre les tests d'intégration indépendants de `pg-test.py` via la variable `GP_TEST_CONNECTION` (si définie : base fournie par la CI ; sinon : instance locale jetable). Fixture xUnit commune.
 **Test de validation** : `dotnet test` local (instance jetable) vert ; avec `GP_TEST_CONNECTION` pointant sur l'instance démarrée manuellement, les mêmes tests passent.
 
-### P3-T04 · Workflow GitHub Actions
-> **Statut** : VALIDE · **Modèle** : sonnet · **Ordre** : 4 · **Dépend de** : P3-T01, P3-T03
+### P3-T04 · Pipeline .gitlab-ci.yml
+> **Statut** : NON_FAIT · **Modèle** : sonnet · **Ordre** : 4 · **Dépend de** : P3-T01, P3-T03
 
-**Explication** : `.github/workflows/ci.yml` déclenché sur push et pull request : jobs `build`, `test` (service `postgres:18`, `GP_TEST_CONNECTION`, rapport de tests et couverture publiés comme artefacts), `qualite` (`dotnet format --verify-no-changes`), `securite` (CodeQL C#, `dependency-review` sur les pull requests, scan d'image Trivy), `paquet` (build et push de l'image vers **GitHub Container Registry** `ghcr.io` sur `main` et les tags, avec `GITHUB_TOKEN`), `deploiement` (`workflow_dispatch` + environnement protégé, préparé pour P13). Cache NuGet, versions d'actions épinglées. Vérifier que les modèles `.github/` (faits en P1-T01) sont cohérents avec le workflow.
-**Test de validation** : `python scripts/verifier-ci.py` (à écrire, parse YAML) confirme les 6 jobs, leurs dépendances, le service PostgreSQL et l'absence de secret en clair ; les modèles `.github/` sont présents. L'exécution réelle sur GitHub se constate après le push de l'utilisateur (signalé dans le bilan de phase).
+**Explication** : étapes `build`, `test` (service `postgres:18`, rapports JUnit et couverture Cobertura), `qualite` (`dotnet format --verify-no-changes`), `securite` (templates GitLab SAST, Dependency-Scanning, Secret-Detection, Container-Scanning), `paquet` (build et push des images vers le GitLab Container Registry sur `main` et les tags), `deploiement` (manuel, préparé pour P13). Cache NuGet.
+**Test de validation** : `python scripts/verifier-ci.py` (à écrire, parse YAML) confirme les 6 étapes, les rapports JUnit, l'absence de secret en clair ; validation par l'API CI Lint de GitLab si H-002 est répondue, sinon signalée dans la preuve.
 
 ### P3-T05 · Documentation de déploiement local
-> **Statut** : VALIDE · **Modèle** : haiku · **Ordre** : 5 · **Dépend de** : P3-T02, P3-T04
+> **Statut** : NON_FAIT · **Modèle** : haiku · **Ordre** : 5 · **Dépend de** : P3-T02, P3-T04
 
-**Explication** : `docs/DEPLOIEMENT.md` : prérequis, variables, démarrage compose, migrations, dépannage, description du workflow GitHub Actions, des secrets à créer (Settings → Secrets and variables → Actions) et de la publication d'image sur ghcr.io.
+**Explication** : `docs/DEPLOIEMENT.md` : prérequis, variables, démarrage compose, migrations, dépannage, description du pipeline et des variables CI à créer dans GitLab (masquées / protégées).
 **Test de validation** : le document contient les sections Prérequis, Démarrage, Variables, Pipeline, Dépannage ; chaque commande citée existe dans le dépôt.
 
 ---
