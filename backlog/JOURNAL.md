@@ -229,3 +229,5 @@
 - **2026-10-21 11:03** — NOTE P3-T02 — exécuteur OK (essai 1) : test sur APP_HOST_PORT=18080 (8080 occupé par youtrack) ; vérification lancée
 - **2026-10-21 11:03** — Hypothèse H-036 créée pour P3-T02 (bloquante : non).
 - **2026-10-21 11:04** — NOTE P3-T02 — vérificateur OK (essai 1) : réserve KEYCLOAK_ADMIN_PASSWORD obligatoire hors profil → corrigée (:-), config -q OK
+- **2026-10-21 11:04** — NOTE P3-T02 — commit f1f2a00
+- **2026-10-21 11:04** — P3-T02 EN_COURS → A_VALIDER — preuve : docker compose -f deploy/docker-compose.yml up -d --wait (APP_HOST_PORT=18080, H-036) → OK ; /api/health 200 ; / HTML ; 61 tables par le bundle EF ; down -v propre; vérificateur OK; commit f1f2a00

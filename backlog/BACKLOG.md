@@ -19,14 +19,14 @@
 
 <!-- RESUME:DEBUT -->
 
-_Mis à jour le 2026-10-21 10:59 par scripts/backlog.py — ne pas modifier à la main._
+_Mis à jour le 2026-10-21 11:04 par scripts/backlog.py — ne pas modifier à la main._
 
 | Phase | Titre | Statut | Modèle | Avancement |
 |---|---|---|---|---|
 | P0 | Initialisation et outillage | ✅ VALIDEE | sonnet | 6/6 |
 | P1 | Socle backend .NET 10 | ✅ VALIDEE | opus | 11/11 |
 | P2 | Socle frontend Blazor WebAssembly et BFF | ✅ VALIDEE | sonnet | 9/9 |
-| P3 | Conteneurisation et intégration continue GitHub Actions | 🔄 EN_COURS | sonnet | 1/5 |
+| P3 | Conteneurisation et intégration continue GitHub Actions | 🔄 EN_COURS | sonnet | 2/5 |
 | P4 | Module Organisation et périmètre hiérarchique | ⬜ NON_DEMARREE | sonnet | 0/8 |
 | P5 | Projets et affectation en cascade | ⬜ NON_DEMARREE | opus | 0/10 |
 | P6 | Planification et ordonnancement | ⬜ NON_DEMARREE | opus | 0/12 |
@@ -237,7 +237,7 @@ _Mis à jour le 2026-10-21 10:59 par scripts/backlog.py — ne pas modifier à l
 **Test de validation** : `docker build -f deploy/docker/Dockerfile -t gprojet:test .` réussit ; `docker run --rm gprojet:test id -u` ≠ 0 ; l'image contient le front (`wwwroot/_framework`) ; taille d'image affichée dans la preuve.
 
 ### P3-T02 · docker compose de développement
-> **Statut** : EN_COURS · **Modèle** : sonnet · **Ordre** : 2 · **Dépend de** : P3-T01
+> **Statut** : A_VALIDER · **Modèle** : sonnet · **Ordre** : 2 · **Dépend de** : P3-T01
 
 **Explication** : `deploy/docker-compose.yml` : `postgres:18` (volume, base vide), service `migrations` (bundle EF `dotnet ef migrations bundle` qui crée le schéma — pas les scripts SQL, pour rester aligné sur les migrations), `app` (image unique), profil `keycloak` (préparé pour P18), réseau dédié, dépendances sur la santé ; `deploy/.env.example` sans valeur sensible.
 **Test de validation** : `docker compose -f deploy/docker-compose.yml up -d --wait` puis `curl -s http://localhost:8080/api/health` → 200 et `curl -s http://localhost:8080/` → HTML ; `docker compose down -v` propre.
