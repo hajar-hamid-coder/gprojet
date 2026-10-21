@@ -27,7 +27,7 @@ claude --permission-mode auto --model sonnet
 | — | Phase terminée : présente le bilan et demande `/valider-phase P0`. |
 | `/refuser-tache P0-T04 <motif>` *(si besoin)* | Reprend la tâche en tenant compte du motif, puis redemande la validation. |
 | `/repondre-hypothese H-003 <réponse>` *(si besoin)* | Débloque la tâche concernée et continue. |
-| `/valider-phase P0` | Clôt la phase, annonce la suivante et son modèle. Vous poussez la branche vers GitHub et ouvrez la pull request. |
+| `/valider-phase P0` | Clôt la phase, annonce la suivante et son modèle. Vous poussez la branche vers GitLab. |
 | `/model opus` puis `/lancer-phase P1` | … et ainsi de suite jusqu'à P19. |
 
 `/etat-projet` affiche l'avancement à tout moment ; `/reprendre` relance proprement le travail après une interruption. Au démarrage de chaque session, un hook injecte automatiquement l'état du backlog dans le contexte de Claude.

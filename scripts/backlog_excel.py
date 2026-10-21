@@ -86,11 +86,6 @@ def ordre_global(phases: list[bl.Phase]) -> list[tuple[bl.Phase, bl.Tache]]:
     return resultat
 
 
-def compter(p: bl.Phase) -> tuple[int, int, int]:
-    """(tâches, faites = A_VALIDER ou VALIDE, bloquées)."""
-    return (len(p.taches), sum(t.statut in bl.TERMINES for t in p.taches), sum(t.statut == "BLOQUE" for t in p.taches))
-
-
 def entete(ws, ligne: int, colonnes: list[tuple[str, int]]) -> None:
     for i, (nom, largeur) in enumerate(colonnes, start=1):
         c = ws.cell(row=ligne, column=i, value=nom)
@@ -131,26 +126,29 @@ def feuille_ordre(wb: Workbook, phases, lignes_md, hyps) -> None:
                 "les statuts changent via /lancer-phase, /valider-phase, /refuser-tache et scripts/backlog.py.")
     ws["A2"].font = SOUS_TITRE
 
-    # Synthèse par phase. Valeurs calculées ici et non par formules : le classeur est régénéré à chaque
-    # transition, et une formule sans valeur en cache s'affiche vide dans les visionneuses qui ne recalculent pas.
+    # Synthèse par phase (avancement calculé par formule sur chaque feuille de phase)
     entete(ws, 4, [("Phase", 8), ("Titre", 46), ("Statut phase", 15), ("Modèle conseillé", 14),
                    ("Tâches", 9), ("Faites", 9), ("Avancement", 12), ("Bloquées", 10)])
-    totaux = [0, 0, 0]
     for i, p in enumerate(phases):
         r = 5 + i
-        nb, faites, bloquees = compter(p)
-        totaux = [totaux[0] + nb, totaux[1] + faites, totaux[2] + bloquees]
-        ecrire_ligne(ws, r, [p.id, p.titre, p.statut, p.modele, nb, faites, faites / nb if nb else 0, bloquees],
-                     {1, 3, 4, 5, 6, 7, 8})
-        ws.cell(row=r, column=1).hyperlink = f"#'{nom_feuille(p)}'!A1"
+        f = nom_feuille(p)
+        codes, statuts = f"'{f}'!B8:B200", f"'{f}'!F8:F200"  # guillemets : « P1 » ressemble à une cellule
+        ecrire_ligne(ws, r, [p.id, p.titre, p.statut, p.modele,
+                             f"=COUNTA({codes})",
+                             f'=COUNTIF({statuts},"A_VALIDER")+COUNTIF({statuts},"VALIDE")',
+                             f"=IF(E{r}=0,0,F{r}/E{r})",
+                             f'=COUNTIF({statuts},"BLOQUE")'], {1, 3, 4, 5, 6, 7, 8})
+        ws.cell(row=r, column=1).hyperlink = f"#'{f}'!A1"
         ws.cell(row=r, column=7).number_format = "0%"
     fin_synthese = 4 + len(phases)
     total = fin_synthese + 1
     ws.cell(row=total, column=2, value="Total").font = GRAS
-    for col, val in ((5, totaux[0]), (6, totaux[1]), (7, totaux[1] / totaux[0] if totaux[0] else 0), (8, totaux[2])):
-        c = ws.cell(row=total, column=col, value=val)
+    for col in (5, 6, 8):
+        lettre = get_column_letter(col)
+        c = ws.cell(row=total, column=col, value=f"=SUM({lettre}5:{lettre}{fin_synthese})")
         c.font, c.alignment = GRAS, CENTRE
-    ws.cell(row=total, column=7).number_format = "0%"
+    c = ws.cell(row=total, column=7, value=f"=IF(E{total}=0,0,F{total}/E{total})")
+    c.font, c.alignment, c.number_format = GRAS, CENTRE, "0%"
     colorer(ws, f"C5:C{fin_synthese}", COULEURS_STATUT)
     colorer(ws, f"D5:D{fin_synthese}", COULEURS_MODELE)
 
@@ -193,8 +191,8 @@ def feuille_phase(wb: Workbook, p: bl.Phase, lignes_md, hyps) -> None:
     ws["A2"].alignment = Alignment(wrap_text=True, vertical="top")
     ws.merge_cells("A2:J2")
     ws.row_dimensions[2].height = 32
-    nb, faites, _ = compter(p)
-    infos = [("Statut phase", p.statut), ("Modèle conseillé", p.modele), ("Avancement", faites / nb if nb else 0)]
+    infos = [("Statut phase", p.statut), ("Modèle conseillé", p.modele),
+             ("Avancement", '=IF(COUNTA(B8:B200)=0,0,(COUNTIF(F8:F200,"A_VALIDER")+COUNTIF(F8:F200,"VALIDE"))/COUNTA(B8:B200))')]
     for i, (lib, val) in enumerate(infos):
         ws.cell(row=3 + i, column=1, value=lib).font = GRAS
         c = ws.cell(row=3 + i, column=2, value=val)
@@ -284,6 +282,7 @@ def exporter(sortie: Path = SORTIE) -> Path:
         feuille_phase(wb, p, lignes_md, hyps)
     feuille_hypotheses(wb, hyps)
     feuille_legende(wb)
+    wb.calculation.fullCalcOnLoad = True  # Excel recalcule les formules d'avancement à l'ouverture
     wb.save(sortie)
     return sortie
 
