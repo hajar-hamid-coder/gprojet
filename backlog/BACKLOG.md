@@ -19,14 +19,14 @@
 
 <!-- RESUME:DEBUT -->
 
-_Mis à jour le 2026-10-21 11:04 par scripts/backlog.py — ne pas modifier à la main._
+_Mis à jour le 2026-10-21 11:08 par scripts/backlog.py — ne pas modifier à la main._
 
 | Phase | Titre | Statut | Modèle | Avancement |
 |---|---|---|---|---|
 | P0 | Initialisation et outillage | ✅ VALIDEE | sonnet | 6/6 |
 | P1 | Socle backend .NET 10 | ✅ VALIDEE | opus | 11/11 |
 | P2 | Socle frontend Blazor WebAssembly et BFF | ✅ VALIDEE | sonnet | 9/9 |
-| P3 | Conteneurisation et intégration continue GitHub Actions | 🔄 EN_COURS | sonnet | 2/5 |
+| P3 | Conteneurisation et intégration continue GitHub Actions | 🔄 EN_COURS | sonnet | 3/5 |
 | P4 | Module Organisation et périmètre hiérarchique | ⬜ NON_DEMARREE | sonnet | 0/8 |
 | P5 | Projets et affectation en cascade | ⬜ NON_DEMARREE | opus | 0/10 |
 | P6 | Planification et ordonnancement | ⬜ NON_DEMARREE | opus | 0/12 |
@@ -243,7 +243,7 @@ _Mis à jour le 2026-10-21 11:04 par scripts/backlog.py — ne pas modifier à l
 **Test de validation** : `docker compose -f deploy/docker-compose.yml up -d --wait` puis `curl -s http://localhost:8080/api/health` → 200 et `curl -s http://localhost:8080/` → HTML ; `docker compose down -v` propre.
 
 ### P3-T03 · Tests en CI avec PostgreSQL de service
-> **Statut** : EN_COURS · **Modèle** : sonnet · **Ordre** : 3 · **Dépend de** : —
+> **Statut** : A_VALIDER · **Modèle** : sonnet · **Ordre** : 3 · **Dépend de** : —
 
 **Explication** : rendre les tests d'intégration indépendants de `pg-test.py` via la variable `GP_TEST_CONNECTION` (si définie : base fournie par la CI ; sinon : instance locale jetable). Fixture xUnit commune.
 **Test de validation** : `dotnet test` local (instance jetable) vert ; avec `GP_TEST_CONNECTION` pointant sur l'instance démarrée manuellement, les mêmes tests passent.

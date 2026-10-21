@@ -235,3 +235,5 @@
 - **2026-10-21 11:04** — NOTE P3-T03 — délégué à executeur-sonnet (essai 1)
 - **2026-10-21 11:06** — NOTE P3-T03 — exécuteur OK (essai 1) : 157/157 + 50/50, GP_TEST_CONNECTION 157/157 ; vérification lancée
 - **2026-10-21 11:08** — NOTE P3-T03 — vérificateur OK (essai 1) : aucun écart (local, GP_TEST_CONNECTION, avec mot de passe)
+- **2026-10-21 11:08** — NOTE P3-T03 — commit b2015f9
+- **2026-10-21 11:08** — P3-T03 EN_COURS → A_VALIDER — preuve : dotnet test local → 157/157 + 50/50 ; GP_TEST_CONNECTION (pg-test 55432) → 157/157 ; postgres:18 avec mot de passe → 157/157; vérificateur OK; commit b2015f9
