@@ -242,3 +242,5 @@
 - **2026-10-21 11:16** — NOTE P3-T04 — exécuteur OK (essai 1) : verifier-ci OK + auto-test, format propre (30 .cs reformatés, règle .editorconfig static PascalCase), coverlet ajouté ; vérification lancée
 - **2026-10-21 11:16** — Hypothèse H-037 créée pour P3-T04 (bloquante : non).
 - **2026-10-21 11:17** — NOTE P3-T04 — vérificateur OK (essai 1) : aucun écart ; exécution GitHub à constater après push (H-037)
+- **2026-10-21 11:17** — NOTE P3-T04 — commit 8a77b23
+- **2026-10-21 11:17** — P3-T04 EN_COURS → A_VALIDER — preuve : python scripts/verifier-ci.py → conforme (6 jobs, needs, postgres:18, aucun secret, épinglage, modèles) ; --auto-test → 4 pièges rejetés ; dotnet format propre ; tests 157/157 + 50/50; vérificateur OK; commit 8a77b23

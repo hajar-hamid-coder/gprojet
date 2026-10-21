@@ -19,14 +19,14 @@
 
 <!-- RESUME:DEBUT -->
 
-_Mis à jour le 2026-10-21 11:09 par scripts/backlog.py — ne pas modifier à la main._
+_Mis à jour le 2026-10-21 11:17 par scripts/backlog.py — ne pas modifier à la main._
 
 | Phase | Titre | Statut | Modèle | Avancement |
 |---|---|---|---|---|
 | P0 | Initialisation et outillage | ✅ VALIDEE | sonnet | 6/6 |
 | P1 | Socle backend .NET 10 | ✅ VALIDEE | opus | 11/11 |
 | P2 | Socle frontend Blazor WebAssembly et BFF | ✅ VALIDEE | sonnet | 9/9 |
-| P3 | Conteneurisation et intégration continue GitHub Actions | 🔄 EN_COURS | sonnet | 3/5 |
+| P3 | Conteneurisation et intégration continue GitHub Actions | 🔄 EN_COURS | sonnet | 4/5 |
 | P4 | Module Organisation et périmètre hiérarchique | ⬜ NON_DEMARREE | sonnet | 0/8 |
 | P5 | Projets et affectation en cascade | ⬜ NON_DEMARREE | opus | 0/10 |
 | P6 | Planification et ordonnancement | ⬜ NON_DEMARREE | opus | 0/12 |
@@ -249,7 +249,7 @@ _Mis à jour le 2026-10-21 11:09 par scripts/backlog.py — ne pas modifier à l
 **Test de validation** : `dotnet test` local (instance jetable) vert ; avec `GP_TEST_CONNECTION` pointant sur l'instance démarrée manuellement, les mêmes tests passent.
 
 ### P3-T04 · Workflow GitHub Actions
-> **Statut** : EN_COURS · **Modèle** : sonnet · **Ordre** : 4 · **Dépend de** : P3-T01, P3-T03
+> **Statut** : A_VALIDER · **Modèle** : sonnet · **Ordre** : 4 · **Dépend de** : P3-T01, P3-T03
 
 **Explication** : `.github/workflows/ci.yml` déclenché sur push et pull request : jobs `build`, `test` (service `postgres:18`, `GP_TEST_CONNECTION`, rapport de tests et couverture publiés comme artefacts), `qualite` (`dotnet format --verify-no-changes`), `securite` (CodeQL C#, `dependency-review` sur les pull requests, scan d'image Trivy), `paquet` (build et push de l'image vers **GitHub Container Registry** `ghcr.io` sur `main` et les tags, avec `GITHUB_TOKEN`), `deploiement` (`workflow_dispatch` + environnement protégé, préparé pour P13). Cache NuGet, versions d'actions épinglées. Vérifier que les modèles `.github/` (faits en P1-T01) sont cohérents avec le workflow.
 **Test de validation** : `python scripts/verifier-ci.py` (à écrire, parse YAML) confirme les 6 jobs, leurs dépendances, le service PostgreSQL et l'absence de secret en clair ; les modèles `.github/` sont présents. L'exécution réelle sur GitHub se constate après le push de l'utilisateur (signalé dans le bilan de phase).
