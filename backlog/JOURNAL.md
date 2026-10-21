@@ -231,3 +231,7 @@
 - **2026-10-21 11:04** — NOTE P3-T02 — vérificateur OK (essai 1) : réserve KEYCLOAK_ADMIN_PASSWORD obligatoire hors profil → corrigée (:-), config -q OK
 - **2026-10-21 11:04** — NOTE P3-T02 — commit f1f2a00
 - **2026-10-21 11:04** — P3-T02 EN_COURS → A_VALIDER — preuve : docker compose -f deploy/docker-compose.yml up -d --wait (APP_HOST_PORT=18080, H-036) → OK ; /api/health 200 ; / HTML ; 61 tables par le bundle EF ; down -v propre; vérificateur OK; commit f1f2a00
+- **2026-10-21 11:04** — P3-T03 NON_FAIT → EN_COURS
+- **2026-10-21 11:04** — NOTE P3-T03 — délégué à executeur-sonnet (essai 1)
+- **2026-10-21 11:06** — NOTE P3-T03 — exécuteur OK (essai 1) : 157/157 + 50/50, GP_TEST_CONNECTION 157/157 ; vérification lancée
+- **2026-10-21 11:08** — NOTE P3-T03 — vérificateur OK (essai 1) : aucun écart (local, GP_TEST_CONNECTION, avec mot de passe)

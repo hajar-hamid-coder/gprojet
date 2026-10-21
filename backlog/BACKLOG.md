@@ -243,7 +243,7 @@ _Mis à jour le 2026-10-21 11:04 par scripts/backlog.py — ne pas modifier à l
 **Test de validation** : `docker compose -f deploy/docker-compose.yml up -d --wait` puis `curl -s http://localhost:8080/api/health` → 200 et `curl -s http://localhost:8080/` → HTML ; `docker compose down -v` propre.
 
 ### P3-T03 · Tests en CI avec PostgreSQL de service
-> **Statut** : NON_FAIT · **Modèle** : sonnet · **Ordre** : 3 · **Dépend de** : —
+> **Statut** : EN_COURS · **Modèle** : sonnet · **Ordre** : 3 · **Dépend de** : —
 
 **Explication** : rendre les tests d'intégration indépendants de `pg-test.py` via la variable `GP_TEST_CONNECTION` (si définie : base fournie par la CI ; sinon : instance locale jetable). Fixture xUnit commune.
 **Test de validation** : `dotnet test` local (instance jetable) vert ; avec `GP_TEST_CONNECTION` pointant sur l'instance démarrée manuellement, les mêmes tests passent.

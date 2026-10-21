@@ -35,6 +35,7 @@ Les règles complètes (périmètre, conventions, interdits) sont dans [CLAUDE.m
 
 - Frameworks : xUnit et FluentAssertions ; bUnit pour les composants ; NetArchTest pour les couches.
 - Tests et PostgreSQL : l'instance jetable uniquement, jamais la base `gprojet`.
+- `GP_TEST_CONNECTION` (chaîne Npgsql d'un serveur, ex. service `postgres:18` de la CI) : si définie, les tests d'intégration l'utilisent au lieu de `pg-test.py` (base jetable `gp_it_*` créée puis supprimée ; `Database=gprojet` refusée).
 
 ```bash
 python scripts/pg-test.py demarrer     # instance jetable, port 55432

@@ -17,15 +17,32 @@ public sealed class PgTestGroupe : ICollectionFixture<PgTestFixture>
 /// Base jetable dédiée aux tests, créée sur l'instance <c>pg-test</c> (port 55432, jamais <c>gprojet</c>) puis migrée par EF.
 /// Si l'instance n'est pas démarrée, la fixture lance <c>python scripts/pg-test.py demarrer --vide</c> et l'arrête à la fin ;
 /// si elle l'est déjà (<c>python scripts/pg-test.py demarrer --vide</c> lancé à la main), elle la laisse en place.
+/// Si <c>GP_TEST_CONNECTION</c> est définie (serveur fourni par la CI), pg-test.py n'est jamais lancé.
 /// </summary>
 public sealed class PgTestFixture : IAsyncLifetime
 {
     private static readonly string Port = Environment.GetEnvironmentVariable("PG_TEST_PORT") ?? "55432";
     private readonly string _base = "gp_it_" + Guid.NewGuid().ToString("N")[..12];
+    private readonly NpgsqlConnectionStringBuilder _admin;
+    private readonly bool _fournie;
     private bool _demarreeParNous;
     private string _script = null!;
 
-    public string Chaine => $"Host=localhost;Port={Port};Database={_base};Username=postgres;Pooling=false";
+    public PgTestFixture()
+    {
+        var fournie = Environment.GetEnvironmentVariable("GP_TEST_CONNECTION");
+        _fournie = !string.IsNullOrWhiteSpace(fournie);
+        // GP_TEST_CONNECTION = serveur fourni par la CI : seule la base jetable gp_it_* est migrée, jamais la base désignée ; Database=gprojet refusée (base de dev).
+        _admin = _fournie
+            ? new NpgsqlConnectionStringBuilder(fournie) { Database = "postgres", Pooling = false }
+            : new NpgsqlConnectionStringBuilder($"Host=localhost;Port={Port};Database=postgres;Username=postgres;Pooling=false");
+        if (_fournie && string.Equals(new NpgsqlConnectionStringBuilder(fournie).Database, "gprojet", StringComparison.OrdinalIgnoreCase))
+        {
+            throw new InvalidOperationException("GP_TEST_CONNECTION ne doit jamais cibler la base de développement 'gprojet'.");
+        }
+    }
+
+    public string Chaine => new NpgsqlConnectionStringBuilder(_admin.ConnectionString) { Database = _base }.ConnectionString;
 
     /// <summary>Connexion superutilisateur à la base de test (manipulations SQL directes).</summary>
     public NpgsqlConnection Ouvrir() => new(Chaine);
@@ -37,21 +54,24 @@ public sealed class PgTestFixture : IAsyncLifetime
 
     public async Task InitializeAsync()
     {
-        var dossier = new DirectoryInfo(AppContext.BaseDirectory);
-        while (dossier is not null && !File.Exists(Path.Combine(dossier.FullName, "scripts", "pg-test.py")))
+        if (!_fournie)
         {
-            dossier = dossier.Parent;
+            var dossier = new DirectoryInfo(AppContext.BaseDirectory);
+            while (dossier is not null && !File.Exists(Path.Combine(dossier.FullName, "scripts", "pg-test.py")))
+            {
+                dossier = dossier.Parent;
+            }
+
+            _script = Path.Combine(dossier?.FullName ?? throw new InvalidOperationException("scripts/pg-test.py introuvable."), "scripts", "pg-test.py");
+
+            if (!await InstanceJoignableAsync())
+            {
+                Python("demarrer", "--vide");
+                _demarreeParNous = true;
+            }
         }
 
-        _script = Path.Combine(dossier?.FullName ?? throw new InvalidOperationException("scripts/pg-test.py introuvable."), "scripts", "pg-test.py");
-
-        if (!await InstanceJoignableAsync())
-        {
-            Python("demarrer", "--vide");
-            _demarreeParNous = true;
-        }
-
-        await using (var admin = new NpgsqlConnection($"Host=localhost;Port={Port};Database=postgres;Username=postgres;Pooling=false"))
+        await using (var admin = new NpgsqlConnection(_admin.ConnectionString))
         {
             await admin.OpenAsync();
             await using var cmd = new NpgsqlCommand($"CREATE DATABASE {_base}", admin);
@@ -70,7 +90,7 @@ public sealed class PgTestFixture : IAsyncLifetime
         }
         else
         {
-            using var admin = new NpgsqlConnection($"Host=localhost;Port={Port};Database=postgres;Username=postgres;Pooling=false");
+            using var admin = new NpgsqlConnection(_admin.ConnectionString);
             admin.Open();
             using var cmd = new NpgsqlCommand($"DROP DATABASE IF EXISTS {_base} WITH (FORCE)", admin);
             cmd.ExecuteNonQuery();
@@ -79,11 +99,11 @@ public sealed class PgTestFixture : IAsyncLifetime
         return Task.CompletedTask;
     }
 
-    private static async Task<bool> InstanceJoignableAsync()
+    private async Task<bool> InstanceJoignableAsync()
     {
         try
         {
-            await using var c = new NpgsqlConnection($"Host=localhost;Port={Port};Database=postgres;Username=postgres;Timeout=3;Pooling=false");
+            await using var c = new NpgsqlConnection(new NpgsqlConnectionStringBuilder(_admin.ConnectionString) { Timeout = 3 }.ConnectionString);
             await c.OpenAsync();
             return true;
         }
