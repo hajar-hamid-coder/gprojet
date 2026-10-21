@@ -1,0 +1,68 @@
+using Gprojet.Backend.Common;
+using Gprojet.Backend.Contracts.Commun;
+using Gprojet.Backend.Infrastructure.Authentification;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Gprojet.Backend.Web.Auth;
+
+public static class BffEndpoints
+{
+    public const string CheminLogin = "/bff/login";
+
+    /// <summary>/bff/user et /bff/logout partout ; le login de développement n'est mappé qu'en Development / Test.</summary>
+    public static IEndpointRouteBuilder MapBff(this IEndpointRouteBuilder app, bool loginDev)
+    {
+        app.MapGet("/bff/user", (ICurrentUser u) => new UtilisateurDto(u.Id, u.Matricule, u.EntiteId, [.. u.Roles]))
+            .RequireAuthorization();
+
+        app.MapPost("/bff/logout", async (HttpContext ctx) =>
+        {
+            await ctx.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return Results.NoContent();
+        }).RequireAuthorization();
+
+        // Langue d'affichage : cookie lisible par le front (non HttpOnly, aucune donnée sensible), liste blanche stricte.
+        app.MapPost("/bff/langue", (LangueDto dto, HttpContext ctx) =>
+        {
+            var culture = Langues.Cultures.FirstOrDefault(c => c == dto.Culture);
+            if (culture is null)
+            {
+                return Results.ValidationProblem(new Dictionary<string, string[]> { ["culture"] = [$"Culture non prise en charge ({string.Join(", ", Langues.Cultures)})."] });
+            }
+
+            ctx.Response.Cookies.Append(Langues.NomCookie, culture, new CookieOptions
+            {
+                HttpOnly = false,
+                Secure = ctx.Request.IsHttps,
+                SameSite = SameSiteMode.Lax,
+                MaxAge = TimeSpan.FromDays(365),
+                Path = "/",
+                IsEssential = true
+            });
+            return Results.NoContent();
+        }).AllowAnonymous();
+
+        if (loginDev)
+        {
+            // Sert de sonde au front : 204 si le login de développement existe (sinon 404).
+            app.MapGet(CheminLogin, () => Results.NoContent()).AllowAnonymous();
+
+            // Formulaire classique : le cookie est posé par la réponse de navigation, redirection fixe (pas d'open redirect).
+            app.MapPost(CheminLogin, async (HttpContext ctx, [FromForm] string? matricule, IChargeurIdentite chargeur) =>
+            {
+                var principal = string.IsNullOrWhiteSpace(matricule) ? null : await chargeur.ChargerAsync(matricule.Trim(), ctx.RequestAborted);
+                if (principal is null)
+                {
+                    return Results.Redirect("/connexion?erreur=1");
+                }
+
+                await ctx.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+                return Results.Redirect("/");
+            }).AllowAnonymous().DisableAntiforgery();
+        }
+
+        return app;
+    }
+}

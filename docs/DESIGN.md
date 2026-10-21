@@ -1,0 +1,57 @@
+# Design : charte HCP
+
+La charte fait foi : `design/charte-hcp/README.md` (palette, police, composants, accessibilité) et `design/charte-hcp/app.css` (ne jamais modifier). Ce document n'en est que l'inventaire côté front.
+
+## Fichiers CSS (`src/Gprojet-Front/wwwroot/css/`)
+
+| Fichier | Rôle |
+|---|---|
+| `app.css` | Copie de la charte. Seule différence : la ligne `@import` Google Fonts est remplacée par 4 blocs `@font-face` locaux (Geist 400/500/600/700, `font-display: swap`, `../fonts/`). Contrôle : `python scripts/verifier-charte.py`. |
+| `app.gp.css` | Ajouts GestionProjet, chargé après `app.css`, uniquement avec les variables de la charte. |
+
+Ordre de chargement dans `index.html` : `app.css`, `app.gp.css`, Font Awesome. Chart.js n'est pas chargé globalement : une page qui trace un graphique ajoute `<script src="lib/chartjs-4.5.1/chart.umd.min.js">`, avec les couleurs lues dans les variables CSS.
+
+## Classes de la charte utilisées
+
+Layout : `.page`, `.sidebar`, `.sidebar-brand`, `.nav-section-label`, `.nav-item`, `.nav-badge`, `.sidebar-footer`, `.user-row`, `.main-area`, `.topbar`, `.breadcrumb-nav`, `.search-box`, `.content-area`, `.page-header`. Indicateurs : `.stats-grid`, `.stat-card`, `.stat-label`, `.stat-value`, `.stat-trend`, `.stat-bar`. Listes : `.explorer-toolbar`, `.toolbar-btn`, `.explorer-table`, `.explorer-header`, `.explorer-row`, `.explorer-breadcrumb`. Blocs : `.card-container`, `.card-header`, `.data-row`. Statuts : `.status-badge` (+ `.en-cours`, `.termine`, `.urgent`, `.en-attente`), `.inbox-priority`. Files : `.inbox-tabs`, `.inbox-item`, `.inbox-actions`, `.inbox-action-btn`. Formulaires : `.form-group`, `.form-input`, `.checkbox-label`, `.login-btn`. États vides : `.empty-state`. Mouvement : `.animate-in` (0.25s).
+
+## Ajouts dans `app.gp.css`
+
+- Variables de texte (H-014), seules couleurs hexadécimales autorisées : `--success-text #047857`, `--warning-text #B45309`, `--danger-text #B91C1C`, `--info-text #1D4ED8`, `--purple-text #6D28D9`. Contraste ≥ 4,5:1 sur le fond du badge (couleur d'origine à 8 % sur blanc), vérifié par `CharteTests`.
+- Badges de statut (`.status-badge.<statut>`, kebab-case), couleur du texte accessible :
+  - bleu : `en-cours`, `gele` ; vert : `termine`, `valide`, `validee`, `accepte`, `atteint`, `livre`, `clos` ;
+  - rouge : `urgent`, `bloque`, `rejete`, `en-retard` ; orange : `en-attente`, `suspendu`, `renvoye` ;
+  - violet : `a-valider`, `soumise`, `en-validation` ;
+  - neutre (texte principal sur `--bg-muted`) : `a-faire`, `a-venir`, `a-produire`, `brouillon`, `ouvert`, `cloture`, `archive`, `annule`, `verrouillee`.
+- Textes : `.text-success`, `.text-warning`, `.text-danger`, `.text-info`, `.text-purple`. Messages : `.message-erreur`, `.message-succes`.
+- Layout (P2-T03) : `.page.sidebar-collapsed .sidebar` (repli en bureau, largeur 0, transition 0.25s) ; `.page.mobile-open .sidebar` (tiroir fixe sous 768 px, transition 0.25s, seul `mobile-open` pilote le menu en mobile) ; `.skip-link` (lien « Aller au contenu », visible au focus) ; `.nav-item .nav-icon` ajusté pour les icônes Font Awesome. Variables de la charte uniquement ; transitions neutralisées sous `prefers-reduced-motion`. Raccourci Ctrl+K et lien d'évitement : `wwwroot/js/layout.js` (sans bibliothèque).
+- Snackbar et chargement (P2-T07) : la charte n'a pas de toast ; `.snackbar` réutilise `.message-erreur` / `.message-succes` (+ `.snackbar-info`), empilé en bas à droite (`.snackbar-zone`), apparition `.animate-in` (0.25s). Erreurs en `role="alert"`, autres en `role="status"`, fermeture manuelle ou auto (6 s). Indicateur global `.chargement-global` : `.spinner` de la charte recoloré (`--border-strong` / `--accent`), 0.6s.
+- Accessibilité : `.sr-only`, `:focus-visible` (anneau `--accent-soft` de la charte), neutralisation des animations sous `prefers-reduced-motion: reduce`.
+
+## Mouvement (P2-T04)
+
+Durées autorisées, uniquement celles de la charte : `0.1s` et `0.15s ease` (survols), `0.25s ease` (`fadeIn` / `.animate-in`, repli du menu), `0.6s` (barres de progression). Aucune autre durée ni courbe, aucune bibliothèque d'animation.
+
+| Où | Mouvement |
+|---|---|
+| Contenu de page | `.animate-in` sur le conteneur de `@Body` dans `MainLayout`, clé = route (sans requête ni ancre) : rejoué à chaque navigation seulement |
+| Repli / tiroir du menu | `transition` 0.25s (`.sidebar`) |
+| Dialogues | règle prête `dialog[open], [role="dialog"]` en `fadeIn 0.25s` ; le composant reste à créer |
+| Listes | règle : poser `.animate-in` sur le conteneur de la liste (jamais ligne par ligne, pas de cascade) ; à appliquer à la création des composants de liste |
+| Survols, boutons | `0.15s ease` hérité de la charte |
+
+Neutralisation : un seul bloc `@media (prefers-reduced-motion: reduce)` dans `app.gp.css` met `animation: none` et `transition: none` partout. Test : `dotnet test --filter Category=Mouvement`.
+
+## Bibliothèques auto-hébergées (aucune ressource Internet)
+
+| Bibliothèque | Version | Emplacement | Licence | Source |
+|---|---|---|---|---|
+| Geist (latin 400/500/600/700, woff2) | 5.3.0 (`@fontsource/geist`) | `wwwroot/fonts/` | SIL OFL 1.1 (`LICENSE-Geist-OFL.txt`) | npm |
+| Font Awesome Free | 6.7.2 | `wwwroot/lib/fontawesome-free-6.7.2/` (`css/`, `webfonts/` woff2 seuls) | icônes CC BY 4.0, polices OFL 1.1, code MIT (`LICENSE.txt`) | npm `@fortawesome/fontawesome-free` |
+| Chart.js | 4.5.1 (`chart.umd.min.js`) | `wwwroot/lib/chartjs-4.5.1/` | MIT (`LICENSE.md`) | npm `chart.js` |
+
+Logo : `wwwroot/images/logo_hcp.png` (copie de `design/charte-hcp/images/`).
+
+## Vérifications
+
+`python scripts/verifier-charte.py` (app.css identique à la charte hors `@import`) ; `dotnet test --filter Category=Charte` (contrastes, pas d'hexadécimal hors des 5 variables, pas d'URL externe dans `index.html` ni `css/`).

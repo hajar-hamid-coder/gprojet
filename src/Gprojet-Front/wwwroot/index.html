@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GestionProjet</title>
+    <base href="/" />
+    <link rel="icon" type="image/png" href="images/logo_hcp.png" />
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="stylesheet" href="css/app.gp.css" />
+    <link rel="stylesheet" href="lib/fontawesome-free-6.7.2/css/all.min.css" />
+</head>
+<body>
+    <!-- Affiche avant le démarrage de Blazor : texte statique en français (hors IStringLocalizer, indisponible à ce stade). -->
+    <div id="app">
+        <div class="chargement-initial" role="status">
+            <span class="spinner" aria-hidden="true"></span>
+            <span>Chargement…</span>
+        </div>
+    </div>
+    <!-- Erreur non gérée : affichée par blazor.webassembly.js (texte statique, comme le chargement initial). -->
+    <div id="blazor-error-ui">
+        Une erreur inattendue est survenue. <a href="" class="reload">Recharger la page</a>.
+        <a class="dismiss" role="button" aria-label="Fermer le message">×</a>
+    </div>
+    <script src="js/layout.js"></script>
+    <script src="_framework/blazor.webassembly.js"></script>
+</body>
+</html>

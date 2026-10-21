@@ -1,0 +1,31 @@
+@using System.Globalization
+@using Gprojet.Backend.Contracts.Commun
+@inject Gprojet.Front.Api.BffApiClient Bff
+@inject NavigationManager Navigation
+@inject IStringLocalizer<Textes> T
+
+<select class="form-input langue-select" aria-label="@T["Langue"]" value="@_actuelle" @onchange="ChangerAsync">
+    @foreach (var (culture, cle) in Choix)
+    {
+        <option value="@culture">@T[cle]</option>
+    }
+</select>
+
+@code {
+    private static readonly (string Culture, string Cle)[] Choix = [(Langues.Defaut, "LangueFr"), ("en", "LangueEn"), ("ar-MA", "LangueAr")];
+
+    private string _actuelle = Langues.Defaut;
+
+    protected override void OnInitialized()
+    {
+        var nom = CultureInfo.CurrentUICulture.Name;
+        _actuelle = Langues.Cultures.Contains(nom) ? nom : Langues.Defaut;
+    }
+
+    // Le cookie est posé par le BFF, puis rechargement complet : la culture est lue avant le premier rendu.
+    private async Task ChangerAsync(ChangeEventArgs e)
+    {
+        await Bff.ChangerLangueAsync(e.Value?.ToString() ?? Langues.Defaut);
+        Navigation.NavigateTo(Navigation.Uri, forceLoad: true);
+    }
+}

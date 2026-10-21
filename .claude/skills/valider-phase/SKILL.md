@@ -14,7 +14,7 @@ allowed-tools: Bash(python scripts/backlog.py *)
 
 Si la validation a réussi :
 1. Fais un commit de clôture si des fichiers restent modifiés (`Pn: clôture de phase`), sans pousser.
-2. Rappelle à l'utilisateur qu'il peut maintenant pousser la branche vers GitLab et ouvrir la merge request.
+2. Rappelle à l'utilisateur qu'il peut maintenant pousser la branche vers GitHub (`git push -u origin <branche>`) et ouvrir la pull request vers `main`.
 3. Annonce la phase suivante, son modèle conseillé (à sélectionner avec `/model`) et la commande `/lancer-phase Pn`.
 4. **Ne lance pas** la phase suivante.
 

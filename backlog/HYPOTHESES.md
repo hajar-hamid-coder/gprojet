@@ -13,11 +13,11 @@
 **Réponse utilisateur** (2026-10-16 11:23) : Docker 29 est installé
 
 ### H-002 · P3-T04
-> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 10:54
+> **Statut** : REPONDUE · **Bloquante** : non · **Date** : 2026-10-16 10:54
 **Question** : Quelle instance GitLab (URL, version, runners Docker disponibles) exécutera le pipeline ?
 **Hypothèse retenue par défaut** : GitLab self-managed ≥ 17 avec runners Docker et Container Registry activé ; validation du YAML par script local, CI Lint GitLab dès que l'URL est connue.
 **Impact si l'hypothèse est fausse** : Mots-clés ou templates de sécurité indisponibles selon l'édition (SAST/DAST complets = Ultimate).
-**Réponse utilisateur** : _en attente_
+**Réponse utilisateur** (2026-10-16 12:48) : Choix utilisateur (2026-10-16) : le dépôt du projet est sur GitHub (hajar-hamid-coder/gprojet, public) ; l'intégration continue se fait avec GitHub Actions et l'image est publiée sur ghcr.io. GitLab reste une intégration fonctionnelle de la plateforme (P12-P13).
 
 ### H-003 · P0-T06
 > **Statut** : REPONDUE · **Bloquante** : non · **Date** : 2026-10-16 10:54
@@ -102,3 +102,164 @@
 **Hypothèse retenue par défaut** : Oui : --success-text #047857, --warning-text #B45309, --danger-text #B91C1C, --info-text #1D4ED8, --purple-text #6D28D9 (toutes ≥ 4,5:1 sur le fond du badge) ; couleurs d'origine conservées pour pastilles, barres, bordures et icônes ; text-tertiary réservé au décoratif.
 **Impact si l'hypothèse est fausse** : Si refusé : badges et petits textes de statut non conformes RGAA, la phase P17 (0 violation axe) ne pourra pas être validée.
 **Réponse utilisateur** (2026-10-16 11:34) : Oui, variantes de texte accessibles validées
+
+### H-015 · P0-T02
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 11:51
+**Question** : Que faire si PG_BIN pointe vers un dossier sans binaires PostgreSQL ?
+**Hypothèse retenue par défaut** : PG_BIN est exclusif dans verifier-env.py (pas de repli), sinon le cas test PG_BIN vide ne peut jamais sortir en 1 ici
+**Impact si l'hypothèse est fausse** : pg-test.py retombe sur les chemins par défaut : comportement différent entre les deux scripts
+**Réponse utilisateur** : _en attente_
+
+### H-016 · P0-T03
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 11:52
+**Question** : database/03-tests-integrite.sql compte-t-il 13 blocs ERREUR + 5 OK comme l'indique la tâche ?
+**Hypothèse retenue par défaut** : Il contient 12 ERREUR + 6 OK (total 18 conforme) ; la répartition 13+5 est une erreur de décompte, seul le total compte
+**Impact si l'hypothèse est fausse** : Si faux, un bloc attendu ERREUR manquerait dans le fichier 03
+**Réponse utilisateur** : _en attente_
+
+### H-017 · P0-T04
+> **Statut** : REPONDUE · **Bloquante** : non · **Date** : 2026-10-16 11:55
+**Question** : FluentAssertions 8.x (licence commerciale Xceed) est-il acceptable pour un projet d'État ?
+**Hypothèse retenue par défaut** : Version 8.11.0 retenue pour l'instant ; si la licence pose problème, épingler 7.x (Apache 2.0) dans Directory.Packages.props
+**Impact si l'hypothèse est fausse** : Aucun avant l'écriture des premiers tests (P0-T05+ ou P1)
+**Réponse utilisateur** (2026-10-16 12:51) : Non : épingler FluentAssertions 7.x (Apache 2.0), pas de licence commerciale
+
+### H-018 · P0-T06
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 11:58
+**Question** : graphify (CLI, paquet PyPI graphifyy) est absent du poste et uv (requis pour l'installer) est absent aussi : faut-il les installer maintenant pour le graphe de connaissances du code ?
+**Hypothèse retenue par défaut** : Ne pas installer maintenant : graphify n'est utile qu'à partir de la première phase qui produit du code (P1). Installation prévue via scripts/installer-outils.ps1 (étapes uv puis uv tool install graphifyy, puis graphify install --project) avant P1 ; en attendant, la recherche se fait par Grep/Explore.
+**Impact si l'hypothèse est fausse** : Sans graphify, les requêtes 'graphify query' de CLAUDE.md ne fonctionnent pas : le repérage du code se fait par recherche classique (plus lent, plus de tokens). Aucun blocage de P0.
+**Réponse utilisateur** : _en attente_
+
+### H-019 · P1-T02
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 13:01
+**Question** : Comment reconnaître un contrôleur, et la liste blanche System.* de Contracts suffit-elle ?
+**Hypothèse retenue par défaut** : Contrôleur = hérite de ControllerBase ou nom en *Controller ; Contracts autorise tout System.* (les API absentes du navigateur ne sont pas détectées, la compilation du front en P2 servira de seconde garde)
+**Impact si l'hypothèse est fausse** : Des endpoints minimal API échapperaient à la règle ; une API System non disponible en WASM serait détectée seulement à la compilation du front
+**Réponse utilisateur** : _en attente_
+
+### H-020 · P1-T03
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 13:05
+**Question** : Dans quel fuseau calcule-t-on la date du jour (saisie des temps, échéances) ?
+**Hypothèse retenue par défaut** : Fuseau Africa/Casablanca (HCP) ; IHorloge.Aujourdhui est calculé dans ce fuseau, Maintenant reste en UTC
+**Impact si l'hypothèse est fausse** : Si un autre fuseau est attendu, changer la valeur passée à HorlogeSysteme ; en UTC pur, les saisies entre minuit et 1 h seraient datées de la veille
+**Réponse utilisateur** : _en attente_
+
+### H-021 · P1-T04
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 13:15
+**Question** : patte.card_min (CHECK IN numérique 0,1) et correspondance_type.type_logique (sans CHECK) doivent-ils devenir des énumérations ?
+**Hypothèse retenue par défaut** : Non : card_min reste short, correspondance_type.type_logique reste string ; seuls les CHECK IN à valeurs texte deviennent des enums (49 enums, 54 contraintes contrôlées)
+**Impact si l'hypothèse est fausse** : Si faux : créer CardinaliteMin et/ou ajouter le CHECK au SQL puis typer en TypeLogique
+**Réponse utilisateur** : _en attente_
+
+### H-022 · P1-T05
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 13:27
+**Question** : Comment reproduire l'index sur expression ux_agent_email (lower(email)) et le trigger de lecture seule de commun.historique, non modélisables par EF ?
+**Hypothèse retenue par défaut** : Le modèle EF déclare ux_agent_email sur email (shortcut commenté) ; la migration initiale P1-T06 recrée l'index sur lower(email) et le trigger tg_historique_lecture_seule en SQL brut
+**Impact si l'hypothèse est fausse** : Si oublié en P1-T06 : unicité de l'email sensible à la casse et journal d'historique modifiable
+**Réponse utilisateur** : _en attente_
+
+### H-023 · P1-T06
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 14:45
+**Question** : La comparaison de schéma doit-elle couvrir l'ordre des colonnes et le contenu des données de référence ?
+**Hypothèse retenue par défaut** : Non : type, nullabilité, défaut, contraintes, index, triggers, fonctions et nombre de lignes par table suffisent ; les données sont une copie figée de 02 embarquée dans la migration
+**Impact si l'hypothèse est fausse** : Une différence d'ordre de colonnes ou de valeurs (même nombre de lignes) ne serait pas détectée
+**Réponse utilisateur** : _en attente_
+
+### H-024 · P1-T07
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 14:49
+**Question** : Quel agent pour les écritures hors requête (jobs, données initiales), et type_cible sans schéma est-il acceptable ?
+**Hypothèse retenue par défaut** : Un utilisateur système (ICurrentUser dédié) sera fourni pour les traitements hors requête ; type_cible = nom de table sans schéma (unique entre schémas, ≤ 30 caractères)
+**Impact si l'hypothèse est fausse** : Sans utilisateur système, cree_par/agent_id seraient vides pour ces écritures ; un futur doublon de nom de table entre schémas rendrait type_cible ambigu
+**Réponse utilisateur** : _en attente_
+
+### H-025 · P1-T08
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 14:54
+**Question** : Quels repositories d'agrégat livrer dans le socle, et où enregistrer UnitOfWork/repositories dans la DI ?
+**Hypothèse retenue par défaut** : Un seul repository réel (Compétence) pour démontrer le motif ; les autres arrivent avec leurs modules (P4, P5…). Enregistrement DI dans la tâche de composition (P1-T09/T10)
+**Impact si l'hypothèse est fausse** : Effort minime pour changer d'agrégat ; aucun enregistrement DI tant que Program.cs n'est pas composé
+**Réponse utilisateur** : _en attente_
+
+### H-026 · P1-T09
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 15:00
+**Question** : Quel utilisateur courant avant Keycloak (P18), et quel code HTTP pour RegleMetierException ?
+**Hypothèse retenue par défaut** : ICurrentUser provisoire = agent SYSTEME (Id Guid.Empty, sans rôle), shortcut à remplacer en P18 ; RegleMetierException → 422, validation FluentValidation → 400
+**Impact si l'hypothèse est fausse** : cree_par/agent_id valent Guid.Empty jusqu'en P18 (colonnes sans FK) ; changer le code 422 est une ligne dans GestionnaireExceptions
+**Réponse utilisateur** : _en attente_
+
+### H-027 · P1-T10
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 15:11
+**Question** : Quels rôles déduire dans le socle, et comment traiter une délégation révoquée ?
+**Hypothèse retenue par défaut** : Deux rôles déduits : RESPONSABLE_ENTITE (responsable d'une entité active) et DELEGATAIRE (délégation non supprimée couvrant aujourd'hui) ; révocation = suppression logique ; les rôles Directeur/Chef de division/Chef de service seront déduits du niveau de l'entité dans le module Organisation (P4). Hors requête et en Production avant P18 : utilisateur SYSTEME et 401 sur les contrôleurs
+**Impact si l'hypothèse est fausse** : Enrichir DevAuthHandler si d'autres rôles sont requis ; prévoir un agent système en base si cree_par doit référencer un agent réel
+**Réponse utilisateur** : _en attente_
+
+### H-028 · P1-T11
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 15:18
+**Question** : Quels jours fériés 2026 retenir pour la démo, notamment les fêtes religieuses mobiles ?
+**Hypothèse retenue par défaut** : Calendrier civil marocain pour les jours fixes ; fêtes mobiles 2026 à des dates indicatives (marquées « indicatif »), à confirmer par l'annonce officielle
+**Impact si l'hypothèse est fausse** : Seules les données de démonstration seraient à corriger ; aucun calcul métier n'est encore branché dessus
+**Réponse utilisateur** : _en attente_
+
+### H-029 · P2-T01
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 15:42
+**Question** : Quel premier DTO partagé, et où exposer la santé pour le front ?
+**Hypothèse retenue par défaut** : SanteDto (record Statut) renvoyé par GET /api/health (minimal API anonyme), consommé par SanteApiClient ; /health et /health/ready restent pour l'exploitation
+**Impact si l'hypothèse est fausse** : Renommage ou déplacement minime si un autre DTO de référence est préféré
+**Réponse utilisateur** : _en attente_
+
+### H-030 · P2-T02
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 15:47
+**Question** : Quelles classes de badge de statut prévoir, et comment mapper les statuts configurables de tâche/ticket ?
+**Hypothèse retenue par défaut** : Classes kebab-case déduites des enums de statut du backend ; les workflows configurables (CategorieStatut) se mappent sur a-faire / en-cours / termine ; d'autres classes s'ajouteront au besoin
+**Impact si l'hypothèse est fausse** : Ajout de classes dans app.gp.css si un statut n'est pas couvert
+**Réponse utilisateur** : _en attente_
+
+### H-031 · P2-T03
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 15:52
+**Question** : Qui voit le menu Administration, et quand le rôle DIRECTEUR sera-t-il attribué ?
+**Hypothèse retenue par défaut** : Administration = DIRECTEUR ou RESPONSABLE_ENTITE ; DIRECTEUR est déclaré (Contracts/Commun/RolesApplication) mais déduit côté serveur seulement en P4 ; libellés en dur en français tant que l'i18n (resx) n'existe pas
+**Impact si l'hypothèse est fausse** : Politiques.cs à ajuster si besoin ; « Portefeuille direction » invisible pour tous jusqu'en P4 ; libellés à basculer en resx plus tard
+**Réponse utilisateur** : _en attente_
+
+### H-032 · P2-T06
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 16:05
+**Question** : Les rôles sont-ils figés dans le cookie, et les pages doivent-elles rediriger les anonymes vers /connexion ?
+**Hypothèse retenue par défaut** : Rôles lus au login et valables 8 h glissantes (shortcut jusqu'à Keycloak P18) ; pas de redirection automatique vers /connexion dans le socle, les gardes de pages viendront avec les pages métier ; anti-CSRF par en-tête X-CSRF: 1 obligatoire dès qu'un cookie de session est présent
+**Impact si l'hypothèse est fausse** : Un changement de rôle ne s'applique qu'à la reconnexion ; ajouter des gardes de pages au besoin
+**Réponse utilisateur** : _en attente_
+
+### H-033 · P2-T07
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 16:10
+**Question** : D'où viendront le niveau et le chemin du périmètre côté front, et quel délai de disparition des notifications ?
+**Hypothèse retenue par défaut** : PerimetreState expose Definir(...) ; il sera alimenté par le module Organisation (P4), sans endpoint fantôme maintenant. Notifications : 6 s pour tous les types, réglable
+**Impact si l'hypothèse est fausse** : Un endpoint ou un claim supplémentaire en P4 ; réglage simple du délai
+**Réponse utilisateur** : _en attente_
+
+### H-034 · P2-T08
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 16:22
+**Question** : Culture par défaut, police arabe et relecture des traductions ?
+**Hypothèse retenue par défaut** : fr-MA par défaut (repli), en et ar-MA ; arabe affiché avec la pile système (Geist sans glyphes arabes, aucune police téléchargée) ; traductions en/ar rédigées sans relecture native
+**Impact si l'hypothèse est fausse** : Changer Langues.Defaut ; ajouter une police arabe auto-hébergée si le rendu système déplaît ; faire relire en et ar avant la mise en production
+**Réponse utilisateur** : _en attente_
+
+### H-035 · P2-T09
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-16 16:26
+**Question** : Faut-il brancher dès maintenant la page Erreur sur un ErrorBoundary et Accès refusé sur une garde de routes ?
+**Hypothèse retenue par défaut** : Non : pages prêtes mais non câblées (pas d'AuthorizeRouteView ni d'ErrorBoundary) jusqu'aux pages métier ; textes de chargement initial et d'erreur fatale de index.html en français (hors localizer)
+**Impact si l'hypothèse est fausse** : Câblage à ajouter avec les premières pages protégées ; en/ar voient deux textes français pendant le chargement
+**Réponse utilisateur** : _en attente_
+
+### H-036 · P3-T02
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-21 11:03
+**Question** : Le port 8080 du poste est occupé par un conteneur youtrack étranger au projet : faut-il changer le port par défaut de l'app dans le compose ?
+**Hypothèse retenue par défaut** : Port par défaut 8080 conservé, surchargeable par APP_HOST_PORT dans deploy/.env ; tests faits sur 18080 sans arrêter youtrack.
+**Impact si l'hypothèse est fausse** : Avec youtrack actif, http://localhost:8080 répond YouTrack et non GestionProjet tant que APP_HOST_PORT n'est pas défini.
+**Réponse utilisateur** : _en attente_
+
+### H-037 · P3-T04
+> **Statut** : OUVERTE · **Bloquante** : non · **Date** : 2026-10-21 11:16
+**Question** : Les versions d'actions épinglées et le comportement réel du workflow (Trivy bloquant sur CRITICAL/HIGH, environnement production) ne peuvent être constatés qu'après le push : faut-il assouplir Trivy ?
+**Hypothèse retenue par défaut** : Trivy bloquant (exit-code 1, CRITICAL/HIGH, unfixed ignorés) ; environnement 'production' à créer dans les réglages GitHub avec relecteurs ; déploiement manuel lancé depuis main ; actions épinglées par SHA (checkout v4.2.2, etc.).
+**Impact si l'hypothèse est fausse** : Premier run possiblement rouge (vulnérabilité de l'image de base, version d'action) : à corriger après le premier push.
+**Réponse utilisateur** : _en attente_
